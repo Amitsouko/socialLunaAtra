@@ -1,0 +1,5 @@
+services:
+    profile.registration.form.type:
+        class: LunaAtra\ProfileBundle\Form\Type\ProfileFormType
+        tags:
+            - { name: form.type, alias: custom_profile }

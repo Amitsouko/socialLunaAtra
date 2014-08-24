@@ -7,16 +7,18 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 
 /**
- * @Route("/profile")
+ * @Route("/user")
  */
 class DefaultController extends Controller
 {
     /**
-     * @Route("/")
+     * @Route("/{username}")
      * @Template()
      */
-    public function profileAction()
+    public function profileAction($username)
     {
-        return array();
+        $em = $this->getDoctrine()->getManager();
+        $user = $em->getRepository('ProfileBundle:User')->findOneByUsername($username);
+        return array('user' =>$user);
     }
 }
