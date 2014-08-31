@@ -1,0 +1,31 @@
+
+<div class="sub-menu-profile">
+    <ul class="list-inline hidden-xs hidden-sm">
+        <li><a href="{{ path("user-bio", {"username": user.username}) }}">Biographie</a></li>
+        <li><a href="">Personnages</a></li>
+        <li><a href="">Guildes</a></li>
+        <li><a href="">Galeries</a></li>
+        <li><a href="">Trophés</a></li>
+    </ul>
+    <div class=" mini-menu pull-right hidden-md hidden-lg" >
+        <a href=""><span class="glyphicon glyphicon-align-justify"></span></a>
+    </div>
+</div>
+
+
+<div id="main-profile-image">
+    <a href="{{ asset(user.WebPath) }}" data-lightbox="profile" data-title="{{ user.username }}">
+        <img src="{{ user.WebPath | imagine_filter('profile_thumbnail') }}">
+    </a>
+
+</div>
+
+
+<h1 class="profile-name col-md-7"><a href="{{ path("user", {"username": user.username}) }}">{{ user.username }}</a>
+{% if app.user == user %} <em><a href="{{ path("fos_user_profile_edit") }}">Éditer</a></em>
+{% endif%}
+</h1>
+{% if user.announce %}
+<h2 class="profile-announcement col-md-7">&ldquo;{{ user.announce }}&rdquo;</h2>
+{% endif %}
+<div class="clearfix"></div>

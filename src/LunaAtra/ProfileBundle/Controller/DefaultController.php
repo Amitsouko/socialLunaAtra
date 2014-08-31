@@ -21,4 +21,15 @@ class DefaultController extends Controller
         $user = $em->getRepository('ProfileBundle:User')->findOneByUsername($username);
         return array('user' =>$user);
     }
+
+    /**
+     * @Route("/{username}/bio", name="user-bio")
+     * @Template("ProfileBundle:Default:bio.html.twig")
+     */
+    public function bioAction($username)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $user = $em->getRepository('ProfileBundle:User')->findOneByUsername($username);
+        return array('user' =>$user);
+    }
 }

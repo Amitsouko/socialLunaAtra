@@ -1,0 +1,22 @@
+{% extends "CoreBundle::base.html.twig" %}
+
+{% block content %}
+
+{% include "ProfileBundle:Include:header-profile.html.twig" %}
+
+<div class="row">
+
+
+<div class=" col-md-10 col-lg-8">
+<article>
+    <div class="white-box">
+    <h1>Biography</h1>
+        <div class="text-user">
+        {{ user.bio|raw }}
+        </div>
+    </div>
+</article>
+</div>
+
+</div>
+{% endblock content %}

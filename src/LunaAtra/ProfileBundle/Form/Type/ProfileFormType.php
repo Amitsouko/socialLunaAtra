@@ -22,6 +22,7 @@ class ProfileFormType extends AbstractType
         // add your custom field
         $builder->add('file')
         ->add("bio", null, array("attr" => array("class" => "tinymce") ))
+        ->add("announce")
         ->add("lastImageUpdate", "hidden",array("data" => date('Y-m-d H:i:s') ));
     }
 

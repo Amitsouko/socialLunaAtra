@@ -24,6 +24,11 @@ class User extends BaseUser
     public $path;
 
     /**
+     * @ORM\Column(type="string", length=140, nullable=true)
+     */
+    public $announce;
+
+    /**
      * @ORM\Column(type="text",  nullable=true)
      */
     public $bio;
@@ -95,7 +100,7 @@ class User extends BaseUser
 
     public function getWebPath()
     {
-        return null === $this->path ? null : $this->getUploadDir().'/'.$this->path;
+        return null === $this->path ? "bundles/core/images/charisson.jpg"  : $this->getUploadDir().'/'.$this->path;
     }
 
     protected function getUploadRootDir()

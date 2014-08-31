@@ -60,7 +60,7 @@ h3 {
 }
 
 
-.container{
+.main-container{
     margin-top:80px;
     position: relative;
 }
@@ -177,7 +177,8 @@ input[type="submit"], button {
     border: white solid 5px;
     border-radius: 3px;
     position: relative;
-    top: -40px;
+    top: -80px;
+    margin-bottom: -40px;
     box-shadow: 0px 2px 1px #dddddd;
     float: left;
     img {
@@ -189,13 +190,21 @@ input[type="submit"], button {
 .profile-name {
     text-transform: none;
     font-size: 2.7em;
-    color: #4D5A75;
+
     font-weight: bold;
-    margin-bottom: 8px;
+    margin-bottom: 1px;
     padding-left: 10px;
+
+    a:link, a:visited {
+        color: #4D5A75;
+    }
+    em {
+        font-size: 0.4em;
+        font-style: normal;
+    }
 }
 
-.profile-annoucement {
+.profile-announcement {
     margin-top: 0px;
     font-style: italic;
     font-weight: normal;
@@ -211,20 +220,15 @@ input[type="submit"], button {
     top: 0px;
     margin: 10px 25px;
     width: 125px;
-    a:link {
-
-    }
 }
 
 .sub-menu-profile {
     margin: -20px;
     margin-bottom: 10px;
-    
-    ul {
-        background: whiteSmoke;
-        border-top-right-radius: 3px;
-        border-bottom: 1px rgb(202, 219, 235) solid;
-        margin-left: 205px;
+    height: 51px;
+    border-top-right-radius: 3px;
+    border-top-left-radius: 3px;
+    border-bottom: 1px rgb(202, 219, 235) solid;
         background: rgb(255,255,255); /* Old browsers */
         background: -moz-linear-gradient(top,  rgba(255,255,255,1) 0%, rgba(242,242,242,1) 100%); /* FF3.6+ */
         background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(255,255,255,1)), color-stop(100%,rgba(242,242,242,1))); /* Chrome,Safari4+ */
@@ -233,6 +237,12 @@ input[type="submit"], button {
         background: -ms-linear-gradient(top,  rgba(255,255,255,1) 0%,rgba(242,242,242,1) 100%); /* IE10+ */
         background: linear-gradient(to bottom,  rgba(255,255,255,1) 0%,rgba(242,242,242,1) 100%); /* W3C */
         filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#f2f2f2',GradientType=0 ); /* IE6-9 */
+
+    ul {
+
+        
+        
+        margin-left: 205px;
 
         li {
             a {
@@ -243,3 +253,11 @@ input[type="submit"], button {
         }
     }
 }
+
+.text-user {
+    word-wrap: break-word;
+    img {
+        max-width: 100%;
+    }
+}
+
