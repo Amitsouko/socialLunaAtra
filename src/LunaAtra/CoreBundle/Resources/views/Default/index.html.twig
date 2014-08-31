@@ -1,9 +1,25 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Index</title>
-</head>
-<body>
-index
-</body>
-</html>
+{% extends "CoreBundle::layout.html.twig" %}
+{% trans_default_domain "home" %}
+{% block bodyclass %}
+{% spaceless %}
+home
+{% endspaceless %}
+{% endblock bodyclass %}
+
+{% block main %}
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-8 col-md-7">
+            <div id="main-logo"></div>
+        </div>
+        <div class="col-lg-4 col-md-5">
+            <div class="white-box shadow">
+            <h1>{{ "form.signup"|trans }}</h1>
+                    {% render path("embed-register") %}
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock main %}

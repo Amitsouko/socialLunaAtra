@@ -1,0 +1,11 @@
+home:
+    intro: Bienvenue sur Luna Atra, le réseau social du MMO. Partagez avec la communauté vos expériences, vos victoires et vos trophés.
+form:
+    signup: S'enregistrer
+    username: Nom d'utilisateur
+    already.registered : Déjà inscrit ?
+    email: Email
+    submit: S'enregistrer
+    password:
+        first: Mot de passe
+        second: Vérification

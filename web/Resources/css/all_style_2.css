@@ -1,0 +1,29 @@
+.fos_user_registration_register > div {
+  margin: 15px 0px;
+}
+.fos_user_registration_register input {
+  font-size: 1.3em;
+  padding: 8px;
+  border-radius: 3px;
+  border: 0px;
+  box-shadow: 0px 0px 3px #C9C99C inset;
+  margin-bottom: 15px;
+  display: block;
+  width: 100%;
+}
+.fos_user_registration_register input:nth-last-child(1) {
+  margin-bottom: 0px;
+}
+.fos_user_registration_register input[type='submit'] {
+  width: 50%;
+}
+.white-box {
+  background-color: white;
+  border-radius: 3px;
+  border: 1px solid whiteSmoke;
+  box-sizing: border-box;
+  padding: 15px;
+}
+.shadow {
+  box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.5);
+}

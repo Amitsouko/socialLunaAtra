@@ -1,5 +1,47 @@
-{% extends "FOSUserBundle::layout.html.twig" %}
+{% extends "CoreBundle::base.html.twig" %}
 
-{% block fos_user_content %}
-{% include "FOSUserBundle:Profile:show_content.html.twig" %}
-{% endblock fos_user_content %}
+{% block content %}
+
+<div id="main-profile-image">
+    <img src="{{ app.user.WebPath | imagine_filter('profile_thumbnail') }}">
+
+</div>
+<div class="sub-menu-profile">
+    <ul class="list-inline">
+        <li><a href="">Biographie</a></li>
+        <li><a href="">Personnages</a></li>
+        <li><a href="">Guildes</a></li>
+        <li><a href="">Galeries</a></li>
+        <li><a href="">Trophés</a></li>
+    </ul>
+</div>
+
+
+
+
+
+<h1 class="profile-name col-md-7">{{ app.user.username }}</h1>
+<h2 class="profile-annoucement col-md-7">&ldquo;Gamer and developer. I am playing at GW2 and FF14. And developer at Luna Atra&rdquo;</h2>
+
+<div class="clearfix"></div>
+<div class="row">
+<div class="col-md-4">
+    <div class="white-box">
+        <h3>Blog</h3>
+    </div>
+    <div class="white-box">
+        <h3>Achèvements</h3>
+    </div>
+    <div class="white-box">
+        <h3>Comptes</h3>
+    </div>
+</div>
+
+<div class="col-md-8">
+    <div class="white-box">
+        coucou
+    </div>
+</div>
+
+</div>
+{% endblock content %}

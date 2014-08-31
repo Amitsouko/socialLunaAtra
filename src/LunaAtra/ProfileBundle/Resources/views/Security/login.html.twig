@@ -1,24 +1,48 @@
-{% extends "FOSUserBundle::layout.html.twig" %}
-
 {% trans_default_domain 'FOSUserBundle' %}
+{% extends "CoreBundle::layout.html.twig" %}
+{% block bodyclass %}
+{% spaceless %}
+subscribe
+{% endspaceless %}
+{% endblock bodyclass %}
+{% block main %}
+<div class="container">
+<div class="row">
+    <div class="col-lg-4 col-lg-offset-4 col-md-6 col-md-offset-3  col-sm-6 col-sm-offset-3">
+        <div class="white-box shadow">
+            <h1>{{ 'security.login.submit'|trans }}</h1>
+            {% if error %}
+                <span class="error">{{ error|trans }}</span>
+            {% endif %}
+                    <form action="{{ path("fos_user_security_check") }}" method="post" class="fos_user_registration_register"> 
+                    <div class="row">
+                     <div class="col-md-12">
+                        <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
 
-{% block fos_user_content %}
-{% if error %}
-    <div>{{ error|trans }}</div>
-{% endif %}
+                        <input type="text" id="username" name="_username" value="{{ last_username }}" required="required" placeholder="{{ 'security.login.username'|trans }}" />
 
-<form action="{{ path("fos_user_security_check") }}" method="post">
-    <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
+                        <input type="password" id="password" name="_password" required="required" placeholder="{{ 'security.login.password'|trans }}"/>
+                        <div class="pull-right">
+                        <label class="align-right" for="remember_me">{{ 'security.login.remember_me'|trans }}</label>
+                        <input class="align-right" type="checkbox" id="remember_me" name="_remember_me" value="on" />
+                        </div>
+                    </div>
 
-    <label for="username">{{ 'security.login.username'|trans }}</label>
-    <input type="text" id="username" name="_username" value="{{ last_username }}" required="required" />
+                        <div class="col-md-6">
+                        <p class="text-center">
+                            <a href="">Pas encore inscrit ?</a>
+                        </p>   
+                            
+                        </div>
+                            <div class="col-md-6">
+                            <input type="submit" id="_submit" name="_submit" value="{{ 'security.login.submit'|trans }}" />
+                        </div>
+                        </div>
+                    </form>
+            </div>
+        
+    </div>
 
-    <label for="password">{{ 'security.login.password'|trans }}</label>
-    <input type="password" id="password" name="_password" required="required" />
-
-    <input type="checkbox" id="remember_me" name="_remember_me" value="on" />
-    <label for="remember_me">{{ 'security.login.remember_me'|trans }}</label>
-
-    <input type="submit" id="_submit" name="_submit" value="{{ 'security.login.submit'|trans }}" />
-</form>
-{% endblock fos_user_content %}
+</div>
+</div>
+{% endblock main %}

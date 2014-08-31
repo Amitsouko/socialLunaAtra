@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+    <title>Luna Atra</title>
+
+
+    {% stylesheets 
+      'bundles/core/css/bootstrap.min.css'
+      'bundles/core/css/bootstrap-theme.min.css'
+      'bundles/core/css/style.less'
+      'bundles/core/css/home.less'
+       filter='less, cssrewrite'
+      output="Resources/css/all.css"
+    %}
+      <link href="{{ asset_url }}" rel="stylesheet" media="screen" />
+    {% endstylesheets %}
+
+
+    {% block css %}
+    {% endblock css %}
+
+
+</head>
+    <body class="{% block bodyclass %}{% endblock bodyclass %}">
+    <div style="overflow:auto;padding-bottom: 10px;">
+    {% render path("embbed-profile") %}
+
+      <div id="background-image" style="background-image:url('{{ asset('bundles/core/images/background-home/'~ random(3) ~'.jpg') }}');"></div>
+        {% block main %}
+        {% endblock main %}
+    </div>
+    </body>
+</html>

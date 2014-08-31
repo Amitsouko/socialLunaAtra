@@ -1,8 +1,27 @@
-{% trans_default_domain 'FOSUserBundle' %}
+{% trans_default_domain "home" %}
+<form action="{{ path('fos_user_registration_register') }}" {{ form_enctype(form) }} method="POST" class="fos_user_registration_register row">
 
-<form action="{{ path('fos_user_registration_register') }}" {{ form_enctype(form) }} method="POST" class="fos_user_registration_register">
-    {{ form_widget(form) }}
-    <div>
-        <input type="submit" value="{{ 'registration.submit'|trans }}" />
+    <div class="col-md-12">
+    <div class="ul-error">{{ form_errors(form.username) }}</div>
+    {{ form_widget(form.username,{ attr: {placeholder: "form.username"|trans }}) }}
+    <div class="ul-error">{{ form_errors(form.email) }}</div>
+    {{ form_widget(form.email,{ attr: {placeholder:"form.email"|trans}}) }}
+    <div class="ul-error">{{ form_errors(form.plainPassword.first) }}</div>
+    {{ form_widget(form.plainPassword.first, { attr: {placeholder:"form.password.first"|trans}}) }}
+
+    {{ form_widget(form.plainPassword.second, { attr: {placeholder: "form.password.second"|trans}}) }}
+    <div class="ul-error">{{ form_widget(form) }}</div>
+    </div>
+ 
+
+    <div class="col-md-6">
+        <p class="text-center">
+            <a href="{{ path("fos_user_security_login") }}">{{ "form.already.registered"|trans }}</a>
+        </p>
+        
+    </div>
+
+    <div class="col-md-6">
+        <input type="submit" value="{{ "form.submit"|trans }}" />
     </div>
 </form>

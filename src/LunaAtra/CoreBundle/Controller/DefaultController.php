@@ -14,6 +14,32 @@ class DefaultController extends Controller
      */
     public function indexAction()
     {
-        return array();
+        $securityContext = $this->container->get('security.context');
+        if ($securityContext->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
+            return $this->render(
+                'CoreBundle:Default:index-connected.html.twig',
+                array());
+        }else{
+            return $this->render(
+                'CoreBundle:Default:index.html.twig',
+                array());
+        }
+
+        
+    }
+
+    /**
+     * @Route("/embbed/header-profile", name="embbed-profile")
+     * @Template()
+     */
+    public function embbedProfileAction()
+    {
+       $csrfToken = $this->container->has('form.csrf_provider')
+            ? $this->container->get('form.csrf_provider')->generateCsrfToken('authenticate')
+            : null;
+
+        return $this->render(
+            'CoreBundle:include:header-profile.html.twig',
+            array('csrf_token' => $csrfToken ));
     }
 }

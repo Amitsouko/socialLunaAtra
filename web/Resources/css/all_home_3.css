@@ -1,0 +1,24 @@
+body.home {
+  overflow: hidden;
+  background: #eaf2f1;
+}
+body.home .container {
+  padding-top: 150px;
+}
+body.home #main-logo {
+  background-image: url("../../../bundles/core/images/luna-atra.png") center center no-repeat;
+  height: 300px;
+}
+body.home #background-image {
+  position: absolute;
+  z-index: -1;
+  width: 100%;
+  height: 320px;
+  background: url('../../../bundles/core/images/background-home/1.jpg');
+  background-size: cover;
+  box-shadow: 0px -10px 23px rgba(0, 0, 0, 0.5) inset;
+  background-position: center center;
+}
+body.home p {
+  font-weight: bold;
+}
