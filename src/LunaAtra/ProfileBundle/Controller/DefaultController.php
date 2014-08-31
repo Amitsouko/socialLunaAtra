@@ -12,8 +12,8 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 class DefaultController extends Controller
 {
     /**
-     * @Route("/{username}")
-     * @Template()
+     * @Route("/{username}", name="user")
+     * @Template("ProfileBundle:Profile:show.html.twig")
      */
     public function profileAction($username)
     {

@@ -3,8 +3,8 @@
 {% block content %}
 
 <div id="main-profile-image">
-    <a href="{{ asset(app.user.WebPath) }}" data-lightbox="profile" data-title="{{ app.user.username }}">
-        <img src="{{ app.user.WebPath | imagine_filter('profile_thumbnail') }}">
+    <a href="{{ asset(user.WebPath) }}" data-lightbox="profile" data-title="{{ user.username }}">
+        <img src="{{ user.WebPath | imagine_filter('profile_thumbnail') }}">
     </a>
 
 </div>
@@ -22,7 +22,7 @@
 
 
 
-<h1 class="profile-name col-md-7">{{ app.user.username }}</h1>
+<h1 class="profile-name col-md-7">{{ user.username }}</h1>
 <h2 class="profile-annoucement col-md-7">&ldquo;Gamer and developer. I am playing at GW2 and FF14. And developer at Luna Atra&rdquo;</h2>
 
 <div class="clearfix"></div>
