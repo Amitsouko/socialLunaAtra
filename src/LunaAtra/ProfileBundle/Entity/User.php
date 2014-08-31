@@ -24,12 +24,17 @@ class User extends BaseUser
     public $path;
 
     /**
-     * @Assert\File(maxSize="6000000", mimeTypes = {"image/jpeg", "image/png", "image/gif"}, mimeTypesMessage = "Please upload a valid image")
+     * @ORM\Column(type="text",  nullable=true)
+     */
+    public $bio;
+
+    /**
+     * @Assert\File(maxSize="2000000", mimeTypes = {"image/jpeg", "image/png", "image/gif"}, mimeTypesMessage = "Please upload a valid image")
      */
     public $file;
 
     /**
-     * @var date $birthday
+     * @var date $lastImageUpdate
      *
      * @ORM\Column(name="lastImageUpdate", type="string", nullable=true)
      */

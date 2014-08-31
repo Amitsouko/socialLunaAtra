@@ -9,6 +9,7 @@
     {% stylesheets 
       'bundles/core/css/bootstrap.min.css'
       'bundles/core/css/bootstrap-theme.min.css'
+      'bundles/core/css/lightbox.css'
       'bundles/core/css/style.less'
       'bundles/core/css/home.less'
        filter='less, cssrewrite'
@@ -16,6 +17,13 @@
     %}
       <link href="{{ asset_url }}" rel="stylesheet" media="screen" />
     {% endstylesheets %}
+
+    {% javascripts
+      '@CoreBundle/Resources/public/js/jquery-1.11.0.min.js'
+      '@CoreBundle/Resources/public/js/lightbox.min.js'
+       %}
+      <script src="{{ asset_url }}"></script>
+  {% endjavascripts %}
 
 
     {% block css %}

@@ -19,7 +19,8 @@
         "sensio/framework-extra-bundle": "~3.0",
         "incenteev/composer-parameter-handler": "~2.0",
         "friendsofsymfony/user-bundle": "~2.0@dev",
-        "liip/imagine-bundle":"dev-master"
+        "liip/imagine-bundle":"dev-master",
+        "stfalcon/tinymce-bundle": "dev-master"
     },
     "require-dev": {
         "sensio/generator-bundle": "~2.3"

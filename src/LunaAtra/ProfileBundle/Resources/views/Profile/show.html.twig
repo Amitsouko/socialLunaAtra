@@ -3,7 +3,9 @@
 {% block content %}
 
 <div id="main-profile-image">
-    <img src="{{ app.user.WebPath | imagine_filter('profile_thumbnail') }}">
+    <a href="{{ asset(app.user.WebPath) }}" data-lightbox="profile" data-title="{{ app.user.username }}">
+        <img src="{{ app.user.WebPath | imagine_filter('profile_thumbnail') }}">
+    </a>
 
 </div>
 <div class="sub-menu-profile">
