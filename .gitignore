@@ -7,7 +7,7 @@ vendor/*
 */cache/*
 web/uploads/*
 web/bundles/*
-web/media/cachce/*
+web/media/cache/*
 .DS_Store
 *~
 # Configuration files
