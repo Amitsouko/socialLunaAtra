@@ -16,6 +16,17 @@
 <form action="{{ path('fos_user_profile_edit') }}" {{ form_enctype(form) }} method="POST" class="fos_user_profile_edit normal-form">
 
     <div class="row">
+        <div class="col-md-12">
+            <div class="white-box">
+                <a class="red-button" href="{{ path("fos_user_profile_show") }}">Cancel</a>
+                <input type="submit" value="{{ 'profile.edit.submit'|trans }}" />
+            </div>
+        </div>
+    </div>
+
+
+    <div class="row">
+
         <div class="col-md-7">
             <div class="white-box height310" >
                 <h2><span>Général</span></h2>
@@ -52,14 +63,7 @@
     </div>
         
     {{ form_widget(form) }}
-        <div class="row">
-            <div class="col-md-12">
-                <div class="white-box">
-                    <input type="submit" value="{{ 'profile.edit.submit'|trans }}" />
-                </div>
-            </div>
-        </div>
-
+       
     </div>
 
 </form>
