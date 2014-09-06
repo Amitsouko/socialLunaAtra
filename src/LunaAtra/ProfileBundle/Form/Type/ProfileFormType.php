@@ -23,6 +23,7 @@ class ProfileFormType extends AbstractType
         $builder->add('file')
         ->add("bio", null, array("attr" => array("class" => "tinymce") ))
         ->add("announce")
+        ->remove("current_password")
         ->add("lastImageUpdate", "hidden",array("data" => date('Y-m-d H:i:s') ));
     }
 

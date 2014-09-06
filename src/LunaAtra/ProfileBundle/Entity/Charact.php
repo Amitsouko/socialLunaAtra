@@ -39,9 +39,9 @@ class Charact
     /**
      * @var integer
      *
-     * @ORM\Column(name="order", type="integer")
+     * @ORM\Column(name="ordre", type="integer", nullable=true)
      */
-    private $order;
+    private $ordre;
 
     /**
      * @var string
@@ -60,7 +60,7 @@ class Charact
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="birthday", type="datetime")
+     * @ORM\Column(name="birthday", type="date")
      */
     private $birthday;
 
@@ -80,6 +80,11 @@ class Charact
      * @Assert\File(maxSize="1000000", mimeTypes = {"image/jpeg", "image/png", "image/gif"}, mimeTypesMessage = "Please upload a valid image")
      */
     public $file;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    public $path;
 
     /**
      * @ORM\PrePersist()
@@ -126,7 +131,6 @@ class Charact
 
     public function __construct()
     {
-        parent::__construct();
     }
 
     public function getAbsolutePath()
@@ -279,29 +283,6 @@ class Charact
     }
 
     /**
-     * Set order
-     *
-     * @param integer $order
-     * @return Charact
-     */
-    public function setOrder($order)
-    {
-        $this->order = $order;
-
-        return $this;
-    }
-
-    /**
-     * Get order
-     *
-     * @return integer 
-     */
-    public function getOrder()
-    {
-        return $this->order;
-    }
-
-    /**
      * Set lastImageUpdate
      *
      * @param string $lastImageUpdate
@@ -345,5 +326,51 @@ class Charact
     public function getUser()
     {
         return $this->user;
+    }
+
+    /**
+     * Set ordre
+     *
+     * @param integer $ordre
+     * @return Charact
+     */
+    public function setOrdre($ordre)
+    {
+        $this->ordre = $ordre;
+
+        return $this;
+    }
+
+    /**
+     * Get ordre
+     *
+     * @return integer 
+     */
+    public function getOrdre()
+    {
+        return $this->ordre;
+    }
+
+    /**
+     * Set path
+     *
+     * @param string $path
+     * @return Charact
+     */
+    public function setPath($path)
+    {
+        $this->path = $path;
+
+        return $this;
+    }
+
+    /**
+     * Get path
+     *
+     * @return string 
+     */
+    public function getPath()
+    {
+        return $this->path;
     }
 }

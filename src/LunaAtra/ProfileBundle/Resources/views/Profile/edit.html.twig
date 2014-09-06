@@ -17,7 +17,19 @@
 
     <div class="row">
         <div class="col-md-12">
-            <div class="white-box">
+            <div class="white-box text-center">
+                <ul class="list-inline">
+                    <li><a href="{{ path("fos_user_profile_edit") }}">Profile</a></li>
+                    <li>Guild</li>
+                    <li>Presonnages</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="white-box text-center">
                 <a class="red-button" href="{{ path("fos_user_profile_show") }}">Cancel</a>
                 <input type="submit" value="{{ 'profile.edit.submit'|trans }}" />
             </div>
@@ -61,10 +73,19 @@
             </div>
         </div>
     </div>
-        
-    {{ form_widget(form) }}
+        <div class="row">
+        <div class="col-md-12">
+            <div class="white-box text-center">
+            {{ form_widget(form) }}
+                <a class="red-button" href="{{ path("fos_user_profile_show") }}">Cancel</a>
+                <input type="submit" value="{{ 'profile.edit.submit'|trans }}" />
+            </div>
+        </div>
+    </div>
+    
        
     </div>
+
 
 </form>
 </div>
