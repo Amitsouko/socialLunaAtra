@@ -4,6 +4,7 @@ namespace LunaAtra\ProfileBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use \Doctrine\Common\Collections\ArrayCollection;
 /**
  * Guild
  *
@@ -72,6 +73,12 @@ class Guild
     private $type;
 
     /**
+     * @ORM\ManyToMany(targetEntity="User", mappedBy="guilds")
+     **/
+    private $users;
+
+
+    /**
      * @Assert\File(maxSize="1000000", mimeTypes = {"image/jpeg", "image/png", "image/gif"}, mimeTypesMessage = "Please upload a valid image")
      */
     public $file;
@@ -130,6 +137,7 @@ class Guild
     public function __construct()
     {
         parent::__construct();
+        $this->users = new ArrayCollection();
     }
 
     public function getAbsolutePath()
@@ -303,5 +311,84 @@ class Guild
     public function getRecrutingAnnounce()
     {
         return $this->recrutingAnnounce;
+    }
+
+    /**
+     * Set type
+     *
+     * @param string $type
+     * @return Guild
+     */
+    public function setType($type)
+    {
+        $this->type = $type;
+
+        return $this;
+    }
+
+    /**
+     * Get type
+     *
+     * @return string 
+     */
+    public function getType()
+    {
+        return $this->type;
+    }
+
+    /**
+     * Set lastImageUpdate
+     *
+     * @param string $lastImageUpdate
+     * @return Guild
+     */
+    public function setLastImageUpdate($lastImageUpdate)
+    {
+        $this->lastImageUpdate = $lastImageUpdate;
+
+        return $this;
+    }
+
+    /**
+     * Get lastImageUpdate
+     *
+     * @return string 
+     */
+    public function getLastImageUpdate()
+    {
+        return $this->lastImageUpdate;
+    }
+
+    /**
+     * Add users
+     *
+     * @param \LunaAtra\ProfileBundle\Entity\User $users
+     * @return Guild
+     */
+    public function addUser(\LunaAtra\ProfileBundle\Entity\User $users)
+    {
+        $this->users[] = $users;
+
+        return $this;
+    }
+
+    /**
+     * Remove users
+     *
+     * @param \LunaAtra\ProfileBundle\Entity\User $users
+     */
+    public function removeUser(\LunaAtra\ProfileBundle\Entity\User $users)
+    {
+        $this->users->removeElement($users);
+    }
+
+    /**
+     * Get users
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getUsers()
+    {
+        return $this->users;
     }
 }

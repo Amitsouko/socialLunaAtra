@@ -20,7 +20,7 @@ use Symfony\Component\DependencyInjection\ContainerAware;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
-
+use LunaATra\CoreBundle\Entity\Notification;
 
 /**
  * Controller managing the user profile
@@ -88,6 +88,12 @@ class ProfileController extends ContainerAware
 
                 $dispatcher->dispatch(FOSUserEvents::PROFILE_EDIT_COMPLETED, new FilterUserResponseEvent($user, $request, $response));
 
+                //create notification
+                $em = $this->container->get('doctrine')->getEntityManager();
+                $notification = new Notification();
+                $notification->setUpdateProfile($user);
+                $em->persist($notification);
+                $em->flush();
                 return $response;
             }
         }

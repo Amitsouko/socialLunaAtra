@@ -4,6 +4,7 @@ namespace LunaAtra\ProfileBundle\Entity;
 use FOS\UserBundle\Model\User as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use \Doctrine\Common\Collections\ArrayCollection;
 /**
  * @ORM\Entity
  * @ORM\Table(name="fos_user")
@@ -39,6 +40,24 @@ class User extends BaseUser
      * @var type
      */
     protected $characters;
+
+    /**
+     * @ORM\OneToMany(targetEntity="LunaAtra\CoreBundle\Entity\Notification", mappedBy="user")
+     * @ORM\OrderBy({"date" = "DESC"})
+     * @var type
+     */
+    protected $ownNotifications;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="Guild", inversedBy="users")
+     * @ORM\JoinTable(name="users_to_guilds")
+     **/
+    private $guilds;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="LunaAtra\CoreBundle\Entity\Notification", mappedBy="users")
+     **/
+    private $notifications;
 
     /**
      * @Assert\File(maxSize="2000000", mimeTypes = {"image/jpeg", "image/png", "image/gif"}, mimeTypesMessage = "Please upload a valid image")
@@ -98,6 +117,7 @@ class User extends BaseUser
     public function __construct()
     {
         parent::__construct();
+        $this->guilds = new ArrayCollection();
     }
 
     public function getAbsolutePath()
@@ -178,5 +198,183 @@ class User extends BaseUser
     public function getLastImageUpdate()
     {
         return $this->lastImageUpdate;
+    }
+
+    /**
+     * Set announce
+     *
+     * @param string $announce
+     * @return User
+     */
+    public function setAnnounce($announce)
+    {
+        $this->announce = $announce;
+
+        return $this;
+    }
+
+    /**
+     * Get announce
+     *
+     * @return string 
+     */
+    public function getAnnounce()
+    {
+        return $this->announce;
+    }
+
+    /**
+     * Set bio
+     *
+     * @param string $bio
+     * @return User
+     */
+    public function setBio($bio)
+    {
+        $this->bio = $bio;
+
+        return $this;
+    }
+
+    /**
+     * Get bio
+     *
+     * @return string 
+     */
+    public function getBio()
+    {
+        return $this->bio;
+    }
+
+    /**
+     * Add characters
+     *
+     * @param \LunaAtra\ProfileBundle\Entity\Charact $characters
+     * @return User
+     */
+    public function addCharacter(\LunaAtra\ProfileBundle\Entity\Charact $characters)
+    {
+        $this->characters[] = $characters;
+
+        return $this;
+    }
+
+    /**
+     * Remove characters
+     *
+     * @param \LunaAtra\ProfileBundle\Entity\Charact $characters
+     */
+    public function removeCharacter(\LunaAtra\ProfileBundle\Entity\Charact $characters)
+    {
+        $this->characters->removeElement($characters);
+    }
+
+    /**
+     * Get characters
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getCharacters()
+    {
+        return $this->characters;
+    }
+
+    /**
+     * Add ownNotifications
+     *
+     * @param \LunaAtra\CoreBundle\Entity\Notification $ownNotifications
+     * @return User
+     */
+    public function addOwnNotification(\LunaAtra\CoreBundle\Entity\Notification $ownNotifications)
+    {
+        $this->ownNotifications[] = $ownNotifications;
+
+        return $this;
+    }
+
+    /**
+     * Remove ownNotifications
+     *
+     * @param \LunaAtra\CoreBundle\Entity\Notification $ownNotifications
+     */
+    public function removeOwnNotification(\LunaAtra\CoreBundle\Entity\Notification $ownNotifications)
+    {
+        $this->ownNotifications->removeElement($ownNotifications);
+    }
+
+    /**
+     * Get ownNotifications
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getOwnNotifications()
+    {
+        return $this->ownNotifications;
+    }
+
+    /**
+     * Add guilds
+     *
+     * @param \LunaAtra\ProfileBundle\Entity\Guild $guilds
+     * @return User
+     */
+    public function addGuild(\LunaAtra\ProfileBundle\Entity\Guild $guilds)
+    {
+        $this->guilds[] = $guilds;
+
+        return $this;
+    }
+
+    /**
+     * Remove guilds
+     *
+     * @param \LunaAtra\ProfileBundle\Entity\Guild $guilds
+     */
+    public function removeGuild(\LunaAtra\ProfileBundle\Entity\Guild $guilds)
+    {
+        $this->guilds->removeElement($guilds);
+    }
+
+    /**
+     * Get guilds
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getGuilds()
+    {
+        return $this->guilds;
+    }
+
+    /**
+     * Add notifications
+     *
+     * @param \LunaAtra\CoreBundle\Entity\Notification $notifications
+     * @return User
+     */
+    public function addNotification(\LunaAtra\CoreBundle\Entity\Notification $notifications)
+    {
+        $this->notifications[] = $notifications;
+
+        return $this;
+    }
+
+    /**
+     * Remove notifications
+     *
+     * @param \LunaAtra\CoreBundle\Entity\Notification $notifications
+     */
+    public function removeNotification(\LunaAtra\CoreBundle\Entity\Notification $notifications)
+    {
+        $this->notifications->removeElement($notifications);
+    }
+
+    /**
+     * Get notifications
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getNotifications()
+    {
+        return $this->notifications;
     }
 }

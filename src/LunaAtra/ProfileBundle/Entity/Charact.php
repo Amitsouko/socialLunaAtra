@@ -277,4 +277,73 @@ class Charact
     {
         return $this->birthday;
     }
+
+    /**
+     * Set order
+     *
+     * @param integer $order
+     * @return Charact
+     */
+    public function setOrder($order)
+    {
+        $this->order = $order;
+
+        return $this;
+    }
+
+    /**
+     * Get order
+     *
+     * @return integer 
+     */
+    public function getOrder()
+    {
+        return $this->order;
+    }
+
+    /**
+     * Set lastImageUpdate
+     *
+     * @param string $lastImageUpdate
+     * @return Charact
+     */
+    public function setLastImageUpdate($lastImageUpdate)
+    {
+        $this->lastImageUpdate = $lastImageUpdate;
+
+        return $this;
+    }
+
+    /**
+     * Get lastImageUpdate
+     *
+     * @return string 
+     */
+    public function getLastImageUpdate()
+    {
+        return $this->lastImageUpdate;
+    }
+
+    /**
+     * Set user
+     *
+     * @param \LunaAtra\ProfileBundle\Entity\User $user
+     * @return Charact
+     */
+    public function setUser(\LunaAtra\ProfileBundle\Entity\User $user = null)
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * Get user
+     *
+     * @return \LunaAtra\ProfileBundle\Entity\User 
+     */
+    public function getUser()
+    {
+        return $this->user;
+    }
 }
