@@ -34,6 +34,13 @@ class User extends BaseUser
     public $bio;
 
     /**
+     * @ORM\OneToMany(targetEntity="LunaAtra\ProfileBundle\Entity\Charact", mappedBy="user")
+     * @ORM\OrderBy({"order" = "DESC"})
+     * @var type
+     */
+    protected $characters;
+
+    /**
      * @Assert\File(maxSize="2000000", mimeTypes = {"image/jpeg", "image/png", "image/gif"}, mimeTypesMessage = "Please upload a valid image")
      */
     public $file;
@@ -99,8 +106,8 @@ class User extends BaseUser
     }
 
     public function getWebPath()
-    {
-        return null === $this->path ? "bundles/core/images/charisson.jpg"  : $this->getUploadDir().'/'.$this->path;
+    {   $lastDigit = substr($this->id, -1);
+        return null === $this->path ? "bundles/core/images/charisson$lastDigit.jpg"  : $this->getUploadDir().'/'.$this->path;
     }
 
     protected function getUploadRootDir()
