@@ -91,6 +91,10 @@ liip_imagine:
             quality: 90
             filters:
                 thumbnail: { size: [175, 175], mode: outbound }
+        character_thumbnail:
+            quality: 90
+            filters:
+                thumbnail: { size: [125, 125], mode: outbound }
 
 # tinymce
 stfalcon_tinymce:

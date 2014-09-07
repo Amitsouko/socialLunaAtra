@@ -30,6 +30,13 @@ class Charact
     private $name;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="announce", type="string", length=45, nullable=true)
+     */
+    private $announce;
+
+    /**
      * @var integer
      *
      * @ORM\Column(name="level", type="integer")
@@ -53,7 +60,7 @@ class Charact
     /**
      * @var string
      *
-     * @ORM\Column(name="bio", type="text")
+     * @ORM\Column(name="bio", type="text", nullable=true)
      */
     private $bio;
 
@@ -372,5 +379,28 @@ class Charact
     public function getPath()
     {
         return $this->path;
+    }
+
+    /**
+     * Set announce
+     *
+     * @param string $announce
+     * @return Charact
+     */
+    public function setAnnounce($announce)
+    {
+        $this->announce = $announce;
+
+        return $this;
+    }
+
+    /**
+     * Get announce
+     *
+     * @return string 
+     */
+    public function getAnnounce()
+    {
+        return $this->announce;
     }
 }

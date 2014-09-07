@@ -2,7 +2,7 @@
 <div class="sub-menu-profile">
     <ul class="list-inline hidden-xs hidden-sm">
         <li><a href="{{ path("user-bio", {"username": user.username}) }}">Biographie</a></li>
-        <li><a href="">Personnages</a></li>
+        <li><a href="{{ path("user-characters", {"username": user.username}) }}">Personnages</a></li>
         <li><a href="">Guildes</a></li>
         <li><a href="">Galeries</a></li>
         <li><a href="">Trophés</a></li>

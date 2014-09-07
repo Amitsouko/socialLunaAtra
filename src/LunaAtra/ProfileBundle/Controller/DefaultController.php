@@ -32,4 +32,15 @@ class DefaultController extends Controller
         $user = $em->getRepository('ProfileBundle:User')->findOneByUsername($username);
         return array('user' =>$user);
     }
+
+    /**
+     * @Route("/{username}/characters", name="user-characters")
+     * @Template("ProfileBundle:Default:characters.html.twig")
+     */
+    public function CharactersAction($username)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $user = $em->getRepository('ProfileBundle:User')->findOneByUsername($username);
+        return array('user' =>$user);
+    }
 }

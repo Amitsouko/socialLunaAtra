@@ -28,6 +28,7 @@ class CustomProfileController extends Controller
             ->add("file")
             ->add("class")
             ->add("level")
+            ->add("announce")
             ->add("bio")
             ->getForm();
 
@@ -39,7 +40,7 @@ class CustomProfileController extends Controller
                 $character->setUser($user);
                 $em->persist($character);
                 $em->flush();
-                return $this->redirect($this->generateUrl('fos_user_profile_show'));
+                return $this->redirect($this->generateUrl('user-characters', array("username"=> $user->getUsername() )));
             }
         }
 

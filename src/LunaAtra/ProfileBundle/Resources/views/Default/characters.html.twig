@@ -1,0 +1,39 @@
+{% extends "CoreBundle::base.html.twig" %}
+
+{% block content %}
+
+{% include "ProfileBundle:Include:header-profile.html.twig" %}
+
+<div class="row">
+    <div class=" col-md-12">
+        <h1>Characters 
+        {% if user ==  app.user %}
+        <a href="{{ path("add-character") }}"><em>Ajouter un personnage</em></a>
+        {% endif %}</h1>
+    </div>
+</div>
+
+<div class="row">
+    {% for char in user.characters %}
+    <div class=" col-md-6">
+        <a href="">
+            <div class="white-box character-list">
+                <h2><span>{{char.name}}</span></h2>
+                <div class="character-thumbnail">
+                    <img src="{{ char.WebPath | imagine_filter('character_thumbnail') }}">
+                </div>
+                    
+                <div>
+                     <p class="character-announcement">&ldquo;{{ char.announce }}&rdquo;<br/>
+                    
+                    </p>
+                    <span>{{char.class}} lvl {{char.level}}</span>
+                </div>
+                <div class="clearfix"></div> 
+            </div>
+        </a>
+    </div>
+    {% endfor %}
+</div>
+
+{% endblock content %}
