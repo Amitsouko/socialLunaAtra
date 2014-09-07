@@ -95,7 +95,10 @@ liip_imagine:
             quality: 90
             filters:
                 thumbnail: { size: [125, 125], mode: outbound }
-
+        mini_character_thumbnail:
+            quality: 75
+            filters:
+                thumbnail: { size: [32, 32], mode: outbound }
 # tinymce
 stfalcon_tinymce:
     include_jquery: true

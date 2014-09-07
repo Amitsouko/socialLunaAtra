@@ -1,0 +1,39 @@
+{% extends "CoreBundle::base.html.twig" %}
+
+{% block content %}
+
+{% include "ProfileBundle:Include:header-profile.html.twig" %}
+
+
+<div class="row">
+   <div class="col-md-8 character-details">
+        <div class="white-box">
+            <a href="{{ asset(character.WebPath) }}" data-lightbox="profile" data-title="{{ character.name }}">
+                <img class="pull-right medaillon" src="{{ character.WebPath|imagine_filter("character_thumbnail") }}">
+            </a>
+                <h2><span>{{ character.name }}</span> 
+                {% if user ==  app.user %}
+                    <a href="{{ path("edit-character", {id: character.id}) }}"><em>Éditer</em></a>
+                {% endif %}
+                </h2>
+                <div class="text-user">
+                {{ character.bio|raw }}
+                </div>  
+            </a>
+            <div class="clearfix"></div>
+        </div>
+   </div>
+
+   <div class="col-md-4">
+    <div class="white-box">
+    <h3><span>Informations</span></h3>
+    <ul class="list-unstyled character-list-mini">
+        <li><strong>Classe </strong> : {{ character.class }}</li>
+        <li><strong>Niveau </strong> : {{ character.level }}</li>
+        <li><strong>Date de création </strong> : {{ character.birthday|date('Y-m-d') }}</li>
+    </ul>
+    </div>
+   </div>   
+</div>
+
+{% endblock content %}

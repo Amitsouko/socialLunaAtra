@@ -15,15 +15,18 @@ class IncludeController extends Controller
      */
     public function indexAction($id)
     {
+        $cache = array();
         $em = $this->getDoctrine()->getManager();
         $user = $this->container->get('security.context')->getToken()->getUser();
         if(!($user->getId() == $id))
         {
 
-            $user = $em ->getRepository('Profilebundle:User')
-                         ->getOneById($id);
+            $user = $em ->getRepository('ProfileBundle:User')
+                         ->findOneById($id);
         }
-
+        $cache[] = array("entity" => 'ProfileBundle:User', "id" => $user->getId());
+        $entityCache = array();
+        $entityCache[] = $user;
         $notifications = array();
         $i = 0;
         foreach($user->getOwnNotifications()  as $notif)
@@ -36,9 +39,23 @@ class IncludeController extends Controller
             //loop to get the value of the key
             foreach( $codedParam as $key => $data)
             {   
+                $arraySearch = array("entity" => $data["entity"], "id" =>$data["id"]);
 
-                $result= $em ->getRepository($data["entity"])
+                $isInCache = array_search($arraySearch, $cache);
+
+
+                if($isInCache != null)
+                {
+                    $result = $entityCache[$isInCache];
+                }else
+                {
+                     $result= $em ->getRepository($data["entity"])
                             ->findOneById($data["id"]);
+
+                    $cache[] = array("entity" => $data["entity"], "id" => $result->getId());
+                    $entityCache[] = $result;
+                }
+               
                 $parameters["%".$key."%"] = $result->get($data["column"]);
             }
 
@@ -49,7 +66,7 @@ class IncludeController extends Controller
         $i++;
 
         }
-        return array("notifications" => $notifications);
+        return array("notifications" => $notifications, "user" => $user);
     }
 
 }

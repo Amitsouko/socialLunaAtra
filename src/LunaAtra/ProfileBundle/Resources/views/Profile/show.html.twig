@@ -9,9 +9,9 @@
 {% if user.characters|length > 0 %}
     <div class="white-box">
         <h3><span>Personnages</span></h3>
-        <ul>
+        <ul class="list-unstyled character-list-mini">
         {% for char in user.characters %}
-            <li>{{ char.name }}</li>
+            <li><a href="{{ path("user-character", {id: char.id}) }}"><img src="{{ char.WebPath|imagine_filter("mini_character_thumbnail") }}"> {{ char.name }}</a></li>
         {% endfor %}
         </ul>
     </div>

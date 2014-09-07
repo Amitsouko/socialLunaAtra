@@ -1,8 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+</head>
+<body>
 {% trans_default_domain "notifications" %}
 
+{% if notif is defined %}
 {% for notif in notifications %}
 <div class="white-box">
  <p>{{ notif.text }}</p>
  <p>{{ notif.date|date }}</p>
  </div>
 {% endfor %}
+{% else %}
+    
+    {% if user == app.user %}
+    <div class="white-box">
+        <p>Tutorial</p>
+     </div>
+    {% endif %}
+
+<div class="white-box">
+    <p>No activity yet bro !</p>
+ </div>
+{% endif %}
+</body>
+</html>

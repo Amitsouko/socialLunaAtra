@@ -1,9 +1,9 @@
 user:
     update:
         profile: 
-            text: %username% updated his profile.
+            text: %username% updated his/her profile.
             type: "MajProfile"
     create:
         character: 
-            text: %username% created his character : %character_username%
+            text: %username% created the character %character_username%
             type: createCharacter
