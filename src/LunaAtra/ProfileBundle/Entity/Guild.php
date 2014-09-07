@@ -132,7 +132,10 @@ class Guild
         }
     }
 
-
+    public function get($name)
+    {
+        return  isset($this->$name) ? $this->$name : null;
+    }
 
     public function __construct()
     {

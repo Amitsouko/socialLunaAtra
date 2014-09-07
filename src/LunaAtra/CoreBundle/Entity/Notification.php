@@ -53,6 +53,10 @@ class Notification
      **/
     private $users;
 
+    public function get($name)
+    {
+        return  isset($this->$name) ? $this->$name : null;
+    }
 
     /**
      * Get id
@@ -208,4 +212,15 @@ class Notification
          );
     }
 
+    public function CreateCharacter($user,$character)
+    {
+        $this->setSeeder($user);
+        $this->setTranslation("user.create.character");
+        $this->setData(
+         array(
+                "username" => array("entity" => "ProfileBundle:User", "id" => $user->getId(), "column" => "username"),
+                "character_username" => array("entity" => "ProfileBundle:Charact", "id" => $character->getId(), "column" => "name")
+            )
+         );
+    }
 }

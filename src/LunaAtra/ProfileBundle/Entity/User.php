@@ -42,7 +42,7 @@ class User extends BaseUser
     protected $characters;
 
     /**
-     * @ORM\OneToMany(targetEntity="LunaAtra\CoreBundle\Entity\Notification", mappedBy="user")
+     * @ORM\OneToMany(targetEntity="LunaAtra\CoreBundle\Entity\Notification", mappedBy="seeder")
      * @ORM\OrderBy({"date" = "DESC"})
      * @var type
      */
@@ -118,6 +118,11 @@ class User extends BaseUser
     {
         parent::__construct();
         $this->guilds = new ArrayCollection();
+    }
+
+    public function get($name)
+    {
+        return  isset($this->$name) ? $this->$name : null;
     }
 
     public function getAbsolutePath()

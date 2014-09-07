@@ -7,7 +7,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use LunaAtra\ProfileBundle\Entity\Charact;
 use Symfony\Component\HttpFoundation\Request;
-
+use LunaAtra\CoreBundle\Entity\Notification;
 /**
  * @Route("/")
  */
@@ -39,6 +39,10 @@ class CustomProfileController extends Controller
                 $user = $this->get('security.context')->getToken()->getUser();
                 $character->setUser($user);
                 $em->persist($character);
+                $em->flush();
+                $notification = new Notification();
+                $notification->CreateCharacter($user,$character);
+                $em->persist($notification);
                 $em->flush();
                 return $this->redirect($this->generateUrl('user-characters', array("username"=> $user->getUsername() )));
             }

@@ -93,6 +93,10 @@ class Charact
      */
     public $path;
 
+    public function get($name)
+    {
+        return  isset($this->$name) ? $this->$name : null;
+    }
     /**
      * @ORM\PrePersist()
      * @ORM\PreUpdate()

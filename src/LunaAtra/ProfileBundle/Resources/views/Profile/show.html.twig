@@ -6,9 +6,16 @@
 
 <div class="row">
 <div class="col-md-4">
+{% if user.characters|length > 0 %}
     <div class="white-box">
-        <h3><span>Galeries</span></h3>
+        <h3><span>Personnages</span></h3>
+        <ul>
+        {% for char in user.characters %}
+            <li>{{ char.name }}</li>
+        {% endfor %}
+        </ul>
     </div>
+{% endif %}
     <div class="white-box">
         <h3><span>Achèvements</span></h3>
     </div>
@@ -18,11 +25,11 @@
 </div>
 
 <div class="col-md-8">
-    <div class="white-box">
-        {#{% include "ProfileBundle:Include:header-profile.html.twig" %}
     
-    ownNotifications #}
-    </div>
+    {% if user.ownNotifications  %}
+        {% render path("include-ownNotifications", {"id": user.id}) %}
+    {% endif %}
+
 </div>
 
 </div>

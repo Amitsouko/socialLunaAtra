@@ -1,0 +1,8 @@
+{% trans_default_domain "notifications" %}
+
+{% for notif in notifications %}
+<div class="white-box">
+ <p>{{ notif.text }}</p>
+ <p>{{ notif.date|date }}</p>
+ </div>
+{% endfor %}
