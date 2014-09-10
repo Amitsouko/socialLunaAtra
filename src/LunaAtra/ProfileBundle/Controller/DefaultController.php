@@ -6,6 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 
+
 /**
  * @Route("/user")
  */
@@ -19,6 +20,9 @@ class DefaultController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $user = $em->getRepository('ProfileBundle:User')->findOneByUsername($username);
+        if(!is_object($user)){
+            throw $this->createNotFoundException('The user does not exist !');
+        }
         return array('user' =>$user);
     }
 

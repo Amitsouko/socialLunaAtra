@@ -16,7 +16,7 @@
 <div class="row">
     {% for char in user.characters %}
     <div class=" col-md-6">
-        <a href="{{ path("user-character",{"id": char.id}) }}" class="no-style">
+        <a href="{{ path("single-character",{"id": char.id}) }}" class="no-style">
             <div class="white-box character-list">
                 <h2><span>{{char.name}}</span></h2>
                 <div class="character-thumbnail">

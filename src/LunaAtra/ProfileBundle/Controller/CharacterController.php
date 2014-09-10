@@ -14,7 +14,7 @@ class CharacterController extends Controller
 
 
     /**
-     * @Route("/{id}", name="user-character")
+     * @Route("/{id}", name="single-character")
      * @Template("ProfileBundle:Default:character.html.twig")
      */
     public function CharacterAction($id)

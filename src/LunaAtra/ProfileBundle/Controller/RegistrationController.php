@@ -24,7 +24,7 @@ use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use FOS\UserBundle\Model\UserInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-
+use LunaAtra\CoreBundle\Entity\Activity;
 /**
  * Controller managing the registration
  *
@@ -119,7 +119,11 @@ class RegistrationController extends ContainerAware
                     $url = $this->container->get('router')->generate('fos_user_profile_show');
                     $response = new RedirectResponse($url);
                 }
-
+                $em = $this->container->get('doctrine')->getManager();
+                $activity = new Activity();
+                $activity->createProfile($user);
+                $em->persist($activity);
+                $em->flush();
                 $dispatcher->dispatch(FOSUserEvents::REGISTRATION_COMPLETED, new FilterUserResponseEvent($user, $request, $response));
 
                 return $response;

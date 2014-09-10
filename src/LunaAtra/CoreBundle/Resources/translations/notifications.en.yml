@@ -1,9 +1,0 @@
-user:
-    update:
-        profile: 
-            text: %username% updated his/her profile.
-            type: "MajProfile"
-    create:
-        character: 
-            text: %username% created the character %character_username%
-            type: createCharacter

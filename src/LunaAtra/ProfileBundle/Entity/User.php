@@ -42,11 +42,11 @@ class User extends BaseUser
     protected $characters;
 
     /**
-     * @ORM\OneToMany(targetEntity="LunaAtra\CoreBundle\Entity\Notification", mappedBy="seeder")
+     * @ORM\OneToMany(targetEntity="LunaAtra\CoreBundle\Entity\Activity", mappedBy="seeder")
      * @ORM\OrderBy({"date" = "DESC"})
      * @var type
      */
-    protected $ownNotifications;
+    protected $activities;
 
     /**
      * @ORM\ManyToMany(targetEntity="Guild", inversedBy="users")
@@ -381,5 +381,43 @@ class User extends BaseUser
     public function getNotifications()
     {
         return $this->notifications;
+    }
+
+    /**
+     * Add activities
+     *
+     * @param \LunaAtra\CoreBundle\Entity\Activity $activities
+     * @return User
+     */
+    public function addActivity(\LunaAtra\CoreBundle\Entity\Activity $activities)
+    {
+        $this->activities[] = $activities;
+
+        return $this;
+    }
+
+    /**
+     * Remove activities
+     *
+     * @param \LunaAtra\CoreBundle\Entity\Activity $activities
+     */
+    public function removeActivity(\LunaAtra\CoreBundle\Entity\Activity $activities)
+    {
+        $this->activities->removeElement($activities);
+    }
+
+    /**
+     * Get activities
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getActivities()
+    {
+        return $this->activities;
+    }
+
+    public function getUrlName()
+    {
+        return "user";
     }
 }

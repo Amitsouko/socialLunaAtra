@@ -13,6 +13,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class Charact
 {
+    private $urlName;
     /**
      * @var integer
      *
@@ -142,6 +143,7 @@ class Charact
 
     public function __construct()
     {
+        $this->urlName = "single-character";
     }
 
     public function getAbsolutePath()
@@ -406,5 +408,11 @@ class Charact
     public function getAnnounce()
     {
         return $this->announce;
+    }
+    /** usefull for the translation of activities
+    */
+    public function getUrlName()
+    {
+        return "single-character";
     }
 }

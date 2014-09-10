@@ -4,13 +4,13 @@
     <title></title>
 </head>
 <body>
-{% trans_default_domain "notifications" %}
 
-{% if notifications is defined %}
-{% for notif in notifications %}
+
+{% if activities is defined %}
+{% for act in activities %}
 <div class="white-box">
- <p>{{ notif.text }}</p>
- <p>{{ notif.date|date }}</p>
+ <p>{{ act.text|raw }}</p>
+ <p>{{ act.date|date }}</p>
  </div>
 {% endfor %}
 {% else %}

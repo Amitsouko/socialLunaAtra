@@ -10,8 +10,8 @@ use Doctrine;
 class IncludeController extends Controller
 {
     /**
-     * @Route("/include/ownNotifications/{id}", name="include-ownNotifications")
-     * @Template("ProfileBundle:Include:ownNotifications.html.twig")
+     * @Route("/include/activities/{id}", name="include-activities")
+     * @Template("ProfileBundle:Include:activities.html.twig")
      */
     public function indexAction($id)
     {
@@ -26,14 +26,14 @@ class IncludeController extends Controller
         $cache[] = array("entity" => 'ProfileBundle:User', "id" => $user->getId());
         $entityCache = array();
         $entityCache[] = $user;
-        $notifications = array();
+        $activities = array();
         $i = 0;
-        foreach($user->getOwnNotifications()  as $notif)
+        foreach($user->getActivities()  as $act)
         {
             if($i > 10) break;
             $parameters = array();
 
-            $codedParam = $notif->getData();
+            $codedParam = $act->getData();
             
             //loop to get the value of the key
             foreach( $codedParam as $key => $data)
@@ -42,7 +42,7 @@ class IncludeController extends Controller
 
                 $isInCache = array_search($arraySearch, $cache);
 
-
+                //check if entity is in cache
                 if($isInCache != null)
                 {
                     $result = $entityCache[$isInCache];
@@ -50,22 +50,28 @@ class IncludeController extends Controller
                 {
                      $result= $em ->getRepository($data["entity"])
                             ->findOneById($data["id"]);
-
+                    //fil in the cache
                     $cache[] = array("entity" => $data["entity"], "id" => $result->getId());
                     $entityCache[] = $result;
                 }
-               
-                $parameters["%".$key."%"] = $result->get($data["column"]);
+               //set parameters
+                if(isset($data["isUrl"]) && $data["isUrl"] == true )
+                {
+                    $uri = $this->get('router')->generate($result->getUrlName(), array($data["urlKey"] => $data["urlData"]));
+                    $parameters["%".$key."%"] = $uri;
+                }else{
+                    $parameters["%".$key."%"] = $result->get($data["column"]);
+                }
             }
-
-            $notifications[]  = array("text" =>$this->get('translator')->trans($notif->getTranslation().".text", $parameters, 'notifications'),
-                                        "type" => $notif->getTranslation().".type",
-                                        "date" => $notif->getDate()
+            //fill in the returned array
+            $activities[]  = array("text" =>$this->get('translator')->trans($act->getTranslation().".text", $parameters, 'activities'),
+                                        "type" => $act->getTranslation().".type",
+                                        "date" => $act->getDate()
                                         );
         $i++;
 
         }
-        return array("notifications" => $notifications, "user" => $user);
+        return array("activities" => $activities, "user" => $user);
     }
 
 }

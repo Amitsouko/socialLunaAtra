@@ -7,7 +7,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use LunaAtra\ProfileBundle\Entity\Charact;
 use Symfony\Component\HttpFoundation\Request;
-use LunaAtra\CoreBundle\Entity\Notification;
+use LunaAtra\CoreBundle\Entity\Activity;
 /**
  * @Route("/")
  */
@@ -40,9 +40,9 @@ class CustomProfileController extends Controller
                 $character->setUser($user);
                 $em->persist($character);
                 $em->flush();
-                $notification = new Notification();
-                $notification->CreateCharacter($user,$character);
-                $em->persist($notification);
+                $activity = new Activity();
+                $activity->CreateCharacter($user,$character);
+                $em->persist($activity);
                 $em->flush();
                 return $this->redirect($this->generateUrl('user-characters', array("username"=> $user->getUsername() )));
             }
@@ -84,11 +84,11 @@ class CustomProfileController extends Controller
                 $character->setUser($user);
                 $em->persist($character);
                 $em->flush();
-                $notification = new Notification();
-                $notification->CreateCharacter($user,$character);
-                $em->persist($notification);
+                $activity = new Activity();
+                $activity->updateCharacter($user,$character);
+                $em->persist($activity);
                 $em->flush();
-                return $this->redirect($this->generateUrl('user-character', array("id"=> $character->getId() )));
+                return $this->redirect($this->generateUrl('single-character', array("id"=> $character->getId() )));
             }
         }
 

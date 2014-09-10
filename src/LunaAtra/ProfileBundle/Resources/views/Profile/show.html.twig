@@ -11,7 +11,7 @@
         <h3><span>Personnages</span></h3>
         <ul class="list-unstyled character-list-mini">
         {% for char in user.characters %}
-            <li><a href="{{ path("user-character", {id: char.id}) }}"><img src="{{ char.WebPath|imagine_filter("mini_character_thumbnail") }}"> {{ char.name }}</a></li>
+            <li><a href="{{ path("single-character", {id: char.id}) }}"><img src="{{ char.WebPath|imagine_filter("mini_character_thumbnail") }}"> {{ char.name }}</a></li>
         {% endfor %}
         </ul>
     </div>
@@ -26,8 +26,8 @@
 
 <div class="col-md-8">
     
-    {% if user.ownNotifications  %}
-        {% render path("include-ownNotifications", {"id": user.id}) %}
+    {% if user.activities  %}
+        {% render path("include-activities", {"id": user.id}) %}
     {% endif %}
 
 </div>

@@ -1,0 +1,15 @@
+user:
+    update:
+        profile: 
+            text: <strong><a href='%user_url%'>%username%</a></strong> updated his/her profile.
+            type: "MajProfile"
+        character: 
+            text: <strong><a href='%user_url%'>%username%</a></strong> has updated <strong><a href='%character_url%'>%character_username%'s</a></strong> informations
+            type: createCharacter
+    create:
+        character: 
+            text: <strong><a href='%user_url%'>%username%</a></strong> created the character <strong><a href='%character_url%'>%character_username%</a></strong>
+            type: createCharacter
+        profile: 
+            text: <strong><a href='%user_url%'>%username%</a></strong> just joined Luna Atra.
+            type: "createProfile"
