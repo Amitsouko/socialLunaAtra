@@ -18,9 +18,8 @@ class IncludeController extends Controller
         $cache = array();
         $em = $this->getDoctrine()->getManager();
         $user = $this->container->get('security.context')->getToken()->getUser();
-        if(!($user->getId() == $id))
+        if( (!is_object($user) || !$user instanceof UserInterface) || !($user->getId() == $id))
         {
-
             $user = $em ->getRepository('ProfileBundle:User')
                          ->findOneById($id);
         }

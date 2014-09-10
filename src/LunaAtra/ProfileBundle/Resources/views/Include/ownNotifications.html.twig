@@ -6,7 +6,7 @@
 <body>
 {% trans_default_domain "notifications" %}
 
-{% if notif is defined %}
+{% if notifications is defined %}
 {% for notif in notifications %}
 <div class="white-box">
  <p>{{ notif.text }}</p>
