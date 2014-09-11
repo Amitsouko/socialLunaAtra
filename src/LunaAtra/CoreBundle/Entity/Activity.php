@@ -218,7 +218,7 @@ class Activity
         $this->setData(
          array(
                 "username" => array("entity" => "ProfileBundle:User", "id" => $user->getId(), "column" => "username"),
-                "user_url" => array("entity" => "ProfileBundle:User", "id" => $user->getId(), "column" => "username","urlKey" => "username", "urlData" =>$user->getUsername(),  "isUrl" => true)
+                "user_url" => array("entity" => "ProfileBundle:User", "id" => $user->getId(), "column" => "username","urlKey" => "username", "urlData" =>"username",  "isUrl" => true)
            )
          );
     }
@@ -230,7 +230,7 @@ class Activity
         $this->setData(
          array(
                 "username" => array("entity" => "ProfileBundle:User", "id" => $user->getId(), "column" => "username"),
-                "user_url" => array("entity" => "ProfileBundle:User", "id" => $user->getId(), "column" => "username","urlKey" => "username", "urlData" =>$user->getUsername(),  "isUrl" => true)
+                "user_url" => array("entity" => "ProfileBundle:User", "id" => $user->getId(), "column" => "username","urlKey" => "username", "urlData" =>"username",  "isUrl" => true)
             )
          );
     }
@@ -242,9 +242,9 @@ class Activity
         $this->setData(
          array(
                 "username" => array("entity" => "ProfileBundle:User", "id" => $user->getId(), "column" => "username"),
-                "user_url" => array("entity" => "ProfileBundle:User", "id" => $user->getId(), "column" => "username","urlKey" => "username", "urlData" =>$user->getUsername(),  "isUrl" => true),
+                "user_url" => array("entity" => "ProfileBundle:User", "id" => $user->getId(), "column" => "username","urlKey" => "username", "urlData" =>"username",  "isUrl" => true),
                 "character_username" => array("entity" => "ProfileBundle:Charact", "id" => $character->getId(), "column" => "name"),
-                "character_url" => array("entity" => "ProfileBundle:Charact","id" => $character->getId(), "column" => "id","urlKey" => "id", "urlData" =>$character->getId(),  "isUrl" => true)
+                "character_url" => array("entity" => "ProfileBundle:Charact","id" => $character->getId(), "column" => "id","urlKey" => "id", "urlData" => "id",  "isUrl" => true)
             )
          );
     }
@@ -256,9 +256,9 @@ class Activity
         $this->setData(
          array(
                 "username" => array("entity" => "ProfileBundle:User", "id" => $user->getId(), "column" => "username"),
-                "user_url" => array("entity" => "ProfileBundle:User", "id" => $user->getId(), "column" => "username","urlKey" => "username", "urlData" =>$user->getUsername(),  "isUrl" => true),
+                "user_url" => array("entity" => "ProfileBundle:User", "id" => $user->getId(), "column" => "username","urlKey" => "username", "urlData" =>"username",  "isUrl" => true),
                 "character_username" => array("entity" => "ProfileBundle:Charact", "id" => $character->getId(), "column" => "name"),
-                "character_url" => array("entity" => "ProfileBundle:Charact","id" => $character->getId(), "column" => "id","urlKey" => "id", "urlData" =>$character->getId(),  "isUrl" => true)
+                "character_url" => array("entity" => "ProfileBundle:Charact","id" => $character->getId(), "column" => "id","urlKey" => "id", "urlData" => "id",  "isUrl" => true)
             )
          );
     }

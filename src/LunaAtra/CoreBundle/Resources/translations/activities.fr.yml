@@ -4,7 +4,7 @@ user:
             text: <strong><a href='%user_url%'>%username%</a></strong> a mis à jour son profil.
             type: "MajProfile"
         character: 
-            text: <strong><a href='%user_url%'>%username%</a></strong> a mis à jour le personnage <a href='%character_url%'>%character_username%</a></strong>
+            text: <strong><a href='%user_url%'>%username%</a></strong> a mis à jour le personnage <strong><a href='%character_url%'>%character_username%</a></strong>
             type: createCharacter
     create:
         character: 

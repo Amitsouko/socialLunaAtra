@@ -57,7 +57,7 @@ class IncludeController extends Controller
                //set parameters
                 if(isset($data["isUrl"]) && $data["isUrl"] == true )
                 {
-                    $uri = $this->get('router')->generate($result->getUrlName(), array($data["urlKey"] => $data["urlData"]));
+                    $uri = $this->get('router')->generate($result->getUrlName(), array($data["urlKey"] => $result->get($data["urlData"])) );
                     $parameters["%".$key."%"] = $uri;
                 }else{
                     $parameters["%".$key."%"] = $result->get($data["column"]);
