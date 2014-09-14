@@ -123,8 +123,9 @@ h3 {
 .normal-form {
     label {
         margin-top: 22px;
+        clear:both;
         color: #9BB7D1;
-        margin-bottom: 12px;
+        margin-bottom: 8px;
     }
     input, select {
         padding: 10px;
@@ -143,6 +144,9 @@ h3 {
     select {
         margin-bottom: 5px;
         margin-right: 10px;
+        &.no-margin-right {
+            margin-right: 0px;
+        }
     }
     input[type="file"] {
         box-shadow: none;

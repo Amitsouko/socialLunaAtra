@@ -28,6 +28,8 @@
     <div class="white-box">
     <h3><span>Informations</span></h3>
     <ul class="list-unstyled character-list-mini">
+        <li><strong>Jeu </strong> : {{ character.game.name }}</li>
+        <li><strong>Serveur </strong> : {{ character.server }}</li>
         <li><strong>Classe </strong> : {{ character.class }}</li>
         <li><strong>Niveau </strong> : {{ character.level }}</li>
         <li><strong>Date de création </strong> : {{ character.birthday|date('Y-m-d') }}</li>

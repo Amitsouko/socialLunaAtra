@@ -6,6 +6,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use LunaAtra\ProfileBundle\Entity\Charact;
+use LunaAtra\CoreBundle\Entity\Game;
+use LunaAtra\CoreBundle\Entity\GameRepository;
 use Symfony\Component\HttpFoundation\Request;
 use LunaAtra\CoreBundle\Entity\Activity;
 /**
@@ -28,6 +30,18 @@ class CustomProfileController extends Controller
             ->add("file")
             ->add("class")
             ->add("level")
+            ->add('game','entity', array(
+                "multiple"=>false,
+                'class'=>'LunaAtra\CoreBundle\Entity\Game', 
+                'property'=>'name', 
+                "empty_value" => "-- Choose a game --" ,
+                "empty_data" => false ,
+                'query_builder' => function(GameRepository $er) {
+                        return $er->createQueryBuilder('c')
+                            ->orderBy('c.name', 'ASC');
+                    }
+                ))
+            ->add("server")
             ->add("announce")
             ->add("bio")
             ->getForm();
@@ -72,6 +86,18 @@ class CustomProfileController extends Controller
             ->add("class")
             ->add("level")
             ->add("announce")
+            ->add('game','entity', array(
+                "multiple"=>false,
+                'class'=>'LunaAtra\CoreBundle\Entity\Game', 
+                'property'=>'name', 
+                "empty_value" => "-- Choose a game --" ,
+                "empty_data" => false ,
+                'query_builder' => function(GameRepository $er) {
+                        return $er->createQueryBuilder('c')
+                            ->orderBy('c.name', 'ASC');
+                    }
+                ))
+            ->add("server")
             ->add("bio")
             ->add("lastImageUpdate", "hidden",array("data" => date('Y-m-d H:i:s') ))
             ->getForm();

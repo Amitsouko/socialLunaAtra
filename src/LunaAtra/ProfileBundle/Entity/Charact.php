@@ -66,6 +66,13 @@ class Charact
     private $bio;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="server", type="string", length=255, nullable=true)
+     */
+    private $server;
+
+    /**
      * @var \DateTime
      *
      * @ORM\Column(name="birthday", type="date")
@@ -76,6 +83,11 @@ class Charact
     * @ORM\ManyToOne(targetEntity="LunaAtra\ProfileBundle\Entity\User")
     */
     protected $user;
+
+    /**
+    * @ORM\ManyToOne(targetEntity="LunaAtra\CoreBundle\Entity\Game")
+    */
+    protected $game;
 
     /**
      * @var date $lastImageUpdate
@@ -414,5 +426,51 @@ class Charact
     public function getUrlName()
     {
         return "single-character";
+    }
+
+    /**
+     * Set server
+     *
+     * @param string $server
+     * @return Charact
+     */
+    public function setServer($server)
+    {
+        $this->server = $server;
+
+        return $this;
+    }
+
+    /**
+     * Get server
+     *
+     * @return string 
+     */
+    public function getServer()
+    {
+        return $this->server;
+    }
+
+    /**
+     * Set game
+     *
+     * @param \LunaAtra\CoreBundle\Entity\Game $game
+     * @return Charact
+     */
+    public function setGame(\LunaAtra\CoreBundle\Entity\Game $game = null)
+    {
+        $this->game = $game;
+
+        return $this;
+    }
+
+    /**
+     * Get game
+     *
+     * @return \LunaAtra\CoreBundle\Entity\Game 
+     */
+    public function getGame()
+    {
+        return $this->game;
     }
 }
