@@ -39,7 +39,7 @@ class DefaultController extends Controller
             : null;
 
         return $this->render(
-            'CoreBundle:include:header-profile.html.twig',
+            'CoreBundle:include:top-bar.html.twig',
             array('csrf_token' => $csrfToken ));
     }
 }

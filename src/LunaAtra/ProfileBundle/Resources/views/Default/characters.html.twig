@@ -2,38 +2,49 @@
 
 {% block content %}
 
-{% include "ProfileBundle:Include:header-profile.html.twig" %}
+{% include "ProfileBundle:Include:top-profile.html.twig" %}
 
-<div class="row">
-    <div class=" col-md-12">
-        <h1>Characters 
+<div class="container">
+
+
+    <div class="row">
+        {% for char in user.characters %}
+        <div class=" col-md-6">
+            <a href="{{ path("single-character",{"id": char.id}) }}" class="no-style">
+                <div class="white-box character-list">
+                    <h2><span>{{char.name}}</span></h2>
+                    <div class="character-thumbnail">
+                        <img src="{{ char.WebPath | imagine_filter('character_thumbnail') }}">
+                    </div>
+                        
+                    <div>
+                         <p class="character-announcement">&ldquo;{{ char.announce }}&rdquo;<br/>
+                        
+                        </p>
+                        <p>{{char.class}} lvl {{char.level}}</p>
+                    </div>
+                    <div class="clearfix"></div> 
+                </div>
+            </a>
+        </div>
+        {% endfor %}
         {% if user ==  app.user %}
-        <a href="{{ path("add-character") }}"><em>Ajouter un personnage</em></a>
-        {% endif %}</h1>
+          <div class=" col-md-6">
+            <a href="{{ path("add-character") }}" class="no-style">
+                <div class="white-box-reversed character-list">
+                    <h2><span>Add another</span></h2>
+                    <div class="character-thumbnail">
+                        <img src="https://lh3.googleusercontent.com/-w05mm27Qc2A/AAAAAAAAAAI/AAAAAAAAABw/hPpRQuikIcU/photo.jpg">
+                    </div>
+                        
+                 
+                    <div class="clearfix"></div> 
+                </div>
+            </a>
+        </div>
+        {% endif %}
     </div>
-</div>
 
-<div class="row">
-    {% for char in user.characters %}
-    <div class=" col-md-6">
-        <a href="{{ path("single-character",{"id": char.id}) }}" class="no-style">
-            <div class="white-box character-list">
-                <h2><span>{{char.name}}</span></h2>
-                <div class="character-thumbnail">
-                    <img src="{{ char.WebPath | imagine_filter('character_thumbnail') }}">
-                </div>
-                    
-                <div>
-                     <p class="character-announcement">&ldquo;{{ char.announce }}&rdquo;<br/>
-                    
-                    </p>
-                    <p>{{char.class}} lvl {{char.level}}</p>
-                </div>
-                <div class="clearfix"></div> 
-            </div>
-        </a>
-    </div>
-    {% endfor %}
 </div>
 
 {% endblock content %}

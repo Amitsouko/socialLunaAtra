@@ -33,16 +33,10 @@
 
 </head>
     <body class="{% block bodyclass %}{% endblock bodyclass %}">
-    <div style="overflow:auto;padding-bottom: 10px;">
-    {% render path("embbed-profile") %}
-
-      <div id="background-image" style="background-image:url('{{ asset('bundles/core/images/background-home/'~ random(3) ~'.jpg') }}');">
-          <div id="gradient"></div>
-
-      </div>
+      {% render path("embbed-profile") %}
         {% block main %}
         {% endblock main %}
-    </div>
+
     <footer>
         <div class="container">
           <div class="row">
