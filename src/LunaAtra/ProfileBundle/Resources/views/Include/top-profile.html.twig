@@ -1,0 +1,71 @@
+{% set currentPath = path(app.request.attributes.get('_route'),
+                           app.request.attributes.get('_route_params')) %}
+ <div id="cover-profile" style="background-image:url('{{ asset('bundles/core/images/background-home/'~ random(3) ~'.jpg') }}');">
+ 
+ <div class="cover-content">
+     <div id="main-profile-image">
+         <a href="{{ asset(user.WebPath) }}" data-lightbox="profile" data-title="{{ user.username }}">
+            <img src="{{ user.WebPath | imagine_filter('profile_thumbnail') }}">
+        </a>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="tram col-md-6 col-md-offset-3 col-lg-4 col-lg-offset-4">
+                <h1 class="profile-name ">
+                    <a href="{{ path("user", {"username": user.username}) }}">{{ user.username }}</a>
+                        {% if app.user == user %} 
+                            <em><a href="{{ path("fos_user_profile_edit") }}">Éditer</a></em>
+                        {% endif%}
+                </h1>
+            </div>
+        </div>
+    </div>
+ </div>
+
+</div>
+<div class="container">
+    <div class="sub-menu-profile">
+        <ul class="list-inline hidden-xs hidden-sm">
+            <li>
+                <a {% if path("user", {"username": user.username}) == currentPath  %}class="selected" {% endif %} 
+                    href="{{ path("user", {"username": user.username}) }}"  >
+                    Profil
+                </a>
+            </li>
+            <li>
+                <a {% if  path("user-bio", {"username": user.username}) == currentPath  %}class="selected" {% endif %}
+                    href="{{ path("user-bio", {"username": user.username}) }}">
+                    Biographie
+                </a>
+            </li>
+            <li>
+                <a {% if path("user-characters", {"username": user.username}) == currentPath  %}class="selected" {% endif %} 
+                    href="{{ path("user-characters", {"username": user.username}) }}">
+                    Personnages
+                </a>
+            </li>
+            <li>
+                <a {% if "d" == currentPath  %}class="selected" {% endif %} href="">
+                    Guildes
+                </a>
+            </li>
+            <li >
+                <a {% if "ZZ" == currentPath  %}class="selected" {% endif %}
+                    href="">
+                    Galeries
+                </a>
+            </li>
+            <li>
+                <a {% if "ZZ" == currentPath  %}class="selected" {% endif %}
+                    href="">
+                    Trophés
+                </a>
+            </li>
+        </ul>
+        <div class=" mini-menu pull-right hidden-md hidden-lg" >
+            <a href=""><span class="glyphicon glyphicon-align-justify"></span></a>
+        </div>
+    </div>
+
+    <div class="clearfix"></div>
+</div>
