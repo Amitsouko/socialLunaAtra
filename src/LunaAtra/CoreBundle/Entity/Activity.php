@@ -262,4 +262,16 @@ class Activity
             )
          );
     }
+
+    public function updateCover($user)
+    {
+        $this->setSeeder($user);
+        $this->setTranslation("user.update.cover");
+        $this->setData(
+         array(
+                "username" => array("entity" => "ProfileBundle:User", "id" => $user->getId(), "column" => "username"),
+                "user_url" => array("entity" => "ProfileBundle:User", "id" => $user->getId(), "column" => "username","urlKey" => "username", "urlData" =>"username",  "isUrl" => true)
+            )
+         );
+    }
 }

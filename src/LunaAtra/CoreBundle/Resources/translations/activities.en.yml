@@ -1,5 +1,8 @@
 user:
     update:
+        cover: 
+            text: <strong><a href='%user_url%'>%username%</a></strong> updated his/her cover.
+            type: "MajCover"
         profile: 
             text: <strong><a href='%user_url%'>%username%</a></strong> updated his/her profile.
             type: "MajProfile"

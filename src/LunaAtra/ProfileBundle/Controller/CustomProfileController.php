@@ -96,10 +96,10 @@ class CustomProfileController extends Controller
                 $cover->setUser($user);
                 $em->persist($cover);
                 $em->flush();
-                // $activity = new Activity();
-                // $activity->updateCharacter($user,$character);
-                // $em->persist($activity);
-                // $em->flush();
+                $activity = new Activity();
+                $activity->updateCover($user);
+                $em->persist($activity);
+                $em->flush();
                 return $this->redirect($this->generateUrl('fos_user_profile_show'));
             }
         }
