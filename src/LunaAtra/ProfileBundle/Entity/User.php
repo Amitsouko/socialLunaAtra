@@ -65,7 +65,7 @@ class User extends BaseUser
     public $file;
 
     /**
-     * @ORM\OneToOne(targetEntity="LunaAtra\ProfileBundle\Entity\ProfileCover", mappedBy="user")
+     * @ORM\OneToMany(targetEntity="LunaAtra\ProfileBundle\Entity\ProfileCover", mappedBy="user", cascade={"persist"} )
      **/
     private $cover;
 
@@ -123,6 +123,7 @@ class User extends BaseUser
     {
         parent::__construct();
         $this->guilds = new ArrayCollection();
+        $this->cover = new ArrayCollection();
     }
 
     public function get($name)
@@ -446,6 +447,6 @@ class User extends BaseUser
      */
     public function getCover()
     {
-        return $this->cover;
+        return $this->cover[0];
     }
 }

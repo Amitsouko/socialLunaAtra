@@ -4,6 +4,7 @@ namespace LunaAtra\ProfileBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use \Doctrine\Common\Collections\ArrayCollection;
 /**
  * ProfileCover
  *
@@ -41,7 +42,7 @@ class ProfileCover
 
 
     /**
-     * @ORM\OneToOne(targetEntity="LunaAtra\ProfileBundle\Entity\User", inversedBy="cover",cascade={"persist"})
+     * @ORM\ManyToOne(targetEntity="LunaAtra\ProfileBundle\Entity\User", inversedBy="cover",cascade={"persist"})
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      **/
     private $user;
@@ -54,6 +55,10 @@ class ProfileCover
     private $lastImageUpdate;
 
 
+    public function __construct()
+    {
+        $this->user = new ArrayCollection();
+    }
     /**
      * @ORM\PrePersist()
      * @ORM\PreUpdate()
@@ -121,7 +126,7 @@ class ProfileCover
     {
         // on se débarrasse de « __DIR__ » afin de ne pas avoir de problème lorsqu'on affiche
         // le document/image dans la vue.
-        return 'uploads/profileImages';
+        return 'uploads/coverImages';
     }
 
 

@@ -91,6 +91,7 @@ class CustomProfileController extends Controller
                     $em->remove($cc);
                     $em->flush();
                 }
+                
 
                 $cover->setUser($user);
                 $em->persist($cover);
@@ -99,7 +100,7 @@ class CustomProfileController extends Controller
                 // $activity->updateCharacter($user,$character);
                 // $em->persist($activity);
                 // $em->flush();
-                return $this->redirect($this->generateUrl('single-character', array("id"=> $character->getId() )));
+                return $this->redirect($this->generateUrl('fos_user_profile_show'));
             }
         }
 

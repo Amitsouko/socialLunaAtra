@@ -1,4 +1,50 @@
-    <form class="normal-form" method="post" {{ form_enctype(form) }} action="">
-{{ form_widget(form) }}
-<input type="submit" value="Créer"/>
-</form>
+{% extends "CoreBundle::base.html.twig" %}
+{% trans_default_domain 'FOSUserBundle' %}
+
+{% block content %}
+
+{% set user = app.user %}
+
+<div class="fos_user_user_show">
+    <div class="container">
+
+            <div class="row">
+
+                <div class="col-md-4">
+                    <div class="white-box">
+                        {% include "ProfileBundle:Include:menu-edit-profile.html.twig" %}
+                    </div>
+                </div>
+                <form action="" {{ form_enctype(form) }} method="POST" class="fos_user_profile_edit normal-form">
+                <div class="col-md-8">
+                    <div class="white-box" >
+
+                        <div class="text-right">
+                            <a class="red-button" href="{{ path("fos_user_profile_show") }}">Cancel</a>
+                            <input type="submit" value="{{ 'profile.edit.submit'|trans }}" />
+                        </div>
+                        <h2><span>Couverture</span></h2>
+
+                                {{ form_widget(form) }}
+
+
+                       <br/>
+                        <div class="text-right">
+                            <a class="red-button" href="{{ path("fos_user_profile_show") }}">Cancel</a>
+                            <input type="submit" value="{{ 'profile.edit.submit'|trans }}" />
+                        </div>
+                   
+                    </div>
+                    </form>
+                </div><!-- endrow -->
+            </div>
+
+    </div>
+</div>
+
+{% endblock content %}
+
+{% block jsbottom %}
+{{ tinymce_init() }}
+{% endblock jsbottom %}
+
