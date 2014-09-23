@@ -1,8 +1,11 @@
 {% set currentPath = path(app.request.attributes.get('_route'),
                            app.request.attributes.get('_route_params')) %}
-<!--  <div id="cover-profile" style="background-image:url('{{ asset('bundles/core/images/background-home/'~ random(3) ~'.jpg') }}');"> -->
+
+{% if user.cover %}
   <div id="cover-profile" style="background-image:url('{{ asset(user.cover.WebPath) }}');">
- 
+  {% else %}
+  <div id="cover-profile" style="background-image:url('{{ asset('bundles/core/images/background-home/'~ random(3) ~'.jpg') }}');">
+ {% endif %}
  <div class="cover-content">
      <div id="main-profile-image">
          <a href="{{ asset(user.WebPath) }}" data-lightbox="profile" data-title="{{ user.username }}">

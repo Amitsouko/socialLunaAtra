@@ -107,7 +107,8 @@ class ProfileCover
 
     public function getWebPath()
     {   $lastDigit = substr($this->id, -1);
-        return null === $this->path ? "bundles/core/images/charisson$lastDigit.jpg"  : $this->getUploadDir().'/'.$this->path;
+        $facticeImage = 'bundles/core/images/background-home/'. rand(0,3) .'.jpg';
+        return null === $this->path ? $facticeImage  : $this->getUploadDir().'/'.$this->path;
     }
 
     protected function getUploadRootDir()
