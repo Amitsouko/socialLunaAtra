@@ -1,0 +1,23 @@
+<header>
+    {% trans_default_domain 'FOSUserBundle' %}
+
+    {% if is_granted("ROLE_USER") %}
+        
+        <a href="{{ path("fos_user_profile_show") }}">{{ app.user.username }}</a> - <a href="{{ path('fos_user_security_logout') }}">{{ 'layout.logout'|trans({}, 'FOSUserBundle') }} </a>
+
+    {% else %}
+        <form action="{{ path("fos_user_security_check") }}" method="post" class="fos_user_registration_register"> 
+            <input type="text" id="username" name="_username" required="required" placeholder="{{ 'security.login.username'|trans }}" />
+
+             <input type="password" id="password" name="_password" required="required" placeholder="{{ 'security.login.password'|trans }}"/>
+
+             <button type="submit" id="_submit" name="_submit" value="{{ 'security.login.submit'|trans }}">
+             <span class="glyphicon glyphicon-ok"></span>
+             </button>
+             <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
+
+        </form>
+
+    {% endif %}
+
+</header>
