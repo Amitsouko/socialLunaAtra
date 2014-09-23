@@ -65,6 +65,11 @@ class User extends BaseUser
     public $file;
 
     /**
+     * @ORM\OneToOne(targetEntity="LunaAtra\ProfileBundle\Entity\ProfileCover", mappedBy="user")
+     **/
+    private $cover;
+
+    /**
      * @var date $lastImageUpdate
      *
      * @ORM\Column(name="lastImageUpdate", type="string", nullable=true)
@@ -419,5 +424,28 @@ class User extends BaseUser
     public function getUrlName()
     {
         return "user";
+    }
+
+    /**
+     * Set cover
+     *
+     * @param \LunaAtra\ProfileBundle\Entity\ProfileCover $cover
+     * @return User
+     */
+    public function setCover(\LunaAtra\ProfileBundle\Entity\ProfileCover $cover = null)
+    {
+        $this->cover = $cover;
+
+        return $this;
+    }
+
+    /**
+     * Get cover
+     *
+     * @return \LunaAtra\ProfileBundle\Entity\ProfileCover 
+     */
+    public function getCover()
+    {
+        return $this->cover;
     }
 }

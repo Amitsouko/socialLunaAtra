@@ -10,6 +10,7 @@ use LunaAtra\CoreBundle\Entity\Game;
 use LunaAtra\CoreBundle\Entity\GameRepository;
 use Symfony\Component\HttpFoundation\Request;
 use LunaAtra\CoreBundle\Entity\Activity;
+use LunaAtra\ProfileBundle\Entity\ProfileCover;
 /**
  * @Route("/")
  */
@@ -59,6 +60,46 @@ class CustomProfileController extends Controller
                 $em->persist($activity);
                 $em->flush();
                 return $this->redirect($this->generateUrl('user-characters', array("username"=> $user->getUsername() )));
+            }
+        }
+
+        return array("form"=>$form->createView());
+    }
+
+
+    /**
+     * @Route("/profile/edit-cover", name="edit-cover")
+     * @Template("ProfileBundle:Default:edit-cover.html.twig")
+     */
+    public function editCoverAction(Request $request)
+    {
+        $cover = new ProfileCover();
+         $em = $this->get('doctrine')->getManager();
+
+        $form = $this->createFormBuilder($cover)
+            ->add("lastImageUpdate", "hidden",array("data" => date('Y-m-d H:i:s') ))
+            ->add("file")
+            ->getForm();
+
+        if ('POST' === $request->getMethod()) {
+            $form->bind($request);
+
+            if ($form->isValid()) { 
+                $user = $this->get('security.context')->getToken()->getUser();
+                if($cc = $user->getCover())
+                {
+                    $em->remove($cc);
+                    $em->flush();
+                }
+
+                $cover->setUser($user);
+                $em->persist($cover);
+                $em->flush();
+                // $activity = new Activity();
+                // $activity->updateCharacter($user,$character);
+                // $em->persist($activity);
+                // $em->flush();
+                return $this->redirect($this->generateUrl('single-character', array("id"=> $character->getId() )));
             }
         }
 

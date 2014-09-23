@@ -1,6 +1,7 @@
 {% set currentPath = path(app.request.attributes.get('_route'),
                            app.request.attributes.get('_route_params')) %}
- <div id="cover-profile" style="background-image:url('{{ asset('bundles/core/images/background-home/'~ random(3) ~'.jpg') }}');">
+<!--  <div id="cover-profile" style="background-image:url('{{ asset('bundles/core/images/background-home/'~ random(3) ~'.jpg') }}');"> -->
+  <div id="cover-profile" style="background-image:url('{{ asset(user.cover.WebPath) }}');">
  
  <div class="cover-content">
      <div id="main-profile-image">
