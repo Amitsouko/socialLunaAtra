@@ -19,13 +19,17 @@
                 <div class="col-md-8">
                     <div class="white-box" >
 
-                        <div class="text-right">
+                        <!-- <div class="text-right">
                             <a class="red-button" href="{{ path("fos_user_profile_show") }}">Cancel</a>
                             <input type="submit" value="{{ 'profile.edit.submit'|trans }}" />
-                        </div>
+                        </div> -->
                         <h2><span>Couverture</span></h2>
 
-                                {{ form_widget(form) }}
+                        <img style="max-width:100%" src="{{user.cover.WebPath | imagine_filter("mini_cover_thumbnail")}}">
+                            <p class="text-center">
+                                {{ form_widget(form.file) }}
+                                
+                            </p>
 
 
                        <br/>

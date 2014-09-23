@@ -11,7 +11,7 @@
             <h2 class="profile-announcement">&ldquo;{{ user.announce }}&rdquo;</h2>
         {% endif %}
         {% if user.characters|length > 0 %}
-            <div class="white-box">
+            <div class="">
                 <h3><span>Personnages</span></h3>
                 <ul class="list-unstyled character-list-mini">
                 {% for char in user.characters %}
@@ -20,10 +20,10 @@
                 </ul>
             </div>
         {% endif %}
-            <div class="white-box">
+            <div class="">
                 <h3><span>Achèvements</span></h3>
             </div>
-            <div class="white-box">
+            <div class="">
                 <h3><span>Comptes</span></h3>
             </div>
         </div>

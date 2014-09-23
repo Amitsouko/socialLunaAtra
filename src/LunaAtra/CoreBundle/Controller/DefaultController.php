@@ -42,4 +42,19 @@ class DefaultController extends Controller
             'CoreBundle:include:top-bar.html.twig',
             array('csrf_token' => $csrfToken ));
     }
+
+    /**
+     * @Route("/embbed/header-main", name="embbed-main")
+     * @Template()
+     */
+    public function embbedMainAction()
+    {
+       $csrfToken = $this->container->has('form.csrf_provider')
+            ? $this->container->get('form.csrf_provider')->generateCsrfToken('authenticate')
+            : null;
+
+        return $this->render(
+            'CoreBundle:include:top-main.html.twig',
+            array('csrf_token' => $csrfToken ));
+    }
 }
