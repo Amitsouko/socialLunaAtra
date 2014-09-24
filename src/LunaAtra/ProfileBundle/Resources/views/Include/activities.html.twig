@@ -7,12 +7,29 @@
 
 
 {% if activities is defined %}
+{% set date = "" %}
+
 {% for act in activities %}
-<div class="white-box">
- <p>{{ act.text|raw }}</p>
- <p>{{ act.date|date }}</p>
- </div>
+
+    {% if act.date|date("d-m-Y") != date %}
+        {% if date != "" %}
+            </div>
+        {% endif %}
+        
+        {% set date = act.date|date("d-m-Y") %}
+        <h2><span>{{ act.date|date("F d, Y") }}</span></h2>
+        
+        <div class="white-box">
+    {% endif %}
+
+    <div class="single-activity">
+        <em>{{ act.date|date }}</em>
+        <span>{{ act.text|raw }}</span>
+    </div>
+
+
 {% endfor %}
+ </div>
 {% else %}
     
     {% if user == app.user %}

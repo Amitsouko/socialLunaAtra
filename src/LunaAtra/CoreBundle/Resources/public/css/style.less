@@ -224,7 +224,7 @@ header.header-main {
 #cover-profile {
     height: 425px; 
     width: 100%;
-    background:url('../images/background-home/1.jpg');
+    background-color:rgb(27, 66, 89);;
     background-size: cover;
     background-position: center;
     .cover-content {
@@ -380,10 +380,27 @@ input[type="submit"], button[type='submit'] {
 }
 
 
-
+.single-activity {
+    border-bottom: 1px whiteSmoke solid;
+    padding: 15px 0px 20px 0px; 
+    em {
+        font-style: normal;
+        opacity:0.6;
+        font-size: 0.75em;
+        color: gray;
+        display: block;
+    }
+    &:first-child {
+        padding-top: 0px;
+    }
+    &:last-child {
+        border-bottom: none;
+        padding-bottom: 5px;
+    }
+}
 
 .profile-announcement{
-    margin-bottom: 10px;
+    margin-bottom: 20px;
     font-style: italic;
     font-weight: normal;
     font-size: 1.3em;
