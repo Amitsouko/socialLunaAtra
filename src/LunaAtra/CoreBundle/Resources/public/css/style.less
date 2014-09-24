@@ -1,6 +1,11 @@
-@green: rgb(50, 164, 71);
-@green-highlight: #3AB651;
-@blue : rgb(84, 145, 227);
+@green: #18B54C;
+@darkGreen: #138268;
+@green-highlight: #2BBA00;
+@yellow : #EBC570;
+@blue : #379BDD;
+@lightRed : ;
+@red : #BD391A;
+
 @lightGray: rgb(229,229,229);
 .transition (@properties: all, @duration: 0.2s, @type: ease-out){
   -webkit-transition: @properties @duration @type;
@@ -20,15 +25,23 @@ body{
     display: none;
 }
 
+a:link,
+a:hover,
+a:active,
+a:visited {
+    color : @blue;
+}
+
 a.no-style:link,
 a.no-style:hover,
+a.no-style:visited, 
 a.no-style:active {
     text-decoration: none;
     color: #333;
 }
 
 .error{
-    color: red;
+    color: @red;
 }
 
 .ul-error{
@@ -36,7 +49,7 @@ a.no-style:active {
         padding:0px;
         li {
             list-style: none;
-            color: red;
+            color: @red;
         }
     }
 }
@@ -74,7 +87,7 @@ h2 {
     border-bottom: 1px  rgb(231, 231, 231)  solid;
     padding-bottom: 9px;
     span {
-        border-bottom: 1px  @blue  solid;
+        border-bottom: 1px  @red  solid;
         padding-bottom: 8px;
     }
 } 
@@ -86,7 +99,7 @@ h3 {
     border-bottom: 1px  rgb(231, 231, 231)  solid;
     padding-bottom: 9px;
     span {
-        border-bottom: 1px  @blue  solid;
+        border-bottom: 1px  @red  solid;
         padding-bottom: 8px;
     }
 } 
@@ -123,7 +136,8 @@ header.header-main {
 
     padding: 10px;
     text-align: center;
-    &:hover{
+    &:visited,
+    &:hover {
         text-decoration: none;
         color: white;
     }
@@ -136,7 +150,22 @@ header.header-main {
 
 .red-button {
     .button;
-    background: rgb(238, 96, 96);
+    background: @red;
+}
+.white-button {
+    .button;
+    &:hover {
+        text-decoration: underline;
+    }
+    &:link,
+    &:hover,
+    &:visited,
+    &:active {
+        color: @blue;
+        text-shadow:none;
+    }
+    box-shadow: none;
+    background: transparent;
 }
 
 .col-no-padding {
@@ -468,7 +497,7 @@ input[type="submit"], button[type='submit'] {
                 }
                 &.selected {
                     color: black;
-                    border-bottom: @blue 2px solid;
+                    border-bottom: @red 2px solid;
                     padding-bottom: 13px;
                 }
 
