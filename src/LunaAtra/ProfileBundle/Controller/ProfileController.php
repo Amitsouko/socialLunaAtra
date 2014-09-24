@@ -92,6 +92,15 @@ class ProfileController extends ContainerAware
                 $em = $this->container->get('doctrine')->getEntityManager();
                 $activity = new Activity();
                 $activity->setUpdateProfile($user);
+                $isExists =  $em->getRepository('CoreBundle:Activity')->findLastSameActivity($activity);
+                if(count($isExists) > 0)
+                {
+                    $existingActivity = $isExists[0];
+                    $existingActivity->setDate(new \Datetime("now"));
+                    $em->persist($existingActivity);
+                }else{
+                    $em->persist($activity);
+                }
                 $em->persist($activity);
                 $em->flush();
                 return $response;

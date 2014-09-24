@@ -57,6 +57,15 @@ class CustomProfileController extends Controller
                 $em->flush();
                 $activity = new Activity();
                 $activity->CreateCharacter($user,$character);
+                $isExists =  $em->getRepository('CoreBundle:Activity')->findLastSameActivity($activity);
+                if(count($isExists) > 0)
+                {
+                    $existingActivity = $isExists[0];
+                    $existingActivity->setDate(new \Datetime("now"));
+                    $em->persist($existingActivity);
+                }else{
+                    $em->persist($activity);
+                }
                 $em->persist($activity);
                 $em->flush();
                 return $this->redirect($this->generateUrl('user-characters', array("username"=> $user->getUsername() )));
@@ -98,6 +107,15 @@ class CustomProfileController extends Controller
                 $em->flush();
                 $activity = new Activity();
                 $activity->updateCover($user);
+                $isExists =  $em->getRepository('CoreBundle:Activity')->findLastSameActivity($activity);
+                if(count($isExists) > 0)
+                {
+                    $existingActivity = $isExists[0];
+                    $existingActivity->setDate(new \Datetime("now"));
+                    $em->persist($existingActivity);
+                }else{
+                    $em->persist($activity);
+                }
                 $em->persist($activity);
                 $em->flush();
                 return $this->redirect($this->generateUrl('fos_user_profile_show'));
@@ -154,7 +172,17 @@ class CustomProfileController extends Controller
                 $em->flush();
                 $activity = new Activity();
                 $activity->updateCharacter($user,$character);
-                $em->persist($activity);
+                //Check if already exists
+                //findLastSameActivity
+                $isExists =  $em->getRepository('CoreBundle:Activity')->findLastSameActivity($activity);
+                if(count($isExists) > 0)
+                {
+                    $existingActivity = $isExists[0];
+                    $existingActivity->setDate(new \Datetime("now"));
+                    $em->persist($existingActivity);
+                }else{
+                    $em->persist($activity);
+                }
                 $em->flush();
                 return $this->redirect($this->generateUrl('single-character', array("id"=> $character->getId() )));
             }

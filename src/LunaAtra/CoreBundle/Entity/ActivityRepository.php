@@ -12,4 +12,22 @@ use Doctrine\ORM\EntityRepository;
  */
 class ActivityRepository extends EntityRepository
 {
+   public function findLastSameActivity($activity)
+    {
+        $dateTime = new \DateTime("now");
+        $dateTime->modify("-30 minutes");
+        return $this->getEntityManager()
+            ->createQuery('SELECT a FROM CoreBundle:Activity a 
+                            WHERE a.seeder = :seeder 
+                            AND a.translation = :translation
+                            AND a.data = :data
+                            AND a.date > :date')
+            ->setParameters(array(
+                'seeder' => $activity->getSeeder() ,
+                'translation' => $activity->getTranslation()   ,
+                'data' => serialize($activity->getData() )   ,
+                'date' => $dateTime 
+            ))
+            ->getResult();
+    }
 }
