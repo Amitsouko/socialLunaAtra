@@ -100,7 +100,6 @@ class CustomProfileController extends Controller
                     $em->remove($cc);
                     $em->flush();
                 }
-                
 
                 $cover->setUser($user);
                 $em->persist($cover);
