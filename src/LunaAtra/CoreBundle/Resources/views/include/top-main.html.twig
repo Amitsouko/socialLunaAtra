@@ -1,16 +1,24 @@
 <header id="main-top-bar" class="header-main">  
 <div class="pull-left">
-    <h1>Logo</h1>
+    <a href="" id="logo-header"></a>
 </div>
 <div class="pull-left">
-    <input  type="search" placeholder="Recherche" name="search" id="search"/><input type="submit" value="Rechercher"/>
+    <input  type="search" placeholder="Recherche" name="search" id="search"/><button type="submit" id="search-submit"><span class="glyphicon glyphicon-search"></span></button>
 </div>
     {% trans_default_domain 'FOSUserBundle' %}
 
     {% if is_granted("ROLE_USER") %}
-    <div class="pull-right profile-area">
+        <div class="pull-right profile-area">
         <div>
-          <!--   <a href="{{ path('fos_user_security_logout') }}">{{ 'layout.logout'|trans({}, 'FOSUserBundle') }} </a> -  -->
+            <a href="" id="home" class="glyphicon glyphicon-th"></a>
+        </div>
+        <div>
+            <a href="{{ path("lunaatra_core_default_index") }}" id="home" class="glyphicon glyphicon-home"></a>
+        </div>
+
+        <div>
+
+
             <a href="{{ path("fos_user_profile_show") }}"><span>{{ app.user.username }}</span></a>
             <a href="{{ path("fos_user_profile_show") }}"><img src="{{ app.user.WebPath | imagine_filter("micro_profile_thumbnail") }}">
             </a>
@@ -18,16 +26,17 @@
         <div>
             <a href="" id="trigger-main-menu-dropdown" class="glyphicon dropdown glyphicon-cog"></a>
             <ul id="main-menu-dropdown" class="list-unstyled dropdown-menu">
-                <li><a href="{{ path("fos_user_profile_show") }}">Mon profil</a></li>
-                <li><a href="{{ path("fos_user_profile_edit") }}">Éditer mes informations</a></li>
-                <li>ff</li>
-                <li><a href="{{ path('fos_user_security_logout') }}">{{ 'layout.logout'|trans({}, 'FOSUserBundle') }} </a></li>
+                <li><a href="{{ path("fos_user_profile_show") }}"><span class="glyphicon glyphicon-user"></span>Mon profil</a></li>
+                <li><a href="{{ path("fos_user_profile_edit") }}"><span class="glyphicon glyphicon-pencil"></span>Éditer mes informations</a></li>
+
+                <li><a href="{{ path('fos_user_security_logout') }}"><span class="glyphicon glyphicon-off"></span>{{ 'layout.logout'|trans({}, 'FOSUserBundle') }} </a></li>
             </ul>
         </div>
         
         
     </div>
     {% else %}
+    <div class="pull-right">
         <form action="{{ path("fos_user_security_check") }}" method="post" class="fos_user_registration_register"> 
             <input type="text" id="username" name="_username" required="required" placeholder="{{ 'security.login.username'|trans }}" />
 
@@ -39,7 +48,7 @@
              <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
 
         </form>
-
+    </div>
     {% endif %}
 
 </header>

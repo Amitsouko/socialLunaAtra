@@ -2,7 +2,7 @@
 @darkGreen: #138268;
 @green-highlight: #2BBA00;
 @yellow : #EBC570;
-@blue : #379BDD;
+@blue : #599DD7;
 @darkBlue: #1b4259;
 
 @red : #BD391A;
@@ -117,8 +117,57 @@ header.header-main {
     background: @darkBlue;
     box-shadow: 0px 2px 2px gray;
     margin-bottom: 20px;
+    input[type="text"],
+    input[type="email"],
+    input[type="search"],
+    input[type="password"] {
+        height: 22px;
+        box-sizing: content-box;
+        vertical-align: middle;
+        border: 0px;
+        margin-bottom: 0px;
+        padding: 5px;
+        color: gray;
+        border:none !important;
+        box-shadow: none !important;
+        text-shadow:none !important;
+    }
+    input[type="search"] {
+        width: 400px;
+        border-bottom-left-radius: 2px;
+        border-top-left-radius: 2px;
+    }
+    #search-submit, #_submit {
+        margin: 0px !important;
+        margin-left: 5px;
+        vertical-align: middle;
+        height: 32px;
+        width: 45px;
+        background:@blue;
+        border:none !important;
+        box-shadow: none !important;
+        text-shadow:none !important;
+        border-radius: 2px;
+    }
+    #search-submit {
+        margin-left: 0px;
+        border-radius: 0px;
+        border-bottom-right-radius: 2px;
+        border-top-right-radius: 2px;
+    }
 }
 
+#trigger-main-menu-dropdown {
+    width: 18px;
+}
+
+#logo-header {
+    background: url("../images/luna-atra-little.png");
+    background-size: cover;
+    width: 70px;
+    display: block;
+    height: 30px;
+}
 
 #main-top-bar {
     z-index: 10; 
@@ -128,7 +177,6 @@ header.header-main {
     input[type="password"],
     button {
         padding:5px;
-        margin:6px;
         margin-right: 0px;
         width: 150px;
         display: inline-block;
@@ -153,6 +201,7 @@ header.header-main {
             display: table-cell;
             vertical-align: middle;
             display: inline-block;
+            margin-left: 20px;
         }
         img {
             margin-left:10px;
@@ -162,17 +211,18 @@ header.header-main {
         font-size: 18px;
         position: relative;
         top: 2px;
-        margin-left: 20px;
         .transition;
         text-decoration: none !important;
         &.open {
             .transform(rotate(45deg));
         }
+
     }
 }
 
 #main-menu-dropdown {
     display: block;
+    border: 1px solid gray;
     box-shadow: 1px 1px 4px gray;
     position: absolute;
     top: 60px;
@@ -182,8 +232,48 @@ header.header-main {
     min-width: 100px;
     background: white;
     border-radius: 3px;
-    border: gray;
     color: gray;
+    li {
+        
+            .glyphicon {
+                margin-left:0px;
+                margin-right:10px;
+            }
+            &:first-child{
+                background: white;
+                border-top-right-radius: 3px;
+                border-top-left-radius: 3px;
+            }
+            a:link,
+            a:visited,
+            a:active {
+                color: gray;
+                display: block;
+                padding:10px 15px;
+                border-bottom: 1px whiteSmoke solid;
+                &:last-child {
+                    border-bottom: none;
+                }
+            }
+            a:hover {
+                background: gray;
+                color: white;
+                text-decoration: none;
+            }
+    }
+    &:after {
+        content:"";
+        display: block;
+        position: absolute;
+        top: -6px;
+        right: 11px;
+        z-index: -1;
+        width: 15px;
+        height: 15px;
+        border: gray solid 1px;
+        background: white;
+        .transform(rotate(45deg));
+    }
 }
 
 .dropdown ~ .dropdown-menu {
@@ -466,8 +556,8 @@ input[type="submit"], button[type='submit'] {
     background: @green;
     color: white;
     border-radius: 3px;
-    box-shadow: 0px 2px 1px #dddddd !important;
-    text-shadow: 0px 2px 1px rgba(0,0,0,0.21) !important;
+    // box-shadow: 0px 2px 1px #dddddd !important;
+    // text-shadow: 0px 2px 1px rgba(0,0,0,0.21) !important;
 
     &:hover {
         background: @green-highlight;
