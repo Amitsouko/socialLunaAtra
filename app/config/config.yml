@@ -91,6 +91,10 @@ liip_imagine:
             quality: 90
             filters:
                 thumbnail: { size: [175, 175], mode: outbound }
+        micro_profile_thumbnail:
+            quality: 90
+            filters:
+                thumbnail: { size: [32, 32], mode: outbound }
         character_thumbnail:
             quality: 90
             filters:

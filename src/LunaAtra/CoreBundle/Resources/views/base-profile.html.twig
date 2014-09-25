@@ -1,8 +1,9 @@
 {% extends "CoreBundle::layout.html.twig" %}
 
+{% block bodyclass %}{% spaceless %}profile-container{% endspaceless %}{% endblock bodyclass %}
 
 {% block main %}
-{% render path("embbed-profile") %}
+{% render path("embbed-main") %}
 
     <div class="main-container">
             {% block content %}

@@ -1,13 +1,15 @@
 {% trans_default_domain 'FOSUserBundle' %}
 
-
+{# top bar of profile #}
 <div id="profile-top-bar">
 
 
 {% if is_granted("ROLE_USER") %}
-    
-    <a href="{{ path("fos_user_profile_show") }}">{{ app.user.username }}</a> - <a href="{{ path('fos_user_security_logout') }}">{{ 'layout.logout'|trans({}, 'FOSUserBundle') }} </a>
-
+    <div class="pull-right profile-area">
+    <a href="{{ path('fos_user_security_logout') }}">{{ 'layout.logout'|trans({}, 'FOSUserBundle') }} </a> - 
+        <a href="{{ path("fos_user_profile_show") }}">{{ app.user.username }}</a>
+        <img src="{{ app.user.WebPath | imagine_filter("micro_profile_thumbnail") }}">
+    </div>
 {% else %}
     <form action="{{ path("fos_user_security_check") }}" method="post" class="fos_user_registration_register"> 
         <input type="text" id="username" name="_username" required="required" placeholder="{{ 'security.login.username'|trans }}" />
