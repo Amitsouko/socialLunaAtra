@@ -101,7 +101,6 @@ class ProfileController extends ContainerAware
                 }else{
                     $em->persist($activity);
                 }
-                $em->persist($activity);
                 $em->flush();
                 return $response;
             }

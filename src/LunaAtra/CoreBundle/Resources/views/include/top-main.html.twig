@@ -1,11 +1,25 @@
-<header id="main-top-bar" class="header-main">
+<header id="main-top-bar" class="header-main">  
+<div class="pull-left">
+    <h1>Logo</h1>
+</div>
+<div class="pull-left">
+    <input  type="search" placeholder="Recherche" name="search" id="search"/><input type="submit" value="Rechercher"/>
+</div>
     {% trans_default_domain 'FOSUserBundle' %}
 
     {% if is_granted("ROLE_USER") %}
     <div class="pull-right profile-area">
-    <a href="{{ path('fos_user_security_logout') }}">{{ 'layout.logout'|trans({}, 'FOSUserBundle') }} </a> - 
-        <a href="{{ path("fos_user_profile_show") }}">{{ app.user.username }}</a>
-        <img src="{{ app.user.WebPath | imagine_filter("micro_profile_thumbnail") }}">
+        <div>
+          <!--   <a href="{{ path('fos_user_security_logout') }}">{{ 'layout.logout'|trans({}, 'FOSUserBundle') }} </a> -  -->
+            <a href="{{ path("fos_user_profile_show") }}"><span>{{ app.user.username }}</span>
+            <img src="{{ app.user.WebPath | imagine_filter("micro_profile_thumbnail") }}">
+            </a>
+        </div>
+        <div>
+            <a href="" class="glyphicon glyphicon-cog"></a>
+        </div>
+        
+        
     </div>
     {% else %}
         <form action="{{ path("fos_user_security_check") }}" method="post" class="fos_user_registration_register"> 

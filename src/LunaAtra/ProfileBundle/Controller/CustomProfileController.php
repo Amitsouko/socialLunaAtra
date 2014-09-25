@@ -57,15 +57,15 @@ class CustomProfileController extends Controller
                 $em->flush();
                 $activity = new Activity();
                 $activity->CreateCharacter($user,$character);
-                $isExists =  $em->getRepository('CoreBundle:Activity')->findLastSameActivity($activity);
-                if(count($isExists) > 0)
-                {
-                    $existingActivity = $isExists[0];
-                    $existingActivity->setDate(new \Datetime("now"));
-                    $em->persist($existingActivity);
-                }else{
-                    $em->persist($activity);
-                }
+                // $isExists =  $em->getRepository('CoreBundle:Activity')->findLastSameActivity($activity);
+                // if(count($isExists) > 0)
+                // {
+                //     $existingActivity = $isExists[0];
+                //     $existingActivity->setDate(new \Datetime("now"));
+                //     $em->persist($existingActivity);
+                // }else{
+                //     $em->persist($activity);
+                // }
                 $em->persist($activity);
                 $em->flush();
                 return $this->redirect($this->generateUrl('user-characters', array("username"=> $user->getUsername() )));
@@ -116,7 +116,6 @@ class CustomProfileController extends Controller
                 }else{
                     $em->persist($activity);
                 }
-                $em->persist($activity);
                 $em->flush();
                 return $this->redirect($this->generateUrl('fos_user_profile_show'));
             }
