@@ -11,12 +11,18 @@
     <div class="pull-right profile-area">
         <div>
           <!--   <a href="{{ path('fos_user_security_logout') }}">{{ 'layout.logout'|trans({}, 'FOSUserBundle') }} </a> -  -->
-            <a href="{{ path("fos_user_profile_show") }}"><span>{{ app.user.username }}</span>
-            <img src="{{ app.user.WebPath | imagine_filter("micro_profile_thumbnail") }}">
+            <a href="{{ path("fos_user_profile_show") }}"><span>{{ app.user.username }}</span></a>
+            <a href="{{ path("fos_user_profile_show") }}"><img src="{{ app.user.WebPath | imagine_filter("micro_profile_thumbnail") }}">
             </a>
         </div>
         <div>
-            <a href="" class="glyphicon glyphicon-cog"></a>
+            <a href="" id="trigger-main-menu-dropdown" class="glyphicon dropdown glyphicon-cog"></a>
+            <ul id="main-menu-dropdown" class="list-unstyled dropdown-menu">
+                <li><a href="{{ path("fos_user_profile_show") }}">Mon profil</a></li>
+                <li><a href="{{ path("fos_user_profile_edit") }}">Éditer mes informations</a></li>
+                <li>ff</li>
+                <li><a href="{{ path('fos_user_security_logout') }}">{{ 'layout.logout'|trans({}, 'FOSUserBundle') }} </a></li>
+            </ul>
         </div>
         
         
