@@ -2,7 +2,7 @@
 <div class="pull-left">
     <a href="" id="logo-header"></a>
 </div>
-<div class="pull-left">
+<div class="pull-left visible-md-block visible-sm-block  visible-lg-block">
     <input  type="search" placeholder="Recherche" name="search" id="search"/><button type="submit" id="search-submit"><span class="glyphicon glyphicon-search"></span></button>
 </div>
     {% trans_default_domain 'FOSUserBundle' %}
@@ -17,9 +17,7 @@
         </div>
 
         <div>
-
-
-            <a href="{{ path("fos_user_profile_show") }}"><span>{{ app.user.username }}</span></a>
+            <a class="hidden-xs span-username" href="{{ path("fos_user_profile_show") }}"><span>{{ app.user.username }}</span></a>
             <a href="{{ path("fos_user_profile_show") }}"><img src="{{ app.user.WebPath | imagine_filter("micro_profile_thumbnail") }}">
             </a>
         </div>
@@ -28,6 +26,7 @@
             <ul id="main-menu-dropdown" class="list-unstyled dropdown-menu">
                 <li><a href="{{ path("fos_user_profile_show") }}"><span class="glyphicon glyphicon-user"></span>Mon profil</a></li>
                 <li><a href="{{ path("fos_user_profile_edit") }}"><span class="glyphicon glyphicon-pencil"></span>Éditer mes informations</a></li>
+                <li class="visible-xs-block" ><a href="#"><span class="glyphicon glyphicon-search"></span>Rechercher</a></li>
 
                 <li><a href="{{ path('fos_user_security_logout') }}"><span class="glyphicon glyphicon-off"></span>{{ 'layout.logout'|trans({}, 'FOSUserBundle') }} </a></li>
             </ul>
@@ -36,7 +35,7 @@
         
     </div>
     {% else %}
-    <div class="pull-right">
+    <div class="pull-right visible-md-block visible-lg-block">
         <form action="{{ path("fos_user_security_check") }}" method="post" class="fos_user_registration_register"> 
             <input type="text" id="username" name="_username" required="required" placeholder="{{ 'security.login.username'|trans }}" />
 
@@ -48,6 +47,9 @@
              <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
 
         </form>
+    </div>
+    <div class="pull-right visible-xs-block visible-sm-block">
+        <a href="{{ path("fos_user_security_login") }}">Login</a>
     </div>
     {% endif %}
 
