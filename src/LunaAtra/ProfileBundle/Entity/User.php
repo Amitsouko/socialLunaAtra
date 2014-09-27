@@ -449,4 +449,27 @@ class User extends BaseUser
     {
         return $this->cover[0];
     }
+
+    /**
+     * Add cover
+     *
+     * @param \LunaAtra\ProfileBundle\Entity\ProfileCover $cover
+     * @return User
+     */
+    public function addCover(\LunaAtra\ProfileBundle\Entity\ProfileCover $cover)
+    {
+        $this->cover[] = $cover;
+
+        return $this;
+    }
+
+    /**
+     * Remove cover
+     *
+     * @param \LunaAtra\ProfileBundle\Entity\ProfileCover $cover
+     */
+    public function removeCover(\LunaAtra\ProfileBundle\Entity\ProfileCover $cover)
+    {
+        $this->cover->removeElement($cover);
+    }
 }

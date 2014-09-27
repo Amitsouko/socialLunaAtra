@@ -1,0 +1,4 @@
+services:
+    privacy.manager:
+        class: LunaAtra\PrivacyBundle\Services\PrivacyManager
+        arguments: ["@security.context", "@doctrine", "@translator"]

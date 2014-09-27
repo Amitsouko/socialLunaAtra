@@ -22,6 +22,18 @@
   -o-transform:      @string;
   transform:         @string;
 }
+
+.gradient-gray {
+            background: rgb(255,255,255); /* Old browsers */
+        background: -moz-linear-gradient(top,  rgba(255,255,255,1) 0%, rgba(242,242,242,1) 100%); /* FF3.6+ */
+        background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(255,255,255,1)), color-stop(100%,rgba(242,242,242,1))); /* Chrome,Safari4+ */
+        background: -webkit-linear-gradient(top,  rgba(255,255,255,1) 0%,rgba(242,242,242,1) 100%); /* Chrome10+,Safari5.1+ */
+        background: -o-linear-gradient(top,  rgba(255,255,255,1) 0%,rgba(242,242,242,1) 100%); /* Opera 11.10+ */
+        background: -ms-linear-gradient(top,  rgba(255,255,255,1) 0%,rgba(242,242,242,1) 100%); /* IE10+ */
+        background: linear-gradient(to bottom,  rgba(255,255,255,1) 0%,rgba(242,242,242,1) 100%); /* W3C */
+        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#f2f2f2',GradientType=0 ); /* IE6-9 */
+}
+
 body{
 
     background: #f5f5f5;
@@ -86,6 +98,12 @@ h1{
     &.out {
         color: gray;
     }
+    &.no-border {
+        border:none;
+        span {
+            border: none;
+        }
+    }
 }
 
 h2 {
@@ -94,8 +112,14 @@ h2 {
     border-bottom: 1px  rgb(231, 231, 231)  solid;
     padding-bottom: 9px;
     span {
-        border-bottom: 1px  @red  solid;
+        border-bottom: 1px  @blue  solid;
         padding-bottom: 8px;
+    }
+    &.no-border {
+        border:none;
+        span {
+            border: none;
+        }
     }
 } 
 
@@ -106,8 +130,14 @@ h3 {
     border-bottom: 1px  rgb(231, 231, 231)  solid;
     padding-bottom: 9px;
     span {
-        border-bottom: 1px  @red  solid;
+        border-bottom: 1px  @blue  solid;
         padding-bottom: 8px;
+    }
+    &.no-border {
+        border:none;
+        span {
+            border: none;
+        }
     }
 } 
 
@@ -224,6 +254,21 @@ header.header-main {
 
     }
 }
+
+#main-footer {
+    margin-top: 30px;
+    .container {
+        border-top: gainsboro solid 1px;
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
+    a:link,
+    a:active,
+    a:visited {
+        color: gainsboro;
+    }
+}
+
 
 #main-menu-dropdown {
     display: block;
@@ -441,7 +486,7 @@ header.header-main {
 }
 
 #cover-profile {
-    height: 455px; 
+    height: 405px; 
     width: 100%;
     background-color:rgb(27, 66, 89);;
     background-size: cover;
@@ -522,11 +567,14 @@ header.header-main {
 .white-box{
     background-color:white;
     border-radius: 3px;
-    border:1px solid whiteSmoke;
+    // border:1px solid whiteSmoke;
     box-sizing:border-box;
     padding:15px;
     margin-bottom: 20px;
     box-shadow: 0px 2px 2px #E6E6E6 !important;
+    &.no-padding {
+        padding: 0px;
+    }
 }
 
 .gray-box{
@@ -542,11 +590,14 @@ header.header-main {
 .white-box-reversed {
     background-color:white;
     border-radius: 3px;
-    border:1px solid whiteSmoke;
+    border:1px solid rgb(221, 221, 221);
     box-sizing:border-box;
     padding:15px;
     margin-bottom: 20px;
-    box-shadow: 0px 2px 2px #E6E6E6 inset !important;    
+    box-shadow: 0px 2px 2px #E6E6E6 inset !important; 
+    &.no-padding {
+        padding: 0px;
+    }   
 }
 
 .shadow{
@@ -624,7 +675,6 @@ input[type="submit"], button[type='submit'] {
 }
 
 .sub-menu-profile {
-
     margin-top: -51px;
     margin-bottom: 20px;
     height: 51px;
@@ -641,9 +691,6 @@ input[type="submit"], button[type='submit'] {
         // filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#f2f2f2',GradientType=0 ); /* IE6-9 */
         background: white;
     ul {
-
-        
-        
         text-align: center;
 
         li {
@@ -662,7 +709,7 @@ input[type="submit"], button[type='submit'] {
                 }
                 &.selected {
                     color: black;
-                    border-bottom: @red 2px solid;
+                    border-bottom: @blue 2px solid;
                     padding-bottom: 13px;
                 }
 
@@ -679,22 +726,53 @@ input[type="submit"], button[type='submit'] {
 }
 
 .character-list {
+    &.final-fantasy-xiv {
+        background:white url('../images/bg-character-card/ffxiv.jpg') bottom right no-repeat;
+    }
+
+
+    div {
+        height: 136px;
+       padding: 20px 0px; 
+       overflow: auto;
+        h3 {
+            margin-bottom: 9px;
+        }
+        .list-unstyled {
+            margin-bottom: 0px;
+            color: gray;
+        }
+    }
     .character-thumbnail {
         display: block;
-        float: left;
-        width: 125px;
-        height: 125px;
+        float:left;
+        margin-right: 15px;
+        border-right: 1px solid #e7e7e7;
+        padding-right: 20px;
+        padding-left:20px;
+        .gradient-gray;
         img {
-            width: 125px;
-            height: 125px;
+            width: 96px;
+            height: 96px;
         }
     }
-    div {
-        p {
-            padding-left: 10px;
-            overflow:hidden;
+
+    .description {
+        overflow: hidden;
+        padding-right: 20px;
+    }
+    .clearfix {
+        padding:0px;
+        height: 0px;
+    }
+
+    &.new-character {
+        .gradient-gray;
+        .character-thumbnail{
+            background: transparent;
         }
     }
+
 }
 
 .character-list-mini {
@@ -712,3 +790,11 @@ input[type="submit"], button[type='submit'] {
     
 }
 
+.no-data-full-size {
+    text-align: center;
+    font-weight: normal;
+    color: gray;
+    font-size: 25px;
+    padding-top: 75px;
+    padding-bottom: 75px;
+}

@@ -4,6 +4,7 @@ namespace LunaAtra\ProfileBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use LunaAtra\PrivacyBundle\Model\PrivacyInterface;
 /**
  * Charact
  *
@@ -11,7 +12,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Entity(repositoryClass="LunaAtra\ProfileBundle\Entity\CharactRepository")
  * @ORM\HasLifecycleCallbacks
  */
-class Charact
+class Charact implements PrivacyInterface
 {
     private $urlName;
     /**
@@ -71,6 +72,13 @@ class Charact
      * @ORM\Column(name="server", type="string", length=255, nullable=true)
      */
     private $server;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="privacy", type="array", nullable=true)
+     */
+    private $privacy;
 
     /**
      * @var \DateTime
@@ -472,5 +480,28 @@ class Charact
     public function getGame()
     {
         return $this->game;
+    }
+
+    /**
+     * Set privacy
+     *
+     * @param array $privacy
+     * @return Charact
+     */
+    public function setPrivacy($privacy)
+    {
+        $this->privacy = $privacy;
+
+        return $this;
+    }
+
+    /**
+     * Get privacy
+     *
+     * @return array 
+     */
+    public function getPrivacy()
+    {
+        return $this->privacy;
     }
 }

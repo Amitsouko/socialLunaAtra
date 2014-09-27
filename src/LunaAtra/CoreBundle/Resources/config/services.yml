@@ -1,0 +1,5 @@
+services:
+    kernel.listener.subdomain_listener:
+        class: LunaAtra\CoreBundle\Listener\SubdomainListener
+        tags:
+            - { name: kernel.event_listener, event: kernel.request, method: onDomainParse }

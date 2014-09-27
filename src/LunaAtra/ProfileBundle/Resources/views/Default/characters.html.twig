@@ -8,37 +8,56 @@
 
 
     <div class="row">
+    {% if user.characters|length > 0 %}
+
         {% for char in user.characters %}
         <div class=" col-md-6">
             <a href="{{ path("single-character",{"id": char.id}) }}" class="no-style">
-                <div class="white-box character-list">
-                    <h2><span>{{char.name}}</span></h2>
+                <div class="white-box no-padding character-list {% spaceless %}
+                {% if char.game and char.game.slug %}
+                    {{char.game.slug}}
+                {% endif %}
+            {% endspaceless %}">
                     <div class="character-thumbnail">
                         <img src="{{ char.WebPath | imagine_filter('character_thumbnail') }}">
                     </div>
+                    <div class="description">
+                        <h3><span>{{char.name}}</span></h3>
                         
-                    <div>
-                         <p class="character-announcement">&ldquo;{{ char.announce }}&rdquo;<br/>
-                        
-                        </p>
-                        <p>{{char.class}} lvl {{char.level}}</p>
+                        <ul class="list-unstyled">
+                        {% if char.game and char.game.name %}
+                            <li>{{char.game.name}}</li>
+                        {% endif %}
+                            <li>{{char.class}} lvl {{char.level}}</li>
+                            <li>lvl {{char.level}}</li>
+                        </ul>
                     </div>
-                    <div class="clearfix"></div> 
+                    <div class="clearfix"></div>
                 </div>
             </a>
         </div>
         {% endfor %}
+        {% else %}
+            {% if user !=  app.user %}
+                <div class="col-md-12 no-data-full-size">
+                    {{ user.username }} n'a pas encore de personnages.
+                </div>
+            {% endif %}
+        {% endif %}
+
         {% if user ==  app.user %}
-          <div class=" col-md-6">
+
+        <div class=" col-md-6">
             <a href="{{ path("add-character") }}" class="no-style">
-                <div class="white-box-reversed character-list">
-                    <h2><span>Add another</span></h2>
+                <div class="white-box-reversed no-padding character-list new-character">
                     <div class="character-thumbnail">
-                        <img src="https://lh3.googleusercontent.com/-w05mm27Qc2A/AAAAAAAAAAI/AAAAAAAAABw/hPpRQuikIcU/photo.jpg">
+                        <img src="{{ asset("bundles/core/images/charisson0.jpg") }}">
                     </div>
+                    <div class="description">
+                        <h3 class="no-border"><span>Add a new character +</span></h3>
                         
-                 
-                    <div class="clearfix"></div> 
+                    </div>
+                    <div class="clearfix"></div>
                 </div>
             </a>
         </div>

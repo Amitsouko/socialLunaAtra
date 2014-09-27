@@ -30,8 +30,12 @@
 
         <div class="col-md-8">
             
-            {% if user.activities  %}
+            {% if user.activities|length > 0  %}
                 {% render path("include-activities", {"id": user.id}) %}
+            {% else %}
+                <div class="col-md-12 no-data-full-size">
+                    {{ user.username }} n'a pas encore d'activité.
+                </div>
             {% endif %}
 
         </div>

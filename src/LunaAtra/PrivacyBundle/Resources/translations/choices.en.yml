@@ -1,0 +1,5 @@
+choice:
+    only_me: only me
+    my_communities: my communities
+    friends: my friends
+    public: everyone

@@ -1,9 +1,11 @@
 <header id="main-top-bar" class="header-main">  
 <div class="pull-left">
-    <a href="" id="logo-header"></a>
+    <a href="{{ path("lunaatra_core_default_index") }}" id="logo-header"></a>
 </div>
 <div class="pull-left visible-md-block visible-sm-block  visible-lg-block">
-    <input  type="search" placeholder="Recherche" name="search" id="search"/><button type="submit" id="search-submit"><span class="glyphicon glyphicon-search"></span></button>
+    <form>
+        <input  type="search" placeholder="Recherche" name="search" id="search"/><button type="submit" id="search-submit"><span class="glyphicon glyphicon-search"></span></button>
+    </form>
 </div>
     {% trans_default_domain 'FOSUserBundle' %}
 

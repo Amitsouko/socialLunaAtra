@@ -132,6 +132,11 @@ class CustomProfileController extends Controller
         $em = $this->getDoctrine()->getManager();
         $character = $em->getRepository('ProfileBundle:Charact')->findOneById($id);
         $user = $this->get('security.context')->getToken()->getUser();
+        $privacyManager = $this->container->get("privacy.manager");
+        $privacyForm = $privacyManager->getPrivacyForm();
+        
+        $privacyManager->canISee($character,$user);
+
         if($character->getUser() != $user)
         {
             return $this->redirect($this->generateUrl('fos_user_profile_show'));
@@ -158,6 +163,7 @@ class CustomProfileController extends Controller
             ->add("server")
             ->add("bio")
             ->add("lastImageUpdate", "hidden",array("data" => date('Y-m-d H:i:s') ))
+            ->add($privacyForm["name"], $privacyForm["type"], $privacyForm["params"])
             ->getForm();
 
         if ('POST' === $request->getMethod()) {

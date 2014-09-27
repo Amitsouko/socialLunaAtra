@@ -21,6 +21,7 @@ class AppKernel extends Kernel
             new FOS\UserBundle\FOSUserBundle(),
             new Liip\ImagineBundle\LiipImagineBundle(),
             new Stfalcon\Bundle\TinymceBundle\StfalconTinymceBundle(),
+            new LunaAtra\PrivacyBundle\PrivacyBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

@@ -1,3 +1,8 @@
+privacy:
+    resource: "@PrivacyBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
 profile:
     resource: "@ProfileBundle/Controller/"
     type:     annotation
