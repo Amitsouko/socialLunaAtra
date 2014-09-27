@@ -19,16 +19,16 @@ class CharacterController extends Controller
      */
     public function CharacterAction($id)
     {
-
+        $privacyManager = $this->get("privacy.manager");
         $em = $this->getDoctrine()->getManager();
         $character = $em->getRepository('ProfileBundle:Charact')->findOneById($id);
         if(!is_object($character)){
             throw $this->createNotFoundException('Character doesn\'t exist.');
         }
-        // $user = $this->get('security.context')->getToken()->getUser();
-        // if($character->getPrivate() && $user != $character->getUser() ){
-        //     throw $this->createNotFoundException('Character is private exists.');
-        // }
+
+        if(!$privacyManager->canISee($character)){
+            throw $this->createNotFoundException('Character is private.');
+        }
         return array('user' =>$character->getUser(), "character" => $character);
     }
 

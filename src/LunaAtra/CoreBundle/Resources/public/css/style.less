@@ -767,9 +767,14 @@ input[type="submit"], button[type='submit'] {
     }
 
     &.new-character {
+        .transition;
+        opacity: 0.6;
         .gradient-gray;
         .character-thumbnail{
             background: transparent;
+        }
+        &:hover {
+            opacity: 1;
         }
     }
 

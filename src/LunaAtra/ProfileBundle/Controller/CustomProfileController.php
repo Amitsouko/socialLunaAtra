@@ -22,14 +22,17 @@ class CustomProfileController extends Controller
      */
     public function addCharacterAction(Request $request)
     {
-         $character = new Charact();
-         $em = $this->get('doctrine')->getManager();
+        $character = new Charact();
+        $em = $this->get('doctrine')->getManager();
+        $privacyManager = $this->container->get("privacy.manager");
+        $privacyForm = $privacyManager->getPrivacyForm();
 
         $form = $this->createFormBuilder($character)
             ->add("name")
             ->add("birthday")
             ->add("file")
             ->add("class")
+            ->add($privacyForm["name"], $privacyForm["type"], $privacyForm["params"])
             ->add("level")
             ->add('game','entity', array(
                 "multiple"=>false,
@@ -134,7 +137,7 @@ class CustomProfileController extends Controller
         $user = $this->get('security.context')->getToken()->getUser();
         $privacyManager = $this->container->get("privacy.manager");
         $privacyForm = $privacyManager->getPrivacyForm();
-        
+
         $privacyManager->canISee($character,$user);
 
         if($character->getUser() != $user)

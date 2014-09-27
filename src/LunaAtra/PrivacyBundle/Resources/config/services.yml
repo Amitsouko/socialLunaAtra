@@ -1,4 +1,9 @@
 services:
     privacy.manager:
         class: LunaAtra\PrivacyBundle\Services\PrivacyManager
-        arguments: ["@security.context", "@doctrine", "@translator"]
+        arguments: ["@security.context", "@doctrine", "@translator",%privacy.rank%]
+    privacy.twig.acme_extension:
+        arguments: ["@security.context", "@privacy.manager"]
+        class: LunaAtra\PrivacyBundle\Twig\PrivacyExtension
+        tags:
+            - { name: twig.extension }

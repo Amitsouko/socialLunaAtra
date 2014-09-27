@@ -16,3 +16,9 @@ parameters:
     debug_redirects: false
     use_assetic_controller: true
     cookie_domain: "*.nova.localhost"
+
+    privacy.rank: 
+        public:         _0_
+        my_communities: _1_
+        friends:        _2_
+        only_me:        _100_

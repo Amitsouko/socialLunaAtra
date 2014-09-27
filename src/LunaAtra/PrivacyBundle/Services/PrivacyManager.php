@@ -16,19 +16,17 @@ class PrivacyManager extends ContainerAware
     private $connectedUser;
     private $assoc;
 
-    public function __construct( $securityContext, $em, $translator)
+    public function __construct( $securityContext, $em, $translator, $privacyRank)
     {
         $this->securityContext  = $securityContext;
-        $this->connectedUser = $securityContext->getToken()->getUser();
+        if($securityContext->getToken()){
+            $this->connectedUser = $securityContext->getToken()->getUser();
+        }else{
+            $this->connectedUser = false;
+        }
         $this->em  = $em;
         $this->translator = $translator;
-
-        $this->assoc = array(
-                "public" => "_0_",
-                "my_communities" => "_1_",
-                "friends" => "_2_",
-                "only_me" => "_100_"
-            );
+        $this->assoc = $privacyRank;
     }
 
     public function getPrivacyForm()
@@ -39,26 +37,25 @@ class PrivacyManager extends ContainerAware
         $return["params"] = array(
                 "choices" => array(
                         $this->assoc["public"]         => $this->translator->trans("choice.public",array(), "choices"),
-                        $this->assoc["my_communities"] => $this->translator->trans("choice.my_communities",array(), "choices"),
-                        $this->assoc["friends"]        => $this->translator->trans("choice.friends",array(), "choices"),
+                        //$this->assoc["my_communities"] => $this->translator->trans("choice.my_communities",array(), "choices"),
+                        //$this->assoc["friends"]        => $this->translator->trans("choice.friends",array(), "choices"),
                         $this->assoc["only_me"]        => $this->translator->trans("choice.only_me",array(), "choices")
                     ),
                 "required" => true,
                 "multiple" =>true,
-                "expanded" => "true"
+                "expanded" => true
             );
         return $return;
     }
 
-    public function canISee(PrivacyInterface $object,User $user)
+    public function canISee(PrivacyInterface $object)
     {
         $privacyConf = $object->getPrivacy();
+        if($this->connectedUser == $object->getUser()) return true;
         //IF only me; so return false
         if(in_array($this->assoc["only_me"], $privacyConf)) return false;
         //if public so, return true
         if(in_array($this->assoc["public"], $privacyConf)) return true;
-
-        
 
     }
 
