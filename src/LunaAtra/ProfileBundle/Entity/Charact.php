@@ -98,6 +98,13 @@ class Charact implements PrivacyInterface
     protected $game;
 
     /**
+     * @ORM\OneToMany(targetEntity="LunaAtra\CoreBundle\Entity\Activity", mappedBy="character")
+     * @ORM\OrderBy({"date" = "DESC"})
+     * @var type
+     */
+    protected $activities;
+
+    /**
      * @var date $lastImageUpdate
      *
      * @ORM\Column(name="lastImageUpdate", type="string", nullable=true)
@@ -504,5 +511,38 @@ class Charact implements PrivacyInterface
     public function getPrivacy()
     {
         return $this->privacy;
+    }
+
+    /**
+     * Add activities
+     *
+     * @param \LunaAtra\CoreBundle\Entity\Activity $activities
+     * @return Charact
+     */
+    public function addActivity(\LunaAtra\CoreBundle\Entity\Activity $activities)
+    {
+        $this->activities[] = $activities;
+
+        return $this;
+    }
+
+    /**
+     * Remove activities
+     *
+     * @param \LunaAtra\CoreBundle\Entity\Activity $activities
+     */
+    public function removeActivity(\LunaAtra\CoreBundle\Entity\Activity $activities)
+    {
+        $this->activities->removeElement($activities);
+    }
+
+    /**
+     * Get activities
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getActivities()
+    {
+        return $this->activities;
     }
 }

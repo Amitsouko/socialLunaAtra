@@ -1,0 +1,19 @@
+{% extends "CoreBundle::base.html.twig" %}
+
+{% block content %}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12 no-data-full-size">
+        <span class="glyphicon glyphicon-warning-sign"></span><br/>
+            Voulez-vous vraiment supprimer <u>définitivement</u> : <a target="_blank" href="{{ data.urlOfDelete }}">{{ data.name }}</a> ?<br/><br/>
+            <form method="POST">
+            {{ form_widget(form) }}
+            {{form_rest(form)}}
+                 <a class="blue-button" href="{{ path("user", {username: app.user.username}) }}">No, absolutely not !</a> <input type="submit" class="red-button" value="Yes"/>
+            </form>
+           
+        </div>
+    </div>
+</div>
+{% endblock content %}

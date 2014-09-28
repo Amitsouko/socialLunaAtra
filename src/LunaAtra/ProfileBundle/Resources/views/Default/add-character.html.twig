@@ -60,9 +60,10 @@
                             <br/>
                             <p class="text-right">
                             {% if character is defined %}
-                                <input type="submit" value="Éditer"/>
+                                <a class="red-button" href="{{ path("delete-character", {id: character.id}) }}">Supprimer le personnage</a>
+                                <input class="green-button" type="submit" value="Éditer"/>
                             {% else %}
-                                <input type="submit" value="Créer"/>
+                                <input class="green-button" type="submit" value="Créer"/>
                             {% endif %}
 
                             </p>

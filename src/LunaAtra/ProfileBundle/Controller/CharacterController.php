@@ -12,6 +12,16 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 class CharacterController extends Controller
 {
 
+    /**
+     * @Route("/deleted", name="single-character-deleted")
+     * @Template("ProfileBundle:Default:character.html.twig")
+     */
+    public function CharacterDeletedAction()
+    {
+        throw $this->createNotFoundException('Character has been deleted.');
+        return array();
+    }
+
 
     /**
      * @Route("/{id}", name="single-character")
@@ -31,5 +41,8 @@ class CharacterController extends Controller
         }
         return array('user' =>$character->getUser(), "character" => $character);
     }
+
+
+    
 
 }

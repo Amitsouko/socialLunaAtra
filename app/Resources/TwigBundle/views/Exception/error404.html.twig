@@ -1,0 +1,13 @@
+{% extends "CoreBundle::base.html.twig" %}
+
+{% block content %}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12 no-data-full-size">
+        <span class="glyphicon glyphicon-warning-sign"></span><br/>
+            {{ status_code }} {{ status_text }}
+        </div>
+    </div>
+</div>
+{% endblock content %}

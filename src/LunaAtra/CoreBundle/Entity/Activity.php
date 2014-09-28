@@ -41,6 +41,12 @@ class Activity
     protected $seeder;
 
     /**
+    * @ORM\ManyToOne(targetEntity="LunaAtra\ProfileBundle\Entity\Charact",inversedBy="activities")
+    * @ORM\JoinColumn(name="character_id", referencedColumnName="id", onDelete="SET NULL")
+    */
+    protected $character;
+
+    /**
      * @var array
      *
      * @ORM\Column(name="data", type="array")
@@ -238,6 +244,7 @@ class Activity
     public function CreateCharacter($user,$character)
     {
         $this->setSeeder($user);
+        $this->setCharacter($character);
         $this->setTranslation("user.create.character");
         $this->setData(
          array(
@@ -252,6 +259,7 @@ class Activity
     public function updateCharacter($user,$character)
     {
         $this->setSeeder($user);
+        $this->setCharacter($character);
         $this->setTranslation("user.update.character");
         $this->setData(
          array(
@@ -263,6 +271,29 @@ class Activity
          );
     }
 
+    public function DeleteCharacter($user,$character)
+    {
+        $this->setSeeder($user);
+        $this->setTranslation("user.delete.character");
+        $this->setData(
+         array(
+                "username" => array("entity" => "ProfileBundle:User", "id" => $user->getId(), "column" => "username"),
+                "user_url" => array("entity" => "ProfileBundle:User", "id" => $user->getId(), "column" => "username","urlKey" => "username", "urlData" =>"username",  "isUrl" => true),
+                "character_username" => $character->getName(),
+                "character_url" => "single-character-deleted"
+            )
+         );
+    }
+
+    public function setCharacterFallback($character)
+    {
+        $data = $this->getData();
+        $data["character_username"] = $character->getName();
+        $data["character_url"] = "single-character-deleted";
+        $this->setData($data);
+    }
+    
+
     public function updateCover($user)
     {
         $this->setSeeder($user);
@@ -273,5 +304,28 @@ class Activity
                 "user_url" => array("entity" => "ProfileBundle:User", "id" => $user->getId(), "column" => "username","urlKey" => "username", "urlData" =>"username",  "isUrl" => true)
             )
          );
+    }
+
+    /**
+     * Set character
+     *
+     * @param \LunaAtra\ProfileBundle\Entity\Charact $character
+     * @return Activity
+     */
+    public function setCharacter(\LunaAtra\ProfileBundle\Entity\Charact $character = null)
+    {
+        $this->character = $character;
+
+        return $this;
+    }
+
+    /**
+     * Get character
+     *
+     * @return \LunaAtra\ProfileBundle\Entity\Charact 
+     */
+    public function getCharacter()
+    {
+        return $this->character;
     }
 }

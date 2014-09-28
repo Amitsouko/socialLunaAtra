@@ -28,6 +28,7 @@ class IncludeController extends Controller
         $entityCache[] = $user;
         $activities = array();
         $i = 0;
+        // foreach activities
         foreach($user->getActivities()  as $act)
         {
             if($i > 10) break;
@@ -37,13 +38,23 @@ class IncludeController extends Controller
             
             //loop to get the value of the key
             foreach( $codedParam as $key => $data)
-            {   
+            { 
+                //if it's a fallback, just attribute stirng value
+                if(!is_array($data)){
+                    if(strpos($key,"url")){ 
+                        $parameters["%".$key."%"] = $this->get('router')->generate($data); //single-character-deleted
+                    }else {
+                        $parameters["%".$key."%"] = $data;
+                    }
+                    
+                    continue;
+                }
+
                 $arraySearch = array("entity" => $data["entity"], "id" =>$data["id"]);
 
                 $isInCache = array_search($arraySearch, $cache);
-
                 //check if entity is in cache
-                if($isInCache != null)
+                if($isInCache !== false)
                 {
                     $result = $entityCache[$isInCache];
                 }else
@@ -62,6 +73,7 @@ class IncludeController extends Controller
                 }else{
                     $parameters["%".$key."%"] = $result->get($data["column"]);
                 }
+                
             }
             //fill in the returned array
             $activities[]  = array("text" =>$this->get('translator')->trans($act->getTranslation().".text", $parameters, 'activities'),

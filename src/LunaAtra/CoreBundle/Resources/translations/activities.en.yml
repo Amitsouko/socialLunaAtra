@@ -16,3 +16,7 @@ user:
         profile: 
             text: <strong><a href='%user_url%'>%username%</a></strong> just joined Luna Atra.
             type: "createProfile"
+    delete:
+        character: 
+            text: <strong><a href='%user_url%'>%username%</a></strong> has deleted the character <strong>%character_username%</strong>
+            type: deleteCharacter

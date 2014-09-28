@@ -399,6 +399,12 @@ header.header-main {
         text-decoration: none;
         color: white;
     }
+    &:link,
+    &:hover,
+    &:visited,
+    &:active {
+        color: white;
+    }
 }
 
 .blue-button {
@@ -409,6 +415,15 @@ header.header-main {
 .red-button {
     .button;
     background: @red;
+}
+
+.green-button {
+    .button;
+    background: @green;
+    // &:hover {
+    //     background: @green-highlight;
+    //     box-shadow: 0px 0px 5px @green-highlight;
+    // }
 }
 .white-button {
     .button;
@@ -632,20 +647,20 @@ header.header-main {
 }
 
 input[type="submit"], button[type='submit'] {
-    background: @green;
+    // background: @green;
     color: white;
     border-radius: 3px;
+    border: 0px;
     // box-shadow: 0px 2px 1px #dddddd !important;
     // text-shadow: 0px 2px 1px rgba(0,0,0,0.21) !important;
 
-    &:hover {
-        background: @green-highlight;
-        box-shadow: 0px 0px 5px @green-highlight;
-    }
+
     &:active {
         box-shadow: 0px 0px 10px rgba(0,0,0,0.2) inset;
     }
 }
+
+
 
 
 .single-activity {
