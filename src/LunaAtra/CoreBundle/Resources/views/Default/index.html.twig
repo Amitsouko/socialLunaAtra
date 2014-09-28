@@ -1,4 +1,4 @@
-{% extends "CoreBundle::layout.html.twig" %}
+{% extends "CoreBundle::base.html.twig" %}
 {% trans_default_domain "home" %}
 {% block bodyclass %}
 {% spaceless %}
@@ -6,7 +6,7 @@ home
 {% endspaceless %}
 {% endblock bodyclass %}
 
-{% block main %}
+{% block content %}
 
 <div class="container main-container">
     <div class="row">
@@ -22,4 +22,4 @@ home
     </div>
 </div>
 
-{% endblock main %}
+{% endblock content %}

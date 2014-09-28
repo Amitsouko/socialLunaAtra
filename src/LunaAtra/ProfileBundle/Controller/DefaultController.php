@@ -23,7 +23,7 @@ class DefaultController extends Controller
         if(!is_object($user)){
             throw $this->createNotFoundException('The user does not exist !');
         }
-        return array('user' =>$user);
+        return array('user' =>$user, "pagename" => "Profil");
     }
 
     /**
@@ -34,7 +34,7 @@ class DefaultController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $user = $em->getRepository('ProfileBundle:User')->findOneByUsername($username);
-        return array('user' =>$user);
+        return array('user' =>$user, "pagename" => "Biographie");
     }
 
     /**
@@ -45,7 +45,7 @@ class DefaultController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $user = $em->getRepository('ProfileBundle:User')->findOneByUsername($username);
-        return array('user' =>$user);
+        return array('user' =>$user, "pagename" => "Personnages");
     }
 
 }

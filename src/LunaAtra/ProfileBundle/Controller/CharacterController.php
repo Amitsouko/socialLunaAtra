@@ -39,7 +39,7 @@ class CharacterController extends Controller
         if(!$privacyManager->canISee($character)){
             throw $this->createNotFoundException('Character is private.');
         }
-        return array('user' =>$character->getUser(), "character" => $character);
+        return array('user' =>$character->getUser(), "character" => $character, "pagename" => "personnages");
     }
 
 

@@ -22,7 +22,7 @@
                         <img src="{{ char.WebPath | imagine_filter('character_thumbnail') }}">
                     </div>
                     <div class="description">
-                        <h3><span>{{char.name}}</span> {% if char|isPrivate %}<em>(privé)</em>{% endif %}</h3>
+                        <h3><span>{{char.name}}</span> {% if char|isPrivate %} <em title="privé" class="color-gray glyphicon glyphicon-eye-close"></em>{% endif %}</h3>
                         
                         <ul class="list-unstyled">
                         {% if char.game and char.game.name %}

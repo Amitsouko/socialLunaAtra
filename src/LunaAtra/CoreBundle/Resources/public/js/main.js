@@ -9,8 +9,10 @@ $(function(){
             ){
             $(".dropdown.open").removeClass("open");
         }
+      
     });
     $(".dropdown").on("click", function(e){
+        $(".dropdown.open").not($(this)).removeClass("open");
         $(this).toggleClass("open");
         return false;
     });

@@ -342,6 +342,26 @@ header.header-main {
     }
 }
 
+#profile-menu-dropdown {
+    z-index: 10;
+    text-align: left;
+    position: absolute;
+    text-align: left;
+    width: 100%;
+    a {
+        font-size: 14px;
+        font-weight: bold;
+        display: block;
+        background: white;
+        border-bottom: 1px solid whiteSmoke;
+        &:hover {
+            background: @darkBlue;
+            color: white;
+        }
+    }
+}
+
+
 .dropdown ~ .dropdown-menu {
     .transition(all,.1s,ease);
     visibility:hidden;
@@ -383,6 +403,10 @@ header.header-main {
 }
 
 .character-details {
+}
+
+.color-gray {
+    color: gray;
 }
 
 .button {
@@ -711,12 +735,25 @@ input[type="submit"], button[type='submit'] {
 }
 
 .sub-menu-profile {
+    z-index:5;
+    position: relative;
     margin-top: -51px;
     margin-bottom: 20px;
     height: 51px;
     border-top-right-radius: 3px;
     border-top-left-radius: 3px;
     border-bottom: 1px rgb(202, 219, 235) solid;
+    .mini-menu {
+        z-index:15;
+        position: absolute;
+        right: 0px;
+    }
+    .responsive-selected-menu {
+        font-size:14px;
+        font-weight: bold;
+        display: inline-block;
+        padding: 15px 20px;
+    }
         // background: rgb(255,255,255); /* Old browsers */
         // background: -moz-linear-gradient(top,  rgba(255,255,255,1) 0%, rgba(242,242,242,1) 100%); /* FF3.6+ */
         // background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(255,255,255,1)), color-stop(100%,rgba(242,242,242,1))); /* Chrome,Safari4+ */
