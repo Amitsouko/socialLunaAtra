@@ -64,6 +64,7 @@ class PrivacyManager extends ContainerAware
     public function canISee(PrivacyInterface $object)
     {
         $privacyConf = $object->getPrivacy();
+        if(!is_array($privacyConf)) return true;
         if($this->connectedUser == $object->getUser()) return true;
         //IF only me; so return false
         if(in_array($this->assoc["only_me"], $privacyConf)) return false;
