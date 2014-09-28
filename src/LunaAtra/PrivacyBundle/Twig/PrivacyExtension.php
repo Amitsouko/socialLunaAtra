@@ -24,6 +24,7 @@ class PrivacyExtension extends \Twig_Extension
         return array(
             new \Twig_SimpleFilter('isPrivate', array($this, 'isPrivate')),
             new \Twig_SimpleFilter('canISee', array($this, 'canISee')),
+            new \Twig_SimpleFilter('inlinePrivacy', array($this, 'inlinePrivacy')),
         );
     }
 
@@ -37,6 +38,21 @@ class PrivacyExtension extends \Twig_Extension
             return false;
         }
         
+    }
+
+    public function inlinePrivacy(PrivacyInterface $object)
+    {
+        $array = Array();
+        $string = "";
+        if(is_array($object->getPrivacy()))
+        {
+            foreach($object->getPrivacy() as $privacy ) {
+                $array[] = $this->privacyManager->getPrivacyName($privacy);
+            }
+            $string = implode(", ", $array);
+        }
+        
+        return $string;
     }
 
     public function canISee(PrivacyInterface $object)

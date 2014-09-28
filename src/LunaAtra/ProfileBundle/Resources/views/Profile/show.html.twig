@@ -7,9 +7,20 @@
 <div class="container">
     <div class="row">
         <div class="col-md-4">
+
+        {# user announce #}
         {% if user.announce %}
             <h2 class="profile-announcement">&ldquo;{{ user.announce }}&rdquo;</h2>
+        {% elseif user == app.user %}
+            <p class="margin-bottom-20">Vous n'avez pas encore de description. <br/>
+            <a href="{{ path("fos_user_profile_edit") }}">
+            <span class="glyphicon glyphicon-pencil"></span> Éditer votre profil</a>.</p>
         {% endif %}
+
+
+
+
+        {# character list #}
         {% if user.characters|length > 0 %}
             <div class="">
                 <h3><span>Personnages</span></h3>
@@ -17,23 +28,30 @@
                 {% for char in user.characters %}
                     <li><a href="{{ path("single-character", {id: char.id}) }}"><img src="{{ char.WebPath|imagine_filter("mini_character_thumbnail") }}"> {{ char.name }}</a></li>
                 {% endfor %}
+                {% if user == app.user %}
+                <li><a href="{{ path("add-character") }}"><span class="glyphicon glyphicon-plus"></span> Ajouter un personnage</a></li>
+                {% endif %}
                 </ul>
             </div>
+
+        {% elseif user == app.user %}
+            <div class="margin-bottom-20">
+            <h3><span>Personnages</span></h3>
+            <span>Vous n'avez pas encore créé de personnage.</span><br/>
+           <a href="{{ path("add-character") }}"><span class="glyphicon glyphicon-plus"></span> Créer mon premier personnage</a>
+           </div>
         {% endif %}
-           <!--  <div class="">
-                <h3><span>Achèvements</span></h3>
-            </div>
-            <div class="">
-                <h3><span>Comptes</span></h3>
-            </div> -->
-        </div>
+  
+
+        </div>{# end column #}
 
         <div class="col-md-8">
-            
+            {# activity list#}
             {% if user.activities|length > 0  %}
                 {% render path("include-activities", {"id": user.id}) %}
             {% else %}
                 <div class="col-md-12 no-data-full-size">
+                <span class="glyphicon glyphicon-exclamation-sign"></span><br/>
                     {{ user.username }} n'a pas encore d'activité.
                 </div>
             {% endif %}

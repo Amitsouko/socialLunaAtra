@@ -24,8 +24,10 @@
                             <input type="submit" value="{{ 'profile.edit.submit'|trans }}" />
                         </div> -->
                         <h2><span>Couverture</span></h2>
-
+                        {% if user.cover %}
                         <img style="max-width:100%" src="{{user.cover.WebPath | imagine_filter("mini_cover_thumbnail")}}">
+                        {% endif %}
+
                             <p class="text-center">
                                 {{ form_widget(form.file) }}
                                 {{ form_widget(form) }}

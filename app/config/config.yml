@@ -98,11 +98,15 @@ liip_imagine:
         character_thumbnail:
             quality: 90
             filters:
-                thumbnail: { size: [175, 175], mode: outbound }
+                thumbnail: { size: [250, 250], mode: outbound }
         mini_character_thumbnail:
             quality: 75
             filters:
                 thumbnail: { size: [32, 32], mode: outbound }
+        micro_character_thumbnail:
+            quality: 90
+            filters:
+                thumbnail: { size: [50, 50], mode: outbound }
         mini_cover_thumbnail:
             quality: 75
             filters:

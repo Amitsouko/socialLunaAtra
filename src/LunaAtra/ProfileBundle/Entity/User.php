@@ -36,7 +36,7 @@ class User extends BaseUser
 
     /**
      * @ORM\OneToMany(targetEntity="LunaAtra\ProfileBundle\Entity\Charact", mappedBy="user")
-     * @ORM\OrderBy({"ordre" = "DESC"})
+     * @ORM\OrderBy({"ordre" = "ASC"})
      * @var type
      */
     protected $characters;

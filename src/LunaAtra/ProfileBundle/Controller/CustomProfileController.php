@@ -29,7 +29,9 @@ class CustomProfileController extends Controller
 
         $form = $this->createFormBuilder($character)
             ->add("name")
-            ->add("birthday")
+            ->add("birthday", null,array(
+                        'years' => range("1990", date('Y')),
+                    ))
             ->add("file")
             ->add("class")
             ->add($privacyForm["name"], $privacyForm["type"], $privacyForm["params"])
@@ -39,14 +41,14 @@ class CustomProfileController extends Controller
                 'class'=>'LunaAtra\CoreBundle\Entity\Game', 
                 'property'=>'name', 
                 "empty_value" => "-- Choose a game --" ,
-                "empty_data" => false ,
+                "required" => false,
+                "empty_data" => null ,
                 'query_builder' => function(GameRepository $er) {
                         return $er->createQueryBuilder('c')
                             ->orderBy('c.name', 'ASC');
                     }
                 ))
             ->add("server")
-            ->add("announce")
             ->add("bio")
             ->getForm();
 
@@ -147,17 +149,19 @@ class CustomProfileController extends Controller
 
         $form = $this->createFormBuilder($character)
             ->add("name")
-            ->add("birthday")
+            ->add("birthday", null,array(
+                        'years' => range("1990", date('Y')),
+                    ))
             ->add("file")
             ->add("class")
             ->add("level")
-            ->add("announce")
             ->add('game','entity', array(
                 "multiple"=>false,
                 'class'=>'LunaAtra\CoreBundle\Entity\Game', 
                 'property'=>'name', 
                 "empty_value" => "-- Choose a game --" ,
-                "empty_data" => false ,
+                "empty_data" => null ,
+                "required" => false,
                 'query_builder' => function(GameRepository $er) {
                         return $er->createQueryBuilder('c')
                             ->orderBy('c.name', 'ASC');

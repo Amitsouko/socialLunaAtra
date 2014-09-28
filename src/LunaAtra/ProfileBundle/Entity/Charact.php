@@ -173,7 +173,8 @@ class Charact implements PrivacyInterface
 
     public function getWebPath()
     {
-        return null === $this->path ? "bundles/core/images/charisson.jpg"  : $this->getUploadDir().'/'.$this->path;
+        $lastDigit = substr($this->id, -1);
+        return null === $this->path ? "bundles/core/images/charisson$lastDigit.jpg"  : $this->getUploadDir().'/'.$this->path;
     }
 
     protected function getUploadRootDir()

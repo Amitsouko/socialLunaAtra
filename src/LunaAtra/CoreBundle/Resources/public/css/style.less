@@ -34,6 +34,17 @@
         filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#f2f2f2',GradientType=0 ); /* IE6-9 */
 }
 
+.margin-bottom-20 {
+    margin-bottom: 20px;
+}
+.margin-bottom-10 {
+    margin-bottom: 10px;
+}
+
+.no-overflow-title {
+    word-wrap: break-word;
+}
+
 body{
 
     background: #f5f5f5;
@@ -140,6 +151,11 @@ h3 {
         }
     }
 } 
+
+.responsive-img {
+    width: 100%;
+    height: auto !important;
+}
 
 header.header-main {
     width: 100%;
@@ -347,9 +363,7 @@ header.header-main {
 
 #bio {
     background: white;
-    img {
-        height: auto !important;
-    }
+    
 }
 
 .medaillon {
@@ -357,6 +371,15 @@ header.header-main {
     background: white;
     border-radius: 3px;
     box-shadow: 0px 2px 2px #E6E6E6 !important;
+}
+.character-medaillon {
+    border: white solid 10px;
+    img {
+        margin-bottom: 15px;
+    }
+    h2 {
+        margin-bottom: 0px;
+    }
 }
 
 .character-details {
@@ -649,11 +672,9 @@ input[type="submit"], button[type='submit'] {
     font-style: italic;
     font-weight: normal;
     font-size: 1.3em;
-    text-align: center;
     line-height: 1.4em;
     color: #9BB7D1;
     border-bottom: none;
-    padding: 10px;
 }
 .character-announcement {
     margin-top: 15px;
@@ -722,6 +743,7 @@ input[type="submit"], button[type='submit'] {
     word-wrap: break-word;
     img {
         max-width: 100%;
+        height: auto !important;
     }
 }
 
@@ -730,7 +752,19 @@ input[type="submit"], button[type='submit'] {
         background:white url('../images/bg-character-card/ffxiv.jpg') bottom right no-repeat;
     }
 
-
+        &.micro {
+            height: 80px;
+            .character-thumbnail img {
+                width: 50px;
+                height: 50px;
+                margin-right: 15px;
+                margin-left: 15px;
+            }
+            div {
+                height: 80px;
+                padding: 15px 0px; 
+            }
+        }
     div {
         height: 136px;
        padding: 20px 0px; 
@@ -742,6 +776,7 @@ input[type="submit"], button[type='submit'] {
             margin-bottom: 0px;
             color: gray;
         }
+
     }
     .character-thumbnail {
         display: block;
@@ -755,6 +790,7 @@ input[type="submit"], button[type='submit'] {
             width: 96px;
             height: 96px;
         }
+
     }
 
     .description {
@@ -762,8 +798,8 @@ input[type="submit"], button[type='submit'] {
         padding-right: 20px;
     }
     .clearfix {
-        padding:0px;
-        height: 0px;
+        padding:0px !important;
+        height: 0px !important;
     }
 
     &.new-character {
@@ -784,7 +820,9 @@ input[type="submit"], button[type='submit'] {
     li {
         padding:6px 0px;
         border-bottom: 1px solid #E6E2E2;
-
+        &:last-child {
+            border-bottom: none;
+        }
         img {
             width: 32px;
             height: 32px;
@@ -802,4 +840,7 @@ input[type="submit"], button[type='submit'] {
     font-size: 25px;
     padding-top: 75px;
     padding-bottom: 75px;
+    .glyphicon {
+        font-size: 35px;
+    }
 }

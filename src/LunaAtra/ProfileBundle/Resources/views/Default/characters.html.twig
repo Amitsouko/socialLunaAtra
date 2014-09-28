@@ -40,6 +40,7 @@
         {% else %}
             {% if user !=  app.user %}
                 <div class="col-md-12 no-data-full-size">
+                <span class="glyphicon glyphicon-exclamation-sign"></span><br/>
                     {{ user.username }} n'a pas encore de personnages.
                 </div>
             {% endif %}
@@ -54,7 +55,7 @@
                         <img src="{{ asset("bundles/core/images/charisson0.jpg") }}">
                     </div>
                     <div class="description">
-                        <h3 class="no-border"><span>Add a new character +</span></h3>
+                        <h3 class="no-border"><span class="glyphicon glyphicon-plus"></span> <span>Add a new character</span></h3>
                         
                     </div>
                     <div class="clearfix"></div>

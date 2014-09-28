@@ -8,20 +8,22 @@
     <div class="row">
 
     <div class="col-md-3 ">
-        <div class="medaillon text-center">
+
+        <div class="medaillon character-medaillon text-center margin-bottom-10">
             <a href="{{ asset(character.WebPath) }}" data-lightbox="profile" data-title="{{ character.name }}">
-                <img class="" src="{{ character.WebPath|imagine_filter("character_thumbnail") }}">
+                <img class="responsive-img" src="{{ character.WebPath|imagine_filter("character_thumbnail") }}">
             </a>
-            <h1>{{ character.name }}</h1>
-            {% if user ==  app.user %}
-                <a href="{{ path("edit-character", {id: character.id}) }}"><em>Éditer</em></a>
-            {% endif %}
+            <h2 class="no-overflow-title no-border no-margin-bottom">{{ character.name }}
+                 {% if user ==  app.user %}
+                    <a href="{{ path("edit-character", {id: character.id}) }}"><em>Éditer</em></a>
+                {% endif %}
+            </h2>
         </div>
-        <h2 class="profile-announcement">
-            {{ character.announce }}
-        </h2>
-        <h3><span>Informations</span></h3>
+
+        
+ 
         <ul class="list-unstyled character-list-mini">
+            <li><strong>Propriétaire </strong> : <a href="{{ path("user",{username:character.user.username}) }}">{{ character.user.username }}</a></li>
         {% if character.game|length > 0 %}
             <li><strong>Jeu </strong> : {{ character.game.name }}</li>
         {% endif %}
@@ -29,6 +31,9 @@
             <li><strong>Classe </strong> : {{ character.class }}</li>
             <li><strong>Niveau </strong> : {{ character.level }}</li>
             <li><strong>Date de création </strong> : {{ character.birthday|date('Y-m-d') }}</li>
+            {% if app.user == character.user %}
+            <li><strong>Confitentialité </strong> : {{ character|inlinePrivacy }}</li>
+            {% endif %}
         </ul>
     </div>
 
@@ -36,18 +41,60 @@
        <div class="col-md-8 character-details">
             <div class="white-box"  style="min-height:500px;">
                     
-                    <h2><span>Biographie</span></h2>
+                <h2><span>Biographie</span></h2>
 
-                    <div class="text-user">
+                <div class="text-user">
+                {% if character.bio|trim is not empty %}
                     {{ character.bio|raw }}
-                    </div>  
-                </a>
+                {% else %}
+                    <div class="no-data-full-size">
+                    <span class="glyphicon glyphicon-exclamation-sign"></span><br/>
+                        {{ character.name}} n'a pas de biographie.
+                    </div>
+                {% endif %}
+                </div>  
+
                 <div class="clearfix"></div>
             </div>
-            <h2>Autres personnages du joueur</h2>
-            {% for char in character.user.characters %}
-                {{ char.name }}
-            {% endfor %}
+
+
+           {% if character.user.characters|length > 1 %}
+            <h2><span>Autres personnages du joueur</span></h2>
+            <div class="row">           
+
+                {% for char in character.user.characters %}
+
+                    {% if char != character %}
+                    <div class=" col-md-6">
+                        <a href="{{ path("single-character",{"id": char.id}) }}" class="no-style">
+                        <div class="white-box no-padding character-list micro {% spaceless %}
+                        {% if char.game and char.game.slug %}
+                            {{char.game.slug}}
+                        {% endif %}
+                        {% endspaceless %}">
+                            <div class="character-thumbnail">
+                                <img src="{{ char.WebPath | imagine_filter('micro_character_thumbnail') }}">
+                            </div>
+                            <div class="description">
+                                <strong><span>{{char.name}}</span> {% if char|isPrivate %}<em>(privé)</em>{% endif %}</strong>
+                                
+                                <ul class="list-unstyled">
+                                {% if char.game and char.game.name %}
+                                    <li>{{char.game.name}}</li>
+                                {% endif %}
+                                </ul>
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+                        </a>
+                    </div>
+                    {% endif %}
+
+                {% endfor %}
+            {% endif %}
+
+
+            </div>
        </div>
     </div>
 </div>

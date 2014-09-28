@@ -15,7 +15,8 @@ class PrivacyManager extends ContainerAware
     private $translator;
     private $connectedUser;
     private $assoc;
-
+    private $assocReversed;
+    private $assocTranslate;
     public function __construct( $securityContext, $em, $translator, $privacyRank)
     {
         $this->securityContext  = $securityContext;
@@ -27,6 +28,12 @@ class PrivacyManager extends ContainerAware
         $this->em  = $em;
         $this->translator = $translator;
         $this->assoc = $privacyRank;
+        $this->assocReversed = array_flip($privacyRank);
+        $assocTranslate = array();
+        foreach($this->assoc as $key => $value)
+        {
+            $this->assocTranslate[$key] = $this->translator->trans("choice.$key",array(), "choices");
+        }
     }
 
     public function getPrivacyForm()
@@ -36,16 +43,22 @@ class PrivacyManager extends ContainerAware
         $return["type"] = "choice";
         $return["params"] = array(
                 "choices" => array(
-                        $this->assoc["public"]         => $this->translator->trans("choice.public",array(), "choices"),
+                        $this->assoc["public"]         => $this->assocTranslate["public"],
                         //$this->assoc["my_communities"] => $this->translator->trans("choice.my_communities",array(), "choices"),
                         //$this->assoc["friends"]        => $this->translator->trans("choice.friends",array(), "choices"),
-                        $this->assoc["only_me"]        => $this->translator->trans("choice.only_me",array(), "choices")
+                        $this->assoc["only_me"]        => $this->assocTranslate["only_me"]
                     ),
                 "required" => true,
                 "multiple" =>true,
-                "expanded" => true
+                "expanded" => true,
+                "data" => array($this->assoc["public"])
             );
         return $return;
+    }
+
+    public function getPrivacyName($string)
+    {
+        return (isset($this->assocReversed[$string])) ? $this->assocTranslate[$this->assocReversed[$string]] : false;
     }
 
     public function canISee(PrivacyInterface $object)
