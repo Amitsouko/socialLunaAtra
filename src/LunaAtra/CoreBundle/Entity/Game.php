@@ -36,10 +36,16 @@ class Game
     private $slug;
 
     /**
-     * @ORM\OneToMany(targetEntity="LunaAtra\PRofileBundle\Entity\Charact", mappedBy="game")
+     * @ORM\OneToMany(targetEntity="LunaAtra\ProfileBundle\Entity\Charact", mappedBy="game")
      * @var type
      */
     protected $characters;
+
+    /**
+     * @ORM\OneToMany(targetEntity="LunaAtra\ProfileBundle\Entity\Blog", mappedBy="game")
+     * @var type
+     */
+    protected $blogs;
 
     /**
      * Get id
@@ -135,5 +141,38 @@ class Game
     public function getCharacters()
     {
         return $this->characters;
+    }
+
+    /**
+     * Add blogs
+     *
+     * @param \LunaAtra\ProfileBundle\Entity\Blog $blogs
+     * @return Game
+     */
+    public function addBlog(\LunaAtra\ProfileBundle\Entity\Blog $blogs)
+    {
+        $this->blogs[] = $blogs;
+
+        return $this;
+    }
+
+    /**
+     * Remove blogs
+     *
+     * @param \LunaAtra\ProfileBundle\Entity\Blog $blogs
+     */
+    public function removeBlog(\LunaAtra\ProfileBundle\Entity\Blog $blogs)
+    {
+        $this->blogs->removeElement($blogs);
+    }
+
+    /**
+     * Get blogs
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getBlogs()
+    {
+        return $this->blogs;
     }
 }

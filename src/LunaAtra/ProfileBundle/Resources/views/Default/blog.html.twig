@@ -1,0 +1,41 @@
+{% extends "CoreBundle::base-profile.html.twig" %}
+
+{% block content %}
+
+{% include "ProfileBundle:Include:top-profile.html.twig" %}
+
+<div class="container">
+
+<div class="row">
+{% if posts %}
+<div class="col-lg-10 col-lg-offset-1 col-md-12">
+<a href="{{ path("create-post") }}">Créer un post</a>
+    {% for post in posts %}
+    <div class="white-box">
+        <h2><a href="{{ path("single-post", {id:post.id}) }}"><span>{{post.title}}</span></a> <em class="gray">{{ post.publishedDate|date }}</em> 
+        {% if user == app.user %}
+        - <em><a href="{{ path("edit-post", {id: post.id}) }}">edit post</a></em>
+        {% endif %}
+        </h2>
+        {% if post.game %}
+        <span>{{ post.game.name }}</span>
+        {% endif %}
+        <p>
+            {{ post.truncatedContent(1000)|raw }}<br/>
+            <a href="{{ path("single-post", {id:post.id}) }}">Lire la suite</a>
+        </p>
+    </div>
+    {% endfor %}
+</div>
+{% else %}
+    <div class="col-md-12 no-data-full-size">
+        <span class="glyphicon glyphicon-exclamation-sign"></span><br/>
+                    {{ user.username }} n'a pas encore de posts.
+    </div>
+{% endif %}
+</div>
+  
+
+</div>
+
+{% endblock content %}

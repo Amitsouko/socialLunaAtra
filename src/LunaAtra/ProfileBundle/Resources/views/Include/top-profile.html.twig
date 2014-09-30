@@ -49,6 +49,11 @@
                 </a>
             </li>
             <li>
+                <a {% if path("user-blog", {"username": user.username}) == currentPath  %}class="selected" {% endif %} href="{{ path("user-blog", {"username": user.username}) }}">
+                    Blog
+                </a>
+            </li>
+            <li>
                 <a {% if "d" == currentPath  %}class="selected" {% endif %} href="">
                     Guildes
                 </a>
@@ -89,6 +94,11 @@
                 <a {% if path("user-characters", {"username": user.username}) == currentPath  %}class="selected" {% endif %} 
                     href="{{ path("user-characters", {"username": user.username}) }}">
                     Personnages
+                </a>
+            </li>
+            <li>
+                <a {% if path("user-blog", {"username": user.username}) == currentPath  %}class="selected" {% endif %} href="{{ path("user-blog", {"username": user.username}) }}">
+                    Blog
                 </a>
             </li>
             <li>

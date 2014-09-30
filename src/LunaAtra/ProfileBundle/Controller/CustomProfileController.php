@@ -138,7 +138,7 @@ class CustomProfileController extends Controller
         $character = $em->getRepository('ProfileBundle:Charact')->findOneById($id);
         $user = $this->get('security.context')->getToken()->getUser();
         $privacyManager = $this->container->get("privacy.manager");
-        $privacyForm = $privacyManager->getPrivacyForm();
+        $privacyForm = $privacyManager->getEditPrivacyForm();
 
         $privacyManager->canISee($character,$user);
 

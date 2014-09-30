@@ -7,6 +7,8 @@ use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
 use LunaAtra\PrivacyBundle\Model\PrivacyInterface;
 use LunaAtra\ProfileBundle\Entity\User;
+use Doctrine\ORM\EntityRepository;
+use FOS\UserBundle\Model\User as BaseUser;
 
 class PrivacyManager extends ContainerAware
 {
@@ -17,6 +19,7 @@ class PrivacyManager extends ContainerAware
     private $assoc;
     private $assocReversed;
     private $assocTranslate;
+
     public function __construct( $securityContext, $em, $translator, $privacyRank)
     {
         $this->securityContext  = $securityContext;
@@ -36,6 +39,9 @@ class PrivacyManager extends ContainerAware
         }
     }
 
+    /**
+     *   GET the privacy form
+    */
     public function getPrivacyForm()
     {
         $return = Array();
@@ -56,11 +62,73 @@ class PrivacyManager extends ContainerAware
         return $return;
     }
 
+    /**
+     *   GET the privacy form
+    */
+    public function getEditPrivacyForm()
+    {
+        $return = Array();
+        $return["name"] = "privacy";
+        $return["type"] = "choice";
+        $return["params"] = array(
+                "choices" => array(
+                        $this->assoc["public"]         => $this->assocTranslate["public"],
+                        //$this->assoc["my_communities"] => $this->translator->trans("choice.my_communities",array(), "choices"),
+                        //$this->assoc["friends"]        => $this->translator->trans("choice.friends",array(), "choices"),
+                        $this->assoc["only_me"]        => $this->assocTranslate["only_me"]
+                    ),
+                "required" => true,
+                "multiple" =>true,
+                "expanded" => true
+            );
+        return $return;
+    }
+    /**
+     *   GET the privacy name
+    */
     public function getPrivacyName($string)
     {
         return (isset($this->assocReversed[$string])) ? $this->assocTranslate[$this->assocReversed[$string]] : false;
+    } 
+
+    /**
+     *   GET the privacy of content for an user
+     * usually used for a querybuilder request to set where closes
+    */
+    public function getUserRightOnContent(BaseUser $owner)
+    {
+        $arrayCanAccess = array();
+        $arrayCanAccess[] = "_0_";
+
+
+        #communities
+        if($this->isInCommunity($owner))
+        {
+            $arrayCanAccess[] = "_1_";
+        }
+
+        if($this->isInFriends($owner))
+        {
+            $arrayCanAccess[] = "_2_";
+        }
+    
+
+        return $arrayCanAccess;
     }
 
+    public function isInCommunity(BaseUser $owner)
+    {
+        return true;
+    }
+
+    public function isInFriends(BaseUser $owner)
+    {
+        return true;
+    }
+
+    /**
+     *   Check if user can see something
+    */
     public function canISee(PrivacyInterface $object)
     {
         $privacyConf = $object->getPrivacy();

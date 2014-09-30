@@ -42,6 +42,13 @@ class User extends BaseUser
     protected $characters;
 
     /**
+     * @ORM\OneToMany(targetEntity="LunaAtra\ProfileBundle\Entity\Blog", mappedBy="user")
+     * @ORM\OrderBy({"publishedDate" = "DESC"})
+     * @var type
+     */
+    protected $posts;
+
+    /**
      * @ORM\OneToMany(targetEntity="LunaAtra\CoreBundle\Entity\Activity", mappedBy="seeder")
      * @ORM\OrderBy({"date" = "DESC"})
      * @var type
@@ -471,5 +478,38 @@ class User extends BaseUser
     public function removeCover(\LunaAtra\ProfileBundle\Entity\ProfileCover $cover)
     {
         $this->cover->removeElement($cover);
+    }
+
+    /**
+     * Add posts
+     *
+     * @param \LunaAtra\ProfileBundle\Entity\Blog $posts
+     * @return User
+     */
+    public function addPost(\LunaAtra\ProfileBundle\Entity\Blog $posts)
+    {
+        $this->posts[] = $posts;
+
+        return $this;
+    }
+
+    /**
+     * Remove posts
+     *
+     * @param \LunaAtra\ProfileBundle\Entity\Blog $posts
+     */
+    public function removePost(\LunaAtra\ProfileBundle\Entity\Blog $posts)
+    {
+        $this->posts->removeElement($posts);
+    }
+
+    /**
+     * Get posts
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getPosts()
+    {
+        return $this->posts;
     }
 }

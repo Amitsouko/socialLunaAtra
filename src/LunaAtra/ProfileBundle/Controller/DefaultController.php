@@ -48,4 +48,29 @@ class DefaultController extends Controller
         return array('user' =>$user, "pagename" => "Personnages");
     }
 
+    /**
+     * @Route("/{username}/blog", name="user-blog")
+     * @Template("ProfileBundle:Default:blog.html.twig")
+     */
+    public function BlogAction($username)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $owner = $em->getRepository('ProfileBundle:User')->findOneByUsername($username);
+        $privacyManager = $this->container->get("privacy.manager");
+
+        $connectedUser = $this->get('security.context')->getToken()->getUser();
+        //get custom post
+        if(!is_object($connectedUser))
+        {
+            $posts = $em->getRepository('ProfileBundle:Blog')->getPublicPosts($user);
+        }else if($connectedUser == $owner)
+        {
+            $posts = $owner->getPosts();
+        }else{
+            $array = $privacyManager->getUserRightOnContent($owner);
+            $posts = $em->getRepository('ProfileBundle:Blog')->getPostByPrivacy($array, $owner);
+        }
+        
+        return array('user' =>$owner,"pagename" => "Blog", "posts" => $posts);
+    }
 }

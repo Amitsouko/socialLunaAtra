@@ -16,18 +16,18 @@ class ActivityRepository extends EntityRepository
     {
         $dateTime = new \DateTime("now");
         $dateTime->modify("-30 minutes");
-        return $this->getEntityManager()
-            ->createQuery('SELECT a FROM CoreBundle:Activity a 
-                            WHERE a.seeder = :seeder 
-                            AND a.translation = :translation
-                            AND a.data = :data
-                            AND a.date > :date')
-            ->setParameters(array(
-                'seeder' => $activity->getSeeder() ,
-                'translation' => $activity->getTranslation()   ,
-                'data' => serialize($activity->getData() )   ,
-                'date' => $dateTime 
-            ))
-            ->getResult();
+
+        $query = $this->createQueryBuilder("a")
+        ->where("a.seeder = :seeder")
+        ->andWhere("a.translation = :translation")
+        ->andWhere("a.data = :data")
+        ->andWhere("a.date > :date")
+        ->setParameter("seeder", $activity->getSeeder() )
+        ->setParameter("translation", $activity->getTranslation() )
+        ->setParameter("data",serialize($activity->getData() ) )
+        ->setParameter("date", $dateTime  )
+        ->getQuery();
+        return $query->getResult();
+
     }
 }

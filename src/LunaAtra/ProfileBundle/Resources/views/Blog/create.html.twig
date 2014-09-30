@@ -1,0 +1,62 @@
+{% extends "CoreBundle::base.html.twig" %}
+
+{% block content %}
+<div class="container">
+
+<div class="row">
+    <div class="col-md-12">
+        <h1>Add character</h1>
+    </div>
+</div>
+
+
+    <form class="normal-form" method="post" {{ form_enctype(form) }} action="">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="white-box">
+                    <div class="row">
+                        <div class="col-md-offset-2 col-md-8">
+
+                            <h2><span>Créer un nouveau post</span></h2>
+                            {{ form_label(form.title,null, { "label_attr": {"class":"col-no-padding col-xs-12 col-sm-5"}}) }}
+                            {{ form_widget(form.title, { "attr": {"class":"col-no-padding col-xs-12 col-sm-7"}}) }}
+
+                            {{ form_label(form.privacy,null, { "label_attr": {"class":"col-no-padding col-xs-12 col-sm-5"}}) }}
+                                    {{ form_widget(form.privacy, { "attr": {"class":"col-no-padding col-xs-12 col-sm-7 no-margin-right"}}) }}
+
+                            {{ form_label(form.game,null, { "label_attr": {"class":"col-no-padding col-xs-12 col-sm-5"}}) }}
+                                    {{ form_widget(form.game, { "attr": {"class":"col-no-padding col-xs-12 col-sm-7 no-margin-right"}}) }}
+
+                            <div class="clearfix"></div>
+                            {{ form_widget(form.content, { "attr": {"class":"tinymce"}}) }}
+
+                            {{ form_widget(form) }}
+                            <br/>
+                            <p class="text-right">
+
+                            {% if character is defined %}
+                                <a class="red-button" href="{{ path("delete-character", {id: character.id}) }}">Supprimer le personnage</a>
+                                <input class="green-button" type="submit" value="Éditer"/>
+                            {% else %}
+                                <input class="green-button" type="submit" value="Créer"/>
+                            {% endif %}
+
+                            </p>
+                        
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+
+</div>
+
+
+
+
+{% endblock content %}
+
+{% block jsbottom %}
+    {{ tinymce_init() }}
+{% endblock jsbottom %}
