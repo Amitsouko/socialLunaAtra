@@ -64,7 +64,7 @@ class DefaultController extends Controller
         //get custom post
         if(!is_object($connectedUser))
         {
-            $posts = $em->getRepository('ProfileBundle:Blog')->getPublicPosts($user);
+            $posts = $em->getRepository('ProfileBundle:Blog')->getPublicPosts($owner);
         }else if($connectedUser == $owner)
         {
             $posts = $owner->getPosts();

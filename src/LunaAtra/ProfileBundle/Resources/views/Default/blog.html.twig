@@ -7,47 +7,85 @@
 <div class="container">
 
 <div class="row">
-{% if posts %}
-<div class="col-lg-10 col-lg-offset-1 col-md-12">
+
 {% if user == app.user %}
-<div class="gray-border">
-<span>Nombre de post publiés : {{ postNumber.publicated }}, nombre de brouillons : {{ postNumber.draft }}</span>
-    <a class="blue-button pull-right" href="{{ path("create-post") }}">Créer un post</a>
-<div class="clearfix"></div>
+    <div class="col-lg-10 col-lg-offset-1 col-md-12">
+        <div class="gray-border">
+            <a class="white-button" href="{{path("user-blog", {"username": user.username, "type":"published"})}}">Posts publiés ({{ postNumber.publicated }})</a>
+            <a class="white-button" href="{{path("user-blog", {"username": user.username, "type":"draft"})}}">Brouillons ({{ postNumber.draft }})</a>
+
+            <a class="blue-button pull-right" href="{{ path("create-post") }}">Créer un post</a>
+            <a class="white-button pull-right" href="">Administrer mon blog</a> 
+            <div class="clearfix"></div>
+        </div>
 </div>
 {% endif %}
+
+
+
+{% if posts %}
+<div class="col-lg-10 col-lg-offset-1 col-md-12">
+
+{% if app.user == posts[0].user and app.request.get('type') and app.request.get('type') == "draft" %}
+{% set showDraft  = true %}
+{% else %}
+{% set showDraft  = false %}
+{% endif %}
+
     {% for post in posts %}
-    <div class="white-box ">
-    <article class="truncated-article">
-    <header>
-        <h1><a href="{{ path("single-post", {id:post.id}) }}"><span>{{post.title}}</span></a> 
-        {% if post.game %}
-        <em>{{ post.game.name }}</em>
+
+        {% if post.draft == showDraft %}
+
+
+
+        <div class="white-box ">
+        <article class="truncated-article">
+        <header>
+            <h1><a href="{{ path("single-post", {id:post.id}) }}"><span>{{post.title}}</span></a> 
+            {% if post.game %}
+            <em>{{ post.game.name }}</em>
+            {% endif %}
+            {% if post|isPrivate %} <em title="privé" class="color-gray glyphicon glyphicon-eye-close"></em>{% endif %}
+            {% if user == app.user %}
+                <span class="pull-right no-underline">
+                    <em><a class="no-underline glyphicon glyphicon-pencil" href="{{ path("edit-post", {id: post.id}) }}"></a></em> 
+                    <em><a class="no-underline glyphicon glyphicon-trash" href="{{ path("delete-post", {id: post.id}) }}"></a></em>
+                </span>
+            {% endif %}
+            </h1>
+            <p>
+            {% if post.user == app.user %}
+                    Privacy : {{ post|inlinePrivacy }}
+            {% endif %}
+            </p>
+        </header>
+            <p class="text-center header-image text-user">
+            <img class src="{{ post.content|getFirstSrc|raw }}">
+            </p>
+            <p class="text-user">
+                {{ post.truncatedContent(1000)|raw }}<br/>
+                <a href="{{ path("single-post", {id:post.id}) }}">Lire la suite</a>
+            </p>
+            <footer>
+                <p class="text-right">
+                    Publié&nbsp;le&nbsp;:&nbsp;<time pubdate="pubdate" datetime="{{ post.publishedDate|date }}">{{ post.publishedDate|date }}</time>{% if post.updateDate %}<br/> last&nbsp;update&nbsp;:&nbsp;{{ post.updateDate|date }}{% endif %}
+                </p>
+            </footer>
+        </article>
+        </div>
+
+
+
         {% endif %}
-        {% if post|isPrivate %} <em title="privé" class="color-gray glyphicon glyphicon-eye-close"></em>{% endif %}
-        {% if user == app.user %}
-        <span class="pull-right no-underline">
-        <em><a class="no-underline glyphicon glyphicon-pencil" href="{{ path("edit-post", {id: post.id}) }}"></a></em> 
-        <em><a class="no-underline glyphicon glyphicon-trash" href="{{ path("delete-post", {id: post.id}) }}"></a></em>
-        </span>
-        {% endif %}
-        </h1>
-        <p>
-        Publié le : <time pubdate="pubdate" datetime="{{ post.publishedDate|date }}">{{ post.publishedDate|date }}</time> {% if post.updateDate %} - last update : {{ post.updateDate|date }}{% endif %}
-        </p>
-    </header>
-        <p class="text-center header-image">
-        <img class src="{{ post.content|getFirstSrc|raw }}">
-        </p>
-        <p>
-            {{ post.truncatedContent(1000)|raw }}<br/>
-            <a href="{{ path("single-post", {id:post.id}) }}">Lire la suite</a>
-        </p>
-    </article>
-    </div>
+
+
     {% endfor %}
 </div>
+
+
 {% else %}
+
+
     <div class="col-md-12 no-data-full-size">
         <span class="glyphicon glyphicon-exclamation-sign"></span><br/>
                     {{ user.username }} n'a pas encore de posts.
