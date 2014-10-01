@@ -9,21 +9,40 @@
 <div class="row">
 {% if posts %}
 <div class="col-lg-10 col-lg-offset-1 col-md-12">
-<a href="{{ path("create-post") }}">Créer un post</a>
+{% if user == app.user %}
+<div class="gray-border">
+<span>Nombre de post publiés : {{ postNumber.publicated }}, nombre de brouillons : {{ postNumber.draft }}</span>
+    <a class="blue-button pull-right" href="{{ path("create-post") }}">Créer un post</a>
+<div class="clearfix"></div>
+</div>
+{% endif %}
     {% for post in posts %}
-    <div class="white-box">
-        <h2><a href="{{ path("single-post", {id:post.id}) }}"><span>{{post.title}}</span></a> <em class="gray">{{ post.publishedDate|date }}</em> 
-        {% if user == app.user %}
-        - <em><a href="{{ path("edit-post", {id: post.id}) }}">edit post</a></em>
-        {% endif %}
-        </h2>
+    <div class="white-box ">
+    <article class="truncated-article">
+    <header>
+        <h1><a href="{{ path("single-post", {id:post.id}) }}"><span>{{post.title}}</span></a> 
         {% if post.game %}
-        <span>{{ post.game.name }}</span>
+        <em>{{ post.game.name }}</em>
         {% endif %}
+        {% if post|isPrivate %} <em title="privé" class="color-gray glyphicon glyphicon-eye-close"></em>{% endif %}
+        {% if user == app.user %}
+        <span class="pull-right no-underline">
+        <em><a class="no-underline glyphicon glyphicon-pencil" href="{{ path("edit-post", {id: post.id}) }}"></a></em> 
+        <em><a class="no-underline glyphicon glyphicon-trash" href="{{ path("edit-post", {id: post.id}) }}"></a></em>
+        </span>
+        {% endif %}
+        </h1>
+        <p>
+        Publié le : <time pubdate="pubdate" datetime="{{ post.publishedDate|date }}">{{ post.publishedDate|date }}</time> {% if post.updateDate %} - last update : {{ post.updateDate|date }}{% endif %}
+        </p>
+    </header>
+    
+        
         <p>
             {{ post.truncatedContent(1000)|raw }}<br/>
             <a href="{{ path("single-post", {id:post.id}) }}">Lire la suite</a>
         </p>
+    </article>
     </div>
     {% endfor %}
 </div>

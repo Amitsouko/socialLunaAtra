@@ -29,6 +29,25 @@ class BlogRepository extends EntityRepository
             ->getResult();
     }
 
+    public function getPostPostNumber($user)
+    {
+        $query = $this->getEntityManager()
+            ->createQuery('SELECT count(a.id), a.draft FROM ProfileBundle:Blog a 
+                            WHERE a.user =  :user
+                            GROUP BY a.draft')
+            ->setParameters(array(
+                'user' => $user 
+            ))
+            ->getResult();
+            $array["draft"] = ( $query[0]["draft"] == true ) ?  $query[0][1] : 0;
+            $array["draft"] = ( $query[1]["draft"] == true ) ?  $query[1][1] : $array["draft"];
+            $array["publicated"] = ( $query[0]["draft"] == false ) ?  $query[0][1] : 0;
+            $array["publicated"] = ( $query[1]["draft"] == false ) ?  $query[1][1] : $array["publicated"] ;
+            return $array;
+    }
+
+
+
    public function getPostByPrivacy($array, $owner)
     {
         $query = $this->createQueryBuilder("a")

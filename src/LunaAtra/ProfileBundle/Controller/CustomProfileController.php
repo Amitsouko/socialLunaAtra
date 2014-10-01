@@ -183,8 +183,7 @@ class CustomProfileController extends Controller
                 $em->flush();
                 $activity = new Activity();
                 $activity->updateCharacter($user,$character);
-                //Check if already exists
-                //findLastSameActivity
+                //Check if already e
                 $isExists =  $em->getRepository('CoreBundle:Activity')->findLastSameActivity($activity);
                 if(count($isExists) > 0)
                 {

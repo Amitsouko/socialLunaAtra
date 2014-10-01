@@ -59,6 +59,8 @@ class DefaultController extends Controller
         $privacyManager = $this->container->get("privacy.manager");
 
         $connectedUser = $this->get('security.context')->getToken()->getUser();
+
+        $postNumber = null;
         //get custom post
         if(!is_object($connectedUser))
         {
@@ -66,11 +68,11 @@ class DefaultController extends Controller
         }else if($connectedUser == $owner)
         {
             $posts = $owner->getPosts();
+            $postNumber = $em->getRepository('ProfileBundle:Blog')->getPostPostNumber($owner);
         }else{
             $array = $privacyManager->getUserRightOnContent($owner);
             $posts = $em->getRepository('ProfileBundle:Blog')->getPostByPrivacy($array, $owner);
         }
-        
-        return array('user' =>$owner,"pagename" => "Blog", "posts" => $posts);
+        return array('user' =>$owner,"pagename" => "Blog", "posts" => $posts, "postNumber" => $postNumber);
     }
 }
