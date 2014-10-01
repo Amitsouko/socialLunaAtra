@@ -28,7 +28,7 @@
         {% if user == app.user %}
         <span class="pull-right no-underline">
         <em><a class="no-underline glyphicon glyphicon-pencil" href="{{ path("edit-post", {id: post.id}) }}"></a></em> 
-        <em><a class="no-underline glyphicon glyphicon-trash" href="{{ path("edit-post", {id: post.id}) }}"></a></em>
+        <em><a class="no-underline glyphicon glyphicon-trash" href="{{ path("delete-post", {id: post.id}) }}"></a></em>
         </span>
         {% endif %}
         </h1>
@@ -36,8 +36,9 @@
         Publié le : <time pubdate="pubdate" datetime="{{ post.publishedDate|date }}">{{ post.publishedDate|date }}</time> {% if post.updateDate %} - last update : {{ post.updateDate|date }}{% endif %}
         </p>
     </header>
-    
-        
+        <p class="text-center header-image">
+        <img class src="{{ post.content|getFirstSrc|raw }}">
+        </p>
         <p>
             {{ post.truncatedContent(1000)|raw }}<br/>
             <a href="{{ path("single-post", {id:post.id}) }}">Lire la suite</a>

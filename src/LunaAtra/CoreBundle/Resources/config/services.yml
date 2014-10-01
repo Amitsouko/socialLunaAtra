@@ -3,3 +3,7 @@ services:
         class: LunaAtra\CoreBundle\Listener\SubdomainListener
         tags:
             - { name: kernel.event_listener, event: kernel.request, method: onDomainParse }
+    privacy.twig.core_extension:
+        class: LunaAtra\CoreBundle\Twig\CoreExtension
+        tags:
+            - { name: twig.extension }

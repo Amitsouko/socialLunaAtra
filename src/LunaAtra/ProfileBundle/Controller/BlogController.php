@@ -157,5 +157,59 @@ class BlogController extends Controller
 
         return array("form" => $form->createview());
     }
+
+    /**
+     * @Route("/admin/delete/{id}", name="delete-post")
+     * @Template("CoreBundle:Delete:confirm.html.twig")
+     */
+    public function deleteEntryAction($id, Request $request)
+    {
+        $securityContext = $this->container->get('security.context');
+        $em = $this->getDoctrine()->getManager();
+        $post = $em->getRepository('ProfileBundle:Blog')->findOneById($id);
+        $user = $securityContext->getToken()->getUser();
+
+        if(!is_object($post)){
+            throw $this->createNotFoundException('Post doesn\'t exist.');
+        }
+
+        if( $user != $post->getUser()){
+            throw $this->createNotFoundException('You don\'t own the post.');
+        }
+
+        $dataForm = array();
+        $form = $this->createFormBuilder($dataForm)
+                ->add('id', 'hidden', array("data" => $post->getId()))
+                ->add('type', 'hidden', array("data" => "blog"))
+                ->add('owner', 'hidden', array("data" => $user->getId()))
+        ->getForm();
+
+        if($request->isMethod('POST')) {
+            $form->bind($request);
+            $data = $form->getData();
+            if($post->getId() == $data["id"] && $user->getId() == $data["owner"] && $post->getUser()->getId() == $user->getId() )
+            {
+                // foreach($character->getActivities() as $activity){
+                //     $activity->setCharacterFallback($character);
+                //     $em->persist($activity);
+                // }
+                // $act = new Activity();
+                // $act->DeleteCharacter($user,$character);
+                // $em->persist($act);
+                $em->remove($post);
+                $em->flush();
+                return $this->redirect($this->generateUrl('user-blog', array("username" => $user->getUsername())));
+            }
+        }
+
+        $data = array(
+                "name" => $post->getTitle(),
+                "urlOfDelete" => $uri = $this->get("router")->generate('single-post', array('id' => $post->getId())) 
+            );
+
+        return $this->render(
+                'CoreBundle:Delete:confirm.html.twig',
+                array( "data" => $data, "form" => $form->createView()));
+    }
 }
 
