@@ -1,55 +1,43 @@
-{% extends "CoreBundle::base.html.twig" %}
+{% extends "ProfileBundle:Backoffice:bolayout.html.twig" %}
 {% trans_default_domain 'FOSUserBundle' %}
 
-{% block content %}
+{% block backofficeContent %}
 
 {% set user = app.user %}
 
-<div class="fos_user_user_show">
-    <div class="container">
+<form action="" {{ form_enctype(form) }} method="POST" class="fos_user_profile_edit normal-form">
 
-            <div class="row">
+    <div class="white-box" >
 
-                <div class="col-md-4">
-                    <div class="white-box">
-                        {% include "ProfileBundle:Include:menu-edit-profile.html.twig" %}
-                    </div>
-                </div>
-                <form action="" {{ form_enctype(form) }} method="POST" class="fos_user_profile_edit normal-form">
-                <div class="col-md-8">
-                    <div class="white-box" >
+        <!-- <div class="text-right">
+            <a class="red-button" href="{{ path("fos_user_profile_show") }}">Cancel</a>
+            <input type="submit" value="{{ 'profile.edit.submit'|trans }}" />
+        </div> -->
+        <h2><span>Couverture</span></h2>
+        {% if user.cover %}
+        <p class="text-center">
+        <img style="max-width:100%" src="{{user.cover.WebPath | imagine_filter("mini_cover_thumbnail")}}">
+        </p>
+        {% endif %}
 
-                        <!-- <div class="text-right">
-                            <a class="red-button" href="{{ path("fos_user_profile_show") }}">Cancel</a>
-                            <input type="submit" value="{{ 'profile.edit.submit'|trans }}" />
-                        </div> -->
-                        <h2><span>Couverture</span></h2>
-                        {% if user.cover %}
-                        <img style="max-width:100%" src="{{user.cover.WebPath | imagine_filter("mini_cover_thumbnail")}}">
-                        {% endif %}
-
-                            <p class="text-center">
-                                {{ form_widget(form.file) }}
-                                {{ form_widget(form) }}
-                                
-                            </p>
+        <p class="text-center">
+            {{ form_widget(form.file) }}
+            {{ form_widget(form) }}
+            
+        </p>
 
 
-                       <br/>
-                        <div class="text-right">
-                            <a class="red-button" href="{{ path("fos_user_profile_show") }}">Cancel</a>
-                            <input type="submit" value="{{ 'profile.edit.submit'|trans }}" />
-                        </div>
-                   
-                    </div>
-                    </form>
-                </div><!-- endrow -->
-            </div>
-
+        <br/>
+        <div class="text-right">
+            <a class="red-button" href="{{ path("fos_user_profile_show") }}">Cancel</a>
+            <input type="submit" class="green-button" value="{{ 'profile.edit.submit'|trans }}" />
+        </div>
+   
     </div>
-</div>
+</form>
+      
 
-{% endblock content %}
+{% endblock backofficeContent %}
 
 {% block jsbottom %}
 {{ tinymce_init() }}

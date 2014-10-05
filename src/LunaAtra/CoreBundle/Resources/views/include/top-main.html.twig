@@ -28,6 +28,7 @@
             <ul id="main-menu-dropdown" class="list-unstyled dropdown-menu">
                 <li><a href="{{ path("fos_user_profile_show") }}"><span class="glyphicon glyphicon-user"></span>Mon profil</a></li>
                 <li><a href="{{ path("fos_user_profile_edit") }}"><span class="glyphicon glyphicon-pencil"></span>Éditer mes informations</a></li>
+                <li><a href="{{ path("show-backoffice") }}"><span class="glyphicon dropdown glyphicon-cog"></span>Administration</a></li>
                 <li class="visible-xs-block" ><a href="#"><span class="glyphicon glyphicon-search"></span>Rechercher</a></li>
 
                 <li><a href="{{ path('fos_user_security_logout') }}"><span class="glyphicon glyphicon-off"></span>{{ 'layout.logout'|trans({}, 'FOSUserBundle') }} </a></li>

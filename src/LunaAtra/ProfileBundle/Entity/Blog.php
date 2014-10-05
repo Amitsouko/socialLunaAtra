@@ -128,8 +128,8 @@ class Blog  implements PrivacyInterface
      */
     public function setContent($content)
     {
-        $this->content = $content;
-
+        $this->content = strip_tags($content,'<a><abbr><acronym><address><area><b><big><blockquote><br><button><caption><center><cite><code><col><colgroup><dd><del><dfn><dir><div><dl><dt><em><fieldset><font><h1><h2><h3><h4><h5><h6><hr><i><img><input><ins><kbd><label><legend><li><map><menu><ol><optgroup><option><p><pre><q><s><samp><select><small><span><strike><strong><sub><sup><table><tbody><td><textarea><tfoot><th><thead><tr><tt><u><ul>');
+        //$this->content = $content;
         return $this;
     }
 
@@ -145,7 +145,7 @@ class Blog  implements PrivacyInterface
 
     public function getTruncatedContent($number = 250)
     {
-        $text = strip_tags(preg_replace("/<img[^>]+\>/i", "(image) ", $this->content),'<p><a><b><u><strong><em>'); 
+        $text = strip_tags(preg_replace("/<img[^>]+\>/i", "(image) ", $this->content),'<p><em><strong><a><b><u><strong><em>'); 
         $text = $text." ";
         $text = substr($text,0,$number);
         $text = substr($text,0,strrpos($text,' '));
@@ -314,3 +314,4 @@ class Blog  implements PrivacyInterface
         return $this->game;
     }
 }
+    

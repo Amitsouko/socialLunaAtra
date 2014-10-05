@@ -42,7 +42,4 @@ class CharacterController extends Controller
         return array('user' =>$character->getUser(), "character" => $character, "pagename" => "personnages");
     }
 
-
-    
-
 }

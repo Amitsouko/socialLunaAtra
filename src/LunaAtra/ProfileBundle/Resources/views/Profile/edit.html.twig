@@ -1,62 +1,44 @@
-{% extends "CoreBundle::base.html.twig" %}
+{% extends "ProfileBundle:Backoffice:bolayout.html.twig" %}
 {% trans_default_domain 'FOSUserBundle' %}
 
-{% block content %}
+{% block backofficeContent %}
 
 {% set user = app.user %}
 
-<div class="fos_user_user_show">
-    <div class="container">
+<form action="{{ path('fos_user_profile_edit') }}" {{ form_enctype(form) }} method="POST" class="fos_user_profile_edit normal-form">
 
-            <div class="row">
+    <div class="white-box" >
+        <h2><span>Général</span></h2>
 
-                <div class="col-md-4">
-                    <div class="white-box">
-                        {% include "ProfileBundle:Include:menu-edit-profile.html.twig" %}
-                    </div>
-                </div>
-                <form action="{{ path('fos_user_profile_edit') }}" {{ form_enctype(form) }} method="POST" class="fos_user_profile_edit normal-form">
-                <div class="col-md-8">
-                    <div class="white-box" >
-
-                        <!-- <div class="text-right">
-                            <a class="red-button" href="{{ path("fos_user_profile_show") }}">Cancel</a>
-                            <input type="submit" value="{{ 'profile.edit.submit'|trans }}" />
-                        </div> -->
-                        <h2><span>Général</span></h2>
-
-                 
-                            {{ form_label(form.username,null, { "label_attr": {"class":"col-no-padding col-xs-12 col-sm-5"}}) }}
-                            {{ form_widget(form.username, { "attr": {"class":"col-no-padding col-xs-12 col-sm-7"}}) }}
-                            {{ form_label(form.email,null, { "label_attr": {"class":"col-no-padding col-xs-12 col-sm-5"}}) }}
-                            {{ form_widget(form.email, { "attr": {"class":"col-no-padding col-xs-12 col-sm-7"}}) }}
-                            {{ form_label(form.announce,null, { "label_attr": {"class":"col-no-padding col-xs-12 col-sm-5"}}) }}
-                            {{ form_widget(form.announce, { "attr": {"class":"col-no-padding col-xs-12 col-sm-7"}}) }}
+ 
+            {{ form_label(form.username,null, { "label_attr": {"class":"col-no-padding col-xs-12 col-sm-5"}}) }}
+            {{ form_widget(form.username, { "attr": {"class":"col-no-padding col-xs-12 col-sm-7"}}) }}
+            {{ form_label(form.email,null, { "label_attr": {"class":"col-no-padding col-xs-12 col-sm-5"}}) }}
+            {{ form_widget(form.email, { "attr": {"class":"col-no-padding col-xs-12 col-sm-7"}}) }}
+            {{ form_label(form.announce,null, { "label_attr": {"class":"col-no-padding col-xs-12 col-sm-5"}}) }}
+            {{ form_widget(form.announce, { "attr": {"class":"col-no-padding col-xs-12 col-sm-7"}}) }}
 
 
-                    <h2><span>Image de profil</span></h2>
-                         <img class="margin-auto medaillon" src="{{ user.WebPath | imagine_filter('profile_thumbnail') }}"><br/>
-                            {{ form_widget(form.file, {attr:{class:"margin-auto"}}) }}
+        <h2><span>Image de profil</span></h2>
+        <img class="margin-auto medaillon" src="{{ user.WebPath | imagine_filter('profile_thumbnail') }}"><br/>
+            {{ form_widget(form.file, {attr:{class:"margin-auto"}}) }}
 
-                    <h2><span>Biographie</span></h2>
-                        {{ form_widget(form.bio) }}
+        
+        <h2><span>Biographie</span></h2>
+        {{ form_widget(form.bio) }}
 
-                        {{ form_widget(form) }}
-                       <br/>
-                        <div class="text-right">
-                            <a class="white-button" href="{{ path("fos_user_profile_show") }}">Cancel</a>
-                            <input type="submit" value="{{ 'profile.edit.submit'|trans }}" />
-                        </div>
-                   
-                    </div>
-                    </form>
-                </div><!-- endrow -->
-            </div>
-
+        {{ form_widget(form) }}
+       <br/>
+        <div class="text-right">
+            <a class="white-button" href="{{ path("fos_user_profile_show") }}">Cancel</a>
+            <input class="green-button" type="submit" value="{{ 'profile.edit.submit'|trans }}" />
+        </div>
+   
     </div>
-</div>
+</form>
+   
 
-{% endblock content %}
+{% endblock backofficeContent %}
 
 {% block jsbottom %}
 {{ tinymce_init() }}

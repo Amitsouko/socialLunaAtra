@@ -7,7 +7,7 @@
     
         <div class="white-box">
         <header>
-            <h1>{{ post.title}} 
+            <h1><span>{{ post.title}}</span>
             {% if post.game %}<em>{{ post.game.name }}</em>{% endif %}
             {% if post|isPrivate %} <em title="privé" class="color-gray glyphicon glyphicon-eye-close"></em>{% endif %}
             {% if post.user == app.user %}

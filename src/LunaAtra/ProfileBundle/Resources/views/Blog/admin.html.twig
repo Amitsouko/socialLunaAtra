@@ -1,0 +1,41 @@
+{% extends "ProfileBundle:Backoffice:bolayout.html.twig" %}
+
+{% block backofficeContent %}
+
+
+<div class="white-box">
+    <h1>Blog dashboard</h1>
+    <p class="text-right">
+        <a class="blue-button" href="{{ path("create-post") }}">Créer un post</a>
+    </p>
+   <div class="panel panel-default">
+
+  <!-- Table -->
+  {% spaceless %}
+    <ul class="list-unstyled character-list-mini list-blog-dashboard">
+        <li class="header">
+            <span class="demi">Title</span>
+            <span class="eighth">Privacy</span>
+            <span class="quarter">Creation date</span>
+            <span class="eighth text-right no-underline">Actions</span>
+        </li>
+    {% for post in app.user.posts %}
+        <li class="{% if post.draft %} draft{% endif %}">
+            <span class="demi"><a href="{{ path("single-post", {id: post.id}) }}">{{ post.title }}</a>{% if post.draft %}- <em>draft</em>{% endif %}</span>
+            <span class="eighth">{{post|inlinePrivacy}}</span>
+            <span class="quarter">{{post.creationDate|date}}</span>
+            <span class="eighth text-right no-underline">
+        <em><a class="no-underline glyphicon glyphicon-pencil" href="{{ path("edit-post", {id: post.id}) }}"></a></em>  - 
+        <em><a class="no-underline glyphicon glyphicon-trash" href="{{ path("delete-post", {id: post.id}) }}"></a></em>
+        </span>
+        </li>
+    {% endfor %}
+    </ul>
+    {% endspaceless %}
+
+</div>
+
+
+
+
+{% endblock backofficeContent %}
