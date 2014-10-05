@@ -59,9 +59,11 @@
             {% endif %}
             </p>
         </header>
+            {% if post.content|getFirstSrc|raw %}
             <p class="text-center header-image text-user">
             <img class src="{{ post.content|getFirstSrc|raw }}">
             </p>
+            {% endif %}
             <p class="text-user">
                 {{ post.truncatedContent(1000)|raw }}<br/>
                 <a href="{{ path("single-post", {id:post.id}) }}">Lire la suite</a>
