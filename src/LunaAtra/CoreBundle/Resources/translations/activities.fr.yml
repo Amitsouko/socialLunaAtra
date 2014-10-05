@@ -9,6 +9,9 @@ user:
         character: 
             text: <strong><a href='%user_url%'>%username%</a></strong> a mis à jour le personnage <strong><a href='%character_url%'>%character_username%</a></strong>
             type: createCharacter
+        post: 
+            text: <strong><a href='%user_url%'>%username%</a></strong> a mis à jour l'article <strong><a href='%post_url%'>%post_title%</a></strong>.
+            type: "updatePost"
     create:
         character: 
             text: <strong><a href='%user_url%'>%username%</a></strong> a créé le personnage <strong><a href='%character_url%'>%character_username%</a></strong>
@@ -16,7 +19,13 @@ user:
         profile: 
             text: <strong><a href='%user_url%'>%username%</a></strong> a rejoint Luna Atra.
             type: "createProfile"
+        post: 
+            text: <strong><a href='%user_url%'>%username%</a></strong> a publié l'article <strong><a href='%post_url%'>%post_title%</a></strong>.
+            type: "createPost"
     delete:
         character: 
             text: <strong><a href='%user_url%'>%username%</a></strong> a supprimé le personnage <strong>%character_username%</strong>
             type: deleteCharacter
+        post: 
+            text: <strong><a href='%user_url%'>%username%</a></strong> a supprimé l'article <strong>%post_title%</strong>.
+            type: "deletePost"

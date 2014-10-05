@@ -1,0 +1,39 @@
+{% extends "ProfileBundle:Backoffice:bolayout.html.twig" %}
+
+{% block backofficeContent %}
+{% set user = app.user   %}
+<div class="white-box">
+    <h1>Characters</h1>
+
+    <p class="text-right">
+        <a class="blue-button" href="{{ path("add-character") }}">Créer un personnage</a>
+    </p>
+   <div class="panel panel-default">
+      {% spaceless %}
+        <ul class="list-unstyled character-list-mini list-blog-dashboard">
+            <li class="header">
+                <span class="demi">Name</span>
+                <span class="eighth">Privacy</span>
+                <span class="quarter">Game</span>
+                <span class="eighth text-right no-underline">Actions</span>
+            </li>
+        {% for character in app.user.characters %}
+            <li class="">
+                <span class="demi"><a href="{{ path("single-character", {id: character.id}) }}">{{ character.name }}</a></span>
+                <span class="eighth">{{character|inlinePrivacy}}</span>
+                <span class="quarter">
+                    {% if character.game %}
+                        {{character.game.name}}
+                    {% endif %}
+                </span>
+                <span class="eighth text-right no-underline">
+            <em><a class="no-underline glyphicon glyphicon-pencil" href="{{ path("edit-character", {id: character.id}) }}"></a></em>  - 
+            <em><a class="no-underline glyphicon glyphicon-trash" href="{{ path("delete-character", {id: character.id}) }}"></a></em>
+            </span>
+            </li>
+        {% endfor %}
+        </ul>
+        {% endspaceless %}
+    </div>
+</div>
+{% endblock backofficeContent %}

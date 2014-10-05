@@ -47,6 +47,12 @@ class Activity
     protected $character;
 
     /**
+    * @ORM\ManyToOne(targetEntity="LunaAtra\ProfileBundle\Entity\Blog",inversedBy="activities")
+    * @ORM\JoinColumn(name="post_id", referencedColumnName="id", onDelete="SET NULL")
+    */
+    protected $post;
+    
+    /**
      * @var array
      *
      * @ORM\Column(name="data", type="array")
@@ -207,6 +213,29 @@ class Activity
         return $this->users;
     }
 
+   /**
+     * Set character
+     *
+     * @param \LunaAtra\ProfileBundle\Entity\Charact $character
+     * @return Activity
+     */
+    public function setCharacter(\LunaAtra\ProfileBundle\Entity\Charact $character = null)
+    {
+        $this->character = $character;
+
+        return $this;
+    }
+
+    /**
+     * Get character
+     *
+     * @return \LunaAtra\ProfileBundle\Entity\Charact 
+     */
+    public function getCharacter()
+    {
+        return $this->character;
+    }
+
     /**
      *    To create activity :   
      *    array(
@@ -216,6 +245,58 @@ class Activity
      *
     */
 
+
+    public function createPost($user,$post)
+    {
+        $this->setSeeder($user);
+        $this->setPost($post);
+        $this->setTranslation("user.create.post");
+        $this->setData(
+         array(
+                "username" => array("entity" => "ProfileBundle:User", "id" => $user->getId(), "column" => "username"),
+                "user_url" => array("entity" => "ProfileBundle:User", "id" => $user->getId(), "column" => "username","urlKey" => "username", "urlData" =>"username",  "isUrl" => true),
+                "post_title" => array("entity" => "ProfileBundle:Blog", "id" => $post->getId(), "column" => "title"),
+                "post_url" => array("entity" => "ProfileBundle:Blog","id" => $post->getId(), "column" => "id","urlKey" => "id", "urlData" => "id",  "isUrl" => true)
+            )
+         );
+    }
+
+    public function updatePost($user,$post)
+    {
+        $this->setSeeder($user);
+        $this->setPost($post);
+        $this->setTranslation("user.update.post");
+        $this->setData(
+         array(
+                "username" => array("entity" => "ProfileBundle:User", "id" => $user->getId(), "column" => "username"),
+                "user_url" => array("entity" => "ProfileBundle:User", "id" => $user->getId(), "column" => "username","urlKey" => "username", "urlData" =>"username",  "isUrl" => true),
+                "post_title" => array("entity" => "ProfileBundle:Blog", "id" => $post->getId(), "column" => "title"),
+                "post_url" => array("entity" => "ProfileBundle:Blog","id" => $post->getId(), "column" => "id","urlKey" => "id", "urlData" => "id",  "isUrl" => true)
+            )
+         );
+    }
+
+    public function deletePost($user,$post)
+    {
+        $this->setSeeder($user);
+        $this->setTranslation("user.delete.post");
+        $this->setData(
+         array(
+                "username" => array("entity" => "ProfileBundle:User", "id" => $user->getId(), "column" => "username"),
+                "user_url" => array("entity" => "ProfileBundle:User", "id" => $user->getId(), "column" => "username","urlKey" => "username", "urlData" =>"username",  "isUrl" => true),
+                "post_title" => $post->getTitle(),
+                "post_url" => "post-deleted"
+            )
+         );
+    }
+
+    public function setPostFallback($post)
+    {
+        $data = $this->getData();
+        $data["post_title"] = $post->getTitle();
+        $data["post_url"] = "post-deleted";
+        $this->setData($data);
+    }
 
     public function CreateProfile($user)
     {
@@ -306,26 +387,27 @@ class Activity
          );
     }
 
+
     /**
-     * Set character
+     * Set post
      *
-     * @param \LunaAtra\ProfileBundle\Entity\Charact $character
+     * @param \LunaAtra\ProfileBundle\Entity\Blog $post
      * @return Activity
      */
-    public function setCharacter(\LunaAtra\ProfileBundle\Entity\Charact $character = null)
+    public function setPost(\LunaAtra\ProfileBundle\Entity\Blog $post = null)
     {
-        $this->character = $character;
+        $this->post = $post;
 
         return $this;
     }
 
     /**
-     * Get character
+     * Get post
      *
-     * @return \LunaAtra\ProfileBundle\Entity\Charact 
+     * @return \LunaAtra\ProfileBundle\Entity\Blog 
      */
-    public function getCharacter()
+    public function getPost()
     {
-        return $this->character;
+        return $this->post;
     }
 }

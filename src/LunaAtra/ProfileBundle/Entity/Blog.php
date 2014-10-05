@@ -13,6 +13,7 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Blog  implements PrivacyInterface
 {
+    private $urlName;
     /**
      * @var integer
      *
@@ -81,12 +82,29 @@ class Blog  implements PrivacyInterface
     */
     protected $game;
 
+    /**
+     * @ORM\OneToMany(targetEntity="LunaAtra\CoreBundle\Entity\Activity", mappedBy="post")
+     * @ORM\OrderBy({"date" = "DESC"})
+     * @var type
+     */
+    protected $activities;
+
     public function __construct()
     {
         $this->draft = true;
         $this->creationDate = new \DateTime("now");
+        $this->urlName = "single-post";
     }
 
+    public function get($name)
+    {
+        return  isset($this->$name) ? $this->$name : null;
+    }
+
+    public function getUrlName()
+    {
+        return "single-post";
+    }
     /**
      * Get id
      *
@@ -313,5 +331,37 @@ class Blog  implements PrivacyInterface
     {
         return $this->game;
     }
+
+    /**
+     * Add activities
+     *
+     * @param \LunaAtra\CoreBundle\Entity\Activity $activities
+     * @return Blog
+     */
+    public function addActivity(\LunaAtra\CoreBundle\Entity\Activity $activities)
+    {
+        $this->activities[] = $activities;
+
+        return $this;
+    }
+
+    /**
+     * Remove activities
+     *
+     * @param \LunaAtra\CoreBundle\Entity\Activity $activities
+     */
+    public function removeActivity(\LunaAtra\CoreBundle\Entity\Activity $activities)
+    {
+        $this->activities->removeElement($activities);
+    }
+
+    /**
+     * Get activities
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getActivities()
+    {
+        return $this->activities;
+    }
 }
-    

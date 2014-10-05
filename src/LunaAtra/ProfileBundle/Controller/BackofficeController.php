@@ -165,25 +165,34 @@ class BackofficeController extends Controller
             if ($form->isValid()) { 
                 if($form->get('save')->isClicked()){
                     $post->setDraft(false);
-                    $post->setUpdateDate(new \Datetime("now"));
+                    $activity = new Activity();
+                    if($post->getPublishedDate() == null){
+                        $post->setPublishedDate(new \Datetime("now"));
+                        $em->flush();
+                        $activity->createPost($user,$post);
+                    }else {
+                        $post->setUpdateDate(new \Datetime("now"));
+                        $activity->updatePost($user,$post);
+                    }
+                    
+                    
+                    
+                    $isExists =  $em->getRepository('CoreBundle:Activity')->findLastSameActivity($activity);
+                    if(count($isExists) > 0)
+                    {
+                        $existingActivity = $isExists[0];
+                        $existingActivity->setDate(new \Datetime("now"));
+                        $em->persist($existingActivity);
+                    }else{
+                        $em->persist($activity);
+                    }
                 }else {
                     $post->setDraft(true);
                 }
                 $em->persist($post);
                 $em->flush();
-                // $activity = new Activity();
-                // $activity->CreateCharacter($user,$character);
-                // $isExists =  $em->getRepository('CoreBundle:Activity')->findLastSameActivity($activity);
-                // if(count($isExists) > 0)
-                // {
-                //     $existingActivity = $isExists[0];
-                //     $existingActivity->setDate(new \Datetime("now"));
-                //     $em->persist($existingActivity);
-                // }else{
-                //     $em->persist($activity);
-                // }
-                // $em->persist($activity);
-                // $em->flush();
+                
+                $em->flush();
                 return $this->redirect($this->generateUrl('single-post', array("id"=> $post->getId() )));
             }
         }
@@ -241,14 +250,19 @@ class BackofficeController extends Controller
                 if($form->get('save')->isClicked()){
                     $post->setDraft(false);
                     $post->setPublishedDate(new \Datetime("now"));
+                    $em->persist($post);
+                    $em->flush();
+                    $activity = new Activity();
+                    $activity->createPost($user,$post);
+                    $em->persist($activity);
                 }else {
                     $post->setDraft(true);
+                    $em->persist($post);
                 }
 
-                $em->persist($post);
+                
+                
                 $em->flush();
-                // $activity = new Activity();
-                // $activity->CreateCharacter($user,$character);
                 return $this->redirect($this->generateUrl('single-post', array("id"=> $post->getId() )));
             }
         }
@@ -287,13 +301,15 @@ class BackofficeController extends Controller
             $data = $form->getData();
             if($post->getId() == $data["id"] && $user->getId() == $data["owner"] && $post->getUser()->getId() == $user->getId() )
             {
-                // foreach($character->getActivities() as $activity){
-                //     $activity->setCharacterFallback($character);
-                //     $em->persist($activity);
-                // }
-                // $act = new Activity();
-                // $act->DeleteCharacter($user,$character);
-                // $em->persist($act);
+                if(!$post->getDraft()){
+                    foreach($post->getActivities() as $activity){
+                        $activity->setPostFallback($post);
+                        $em->persist($activity);
+                    }
+                    $act = new Activity();
+                    $act->deletePost($user,$post);
+                    $em->persist($act);
+                }
                 $em->remove($post);
                 $em->flush();
                 return $this->redirect($this->generateUrl('user-blog', array("username" => $user->getUsername())));
@@ -336,9 +352,17 @@ class BackofficeController extends Controller
     */
 
 
+    /**
+     * @Route("/character", name="backoffice-characters")
+     * @Template("ProfileBundle:Backoffice:characters.html.twig")
+     */
+    public function showCharacterAction()
+    {
+        return array();
+    }
 
 
-       /**
+    /**
      * @Route("/character/add", name="add-character")
      * @Template("ProfileBundle:Default:add-character.html.twig")
      */

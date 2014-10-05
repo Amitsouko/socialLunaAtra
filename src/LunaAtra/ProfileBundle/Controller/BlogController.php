@@ -28,6 +28,15 @@ class BlogController extends Controller
         return array("post" => $post);
     }
 
+    /**
+     * @Route("/deleted", name="post-deleted")
+     * @Template("ProfileBundle:Default:character.html.twig")
+     */
+    public function CharacterDeletedAction()
+    {
+        throw $this->createNotFoundException('Post has been deleted.');
+        return array();
+    }
  
 }
 
