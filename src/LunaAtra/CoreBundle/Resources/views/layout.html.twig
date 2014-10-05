@@ -13,6 +13,9 @@
       'bundles/core/css/style.less'
       'bundles/core/css/media-queries.less'
       'bundles/core/css/home.less'
+      'bundles/core/css/jquery-ui.min.css'
+      'bundles/core/css/jquery-ui.structure.min.css'
+      'bundles/core/css/jquery-ui.theme.min.css'
        filter='less, cssrewrite'
       output="Resources/css/all.css"
     %}
@@ -25,6 +28,7 @@
     {% javascripts
       '@CoreBundle/Resources/public/js/jquery-1.11.0.min.js'
       '@CoreBundle/Resources/public/js/lightbox.min.js'
+      '@CoreBundle/Resources/public/js/jquery-ui.min.js'
       'bundles/core/js/main.js'
        %}
       <script src="{{ asset_url }}"></script>

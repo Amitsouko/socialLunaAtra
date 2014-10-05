@@ -39,4 +39,13 @@ $(function(){
         console.log($(this) != $("#form_privacy input[value='_0_']"));
     });
 
+    $(".sortable-table").sortable({
+        axis:"y",
+        containment:"parent",
+        tolerance:"pointer",
+        items: "li:not(.header)",
+        revert:100
+    })
+    .disableSelection();
+
 })

@@ -963,6 +963,7 @@ input[type="submit"], button[type='submit'] {
 
 .list-blog-dashboard {
     li {
+        background: white;
     }
     .header {
         font-weight: bold;
@@ -987,6 +988,17 @@ input[type="submit"], button[type='submit'] {
     .quarter {
         width: 25%;
     }
+    .ui-sortable-helper {
+        box-shadow: 0px 0px 5px rgba(0,0,0,0.5);
+        .transform(rotate(0.5deg));
+    }
 
+}
+
+.ui-sortable-handle {
+    cursor:move;
+    &.header{
+        cursor:initial;
+    }
 }
 

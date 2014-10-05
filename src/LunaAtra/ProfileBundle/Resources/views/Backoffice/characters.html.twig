@@ -4,13 +4,15 @@
 {% set user = app.user   %}
 <div class="white-box">
     <h1>Characters</h1>
-
+    <p>
+        Drag and drop the character if you want to reorder them in your character list in your profile.
+    </p>
     <p class="text-right">
         <a class="blue-button" href="{{ path("add-character") }}">Créer un personnage</a>
     </p>
    <div class="panel panel-default">
       {% spaceless %}
-        <ul class="list-unstyled character-list-mini list-blog-dashboard">
+        <ul class="list-unstyled character-list-mini list-blog-dashboard sortable-table">
             <li class="header">
                 <span class="demi">Name</span>
                 <span class="eighth">Privacy</span>
