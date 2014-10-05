@@ -39,18 +39,20 @@ class BlogRepository extends EntityRepository
                 'user' => $user 
             ))
             ->getResult();
-            $array["draft"] = ( $query[0]["draft"] == true ) ?  $query[0][1] : 0;
-            $array["draft"] = ( $query[1]["draft"] == true ) ?  $query[1][1] : $array["draft"];
-            $array["publicated"] = ( $query[0]["draft"] == false ) ?  $query[0][1] : 0;
-            $array["publicated"] = ( $query[1]["draft"] == false ) ?  $query[1][1] : $array["publicated"] ;
-            return $array;
+
+                $array["draft"] = ( isset($query[0]["draft"] ) && $query[0]["draft"] == true ) ?  $query[0][1] : 0;
+                $array["draft"] = ( isset($query[1]["draft"] ) &&  $query[1]["draft"] == true ) ?  $query[1][1] : $array["draft"];
+                $array["publicated"] = ( isset($query[0]["draft"]) && $query[0]["draft"] == false ) ?  $query[0][1] : 0;
+                $array["publicated"] = ( isset( $query[1]["draft"]) && $query[1]["draft"] == false ) ?  $query[1][1] : $array["publicated"] ;
+                return $array; 
     }
 
 
 
    public function getPostByPrivacy($array, $owner)
     {
-        $query = $this->createQueryBuilder("a")
+        $qb = $this->createQueryBuilder("a");
+        $query = $qb
             ->where("a.user = :user")
             ->setParameter("user", $owner)
             ->andWhere("a.privacy LIKE :privacy")
@@ -58,14 +60,20 @@ class BlogRepository extends EntityRepository
             ->setParameter("privacy", "%\_0\_%" );
 
         $i = 0;
+
+        $orModule = $qb->expr()->orx();
+        
+
         foreach($array as $value)
         {
-            $query->orWhere("a.privacy LIKE :privacy".$i)
+            $orModule->add($qb->expr()->like('a.privacy', ":privacy".$i));
+
+            //$query->orWhere("a.privacy LIKE :privacy".$i)
             // replace _ for \_, because of SQL syntaxe
-            ->setParameter("privacy".$i, "%".str_replace("_", "\\_", $value)."%" );
+            $query->setParameter("privacy".$i, "%".str_replace("_", "\\_", $value)."%" );
             $i++;
         }
-
+        $query->andWhere($orModule);
         $query->orderBy("a.publishedDate", "DESC");
 
         return $query->getQuery()->getResult();

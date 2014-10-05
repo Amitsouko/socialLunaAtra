@@ -23,7 +23,7 @@
 
 
 
-{% if posts %}
+{% if posts|length > 0 %}
 <div class="col-lg-10 col-lg-offset-1 col-md-12">
 
 {% if app.user == posts[0].user and app.request.get('type') and app.request.get('type') == "draft" %}
