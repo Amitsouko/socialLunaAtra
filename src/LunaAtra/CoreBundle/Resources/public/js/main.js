@@ -1,7 +1,6 @@
 $(function(){
     //DropDown
     $(document).on("click", function(e){
-        console.log($(e.target));
         if(!$(e.target).hasClass("dropdown")
             && $(e.target).closest(".dropdown-menu").length == 0
             && $(e.target).closest(".dropdown").length == 0
@@ -46,6 +45,30 @@ $(function(){
         items: "li:not(.header)",
         revert:100
     })
-    .disableSelection();
+    .disableSelection()
+    .on("sortupdate", function(e,ui){
+        $(".form-reorder").removeClass("hidden");
+        $(".form-reorder-success").addClass("hidden");
+    });
+
+    $(".form-reorder form").on("submit",function(e){
+        e.preventDefault();
+        e.stopPropagation();
+        $(this).find("input[type='submit']").hide();
+
+        $.ajax({
+            type: "POST",
+            url: $(".form-reorder form").attr("action"),
+            data: { order: $(".sortable-table").sortable("toArray").toString() }
+        })
+        .done(function( msg ) {
+            if(typeof(msg["success"]) != "undefined" )
+            {
+                 $(".form-reorder form").find("input[type='submit']").show();
+                $(".form-reorder-success").removeClass("hidden");
+                $(".form-reorder").addClass("hidden");
+            }
+        });
+    });
 
 })

@@ -12,6 +12,7 @@ use Symfony\Component\HttpFoundation\Request;
 use LunaAtra\CoreBundle\Entity\Activity;
 use LunaAtra\ProfileBundle\Entity\ProfileCover;
 use LunaAtra\ProfileBundle\Entity\Blog;
+use Symfony\Component\HttpFoundation\JsonResponse;
 /**
  * @Route("/profile/backoffice")
  */
@@ -359,6 +360,43 @@ class BackofficeController extends Controller
     public function showCharacterAction()
     {
         return array();
+    }
+
+    /**
+     * @Route("/character/reorder", name="reorder-characters")
+     * @Template()
+     */
+    public function reorderCharacterAction(Request $request)
+    {
+        $order = $request->request->get("order");
+        $em = $this->get('doctrine')->getManager();
+        $order = explode(",",$order);
+        $response = new JsonResponse();
+        //select charcters
+        $characters =  $em->getRepository('ProfileBundle:Charact')->findBy(array("id" => $order, "user" => $this->getUser() ));
+        if(count($order) != count($characters) ){
+            return $response->setData(array(
+                'error' => "Problem with characters id (you don't own all characters)"
+            ));
+        }
+
+        foreach($order as $position => $id)
+        {
+            foreach($characters as $charact)
+            {
+                if($charact->getId() == $id)
+                {
+                    $charact->setOrdre($position );
+                    $em->persist($charact);
+                }
+            }
+        }
+
+
+        $em->flush();
+        return $response->setData(array(
+            'success' => "ok"
+        ));
     }
 
 

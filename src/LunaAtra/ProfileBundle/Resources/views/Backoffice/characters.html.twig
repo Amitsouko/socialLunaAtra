@@ -12,7 +12,8 @@
     </p>
    <div class="panel panel-default">
       {% spaceless %}
-        <ul class="list-unstyled character-list-mini list-blog-dashboard sortable-table">
+
+        <ul class="list-unstyled character-list-mini list-blog-dashboard sortable-table rankings" data-form="form-reorder">
             <li class="header">
                 <span class="demi">Name</span>
                 <span class="eighth">Privacy</span>
@@ -20,7 +21,7 @@
                 <span class="eighth text-right no-underline">Actions</span>
             </li>
         {% for character in app.user.characters %}
-            <li class="">
+            <li class="ranking" id="{{ character.id }}">
                 <span class="demi"><a href="{{ path("single-character", {id: character.id}) }}">{{ character.name }}</a></span>
                 <span class="eighth">{{character|inlinePrivacy}}</span>
                 <span class="quarter">
@@ -36,6 +37,17 @@
         {% endfor %}
         </ul>
         {% endspaceless %}
+        <div class="hidden form-reorder" data-success="form-reorder-success">
+            Do you validate this reorder ?
+                  <form method="post" action="{{ path("reorder-characters") }}">
+                      <input type="submit" value="mettre à jour"/>
+                </form>
+        </div>
+        <div class="hidden form-reorder-success">
+            <p>
+                Characters reorder succesfuly
+            </p>
+        </div>
     </div>
 </div>
 {% endblock backofficeContent %}
