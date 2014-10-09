@@ -21,7 +21,7 @@
                 <span class="eighth text-right no-underline">Actions</span>
             </li>
         {% for character in app.user.characters %}
-            <li class="ranking" id="{{ character.id }}">
+            <li class="ranking" id="{{ character.id }}" data-order="{{ character.ordre }}">
                 <span class="demi"><a href="{{ path("single-character", {id: character.id}) }}">{{ character.name }}</a></span>
                 <span class="eighth">{{character|inlinePrivacy}}</span>
                 <span class="quarter">
