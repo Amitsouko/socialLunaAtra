@@ -71,7 +71,7 @@ $(function(){
         });
     });
 
-
+    $.waitForImages.hasImgProperties = ['backgroundImage'];
     $('#image-cover-profile').waitForImages(function(e) {
         $(this).animate({opacity: "1"}, 1500);
     });
