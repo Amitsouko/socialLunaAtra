@@ -71,9 +71,33 @@ $(function(){
         });
     });
 
-    $.waitForImages.hasImgProperties = ['backgroundImage'];
-    $('#image-cover-profile').waitForImages(function(e) {
-        $(this).animate({opacity: "1"}, 1500);
+
+    // $('#image-cover-profile').waitForImages(function() {
+    //    //   $(this).animate({opacity: "1"}, 1500);
+    // },
+    //  function(loaded, count, success) {
+    //        alert(loaded + ' of ' + count + ' images has ' + (success ? 'loaded' : 'failed to load') +  '.');
+    //        $(this).addClass('loaded');
+    //     }
+
+    // );
+
+    // $('#image-cover-profile').waitForImages(function() {
+    //         //alert('All images have loaded.');
+    //     }, function(loaded, count, success) {
+    //        alert(loaded + ' of ' + count + ' images has ' + (success ? 'loaded' : 'failed to load') +  '.');
+    //        $(this).addClass('loaded');
+    //     });
+
+    $('#image-cover-profile').waitForImages({
+        finished: function() {
+            console.log("end");
+        },
+        each: function() {
+            $(this).animate({opacity: "1"}, 1500);
+          // console.log($(this));
+        },
+        waitForAll: true
     });
 
 })
