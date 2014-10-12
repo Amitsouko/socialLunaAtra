@@ -1,21 +1,38 @@
+{% set currentPath = path(app.request.attributes.get('_route'),
+                           app.request.attributes.get('_route_params')) %}
 {% extends "CoreBundle::base-profile.html.twig" %}
 
 {% block content %}
 
 {% include "ProfileBundle:Include:header-profile.html.twig" %}
 {% include "ProfileBundle:Include:top-profile.html.twig" %}
+
+
+
+
 <div class="container">
     <div class="row">
-        <div class="col-md-4">
+        <div class="col-md-12">
+            <div class="white-box to-upper no-padding">
+                    <div class="row">
+                        {% include "ProfileBundle:Include:menu-profile.html.twig" %}
 
-        {# user announce #}
+
+
+
+
+
+
+  <div class="col-md-4">
+
+        {# user announce 
         {% if user.announce %}
             <h2 class="profile-announcement">&ldquo;{{ user.announce }}&rdquo;</h2>
         {% elseif user == app.user %}
             <p class="margin-bottom-20">Vous n'avez pas encore de description. <br/>
             <a href="{{ path("fos_user_profile_edit") }}">
             <span class="glyphicon glyphicon-pencil"></span> Éditer votre profil</a>.</p>
-        {% endif %}
+        {% endif %}#}
 
 
 
@@ -57,6 +74,53 @@
             {% endif %}
 
         </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                        
+                    </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="container container-upper">
+    <div class="row">
+
+
+      
 
     </div>
 </div>

@@ -1,0 +1,68 @@
+<div class="col-md-12">
+                            
+                            <div class="sub-menu-profile">
+                                <ul class="list-inline hidden-xs hidden-sm">
+                                    <li>
+                                        <a {% if path("user", {"username": user.username}) == currentPath  %}class="selected" {% endif %} 
+                                            href="{{ path("user", {"username": user.username}) }}"  >
+                                            Profil
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a {% if  path("user-bio", {"username": user.username}) == currentPath  %}class="selected" {% endif %}
+                                            href="{{ path("user-bio", {"username": user.username}) }}">
+                                            Biographie
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a {% if path("user-characters", {"username": user.username}) == currentPath  %}class="selected" {% endif %} 
+                                            href="{{ path("user-characters", {"username": user.username}) }}">
+                                            Personnages
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a {% if path("user-blog", {"username": user.username}) == currentPath  %}class="selected" {% endif %} href="{{ path("user-blog", {"username": user.username}) }}">
+                                            Blog
+                                        </a>
+                                    </li>
+
+                                </ul>
+
+
+
+                                    {# responsive menu #}
+                                    <span class="hidden-md hidden-lg pull-left responsive-selected-menu">{{ pagename }}</span>
+                                    <a  class=" mini-menu pull-right hidden-md hidden-lg dropdown" href=""><span class="glyphicon glyphicon-align-justify"></span></a>
+                                        <ul id="profile-menu-dropdown" class="list-unstyled dropdown-menu">
+                                           <li>
+                                            <a {% if path("user", {"username": user.username}) == currentPath  %}class="selected" {% endif %} 
+                                                href="{{ path("user", {"username": user.username}) }}"  >
+                                                Profil
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a {% if  path("user-bio", {"username": user.username}) == currentPath  %}class="selected" {% endif %}
+                                                href="{{ path("user-bio", {"username": user.username}) }}">
+                                                Biographie
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a {% if path("user-characters", {"username": user.username}) == currentPath  %}class="selected" {% endif %} 
+                                                href="{{ path("user-characters", {"username": user.username}) }}">
+                                                Personnages
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a {% if path("user-blog", {"username": user.username}) == currentPath  %}class="selected" {% endif %} href="{{ path("user-blog", {"username": user.username}) }}">
+                                                Blog
+                                            </a>
+                                        </li>
+                               
+                                        </ul>
+                                </ul>
+
+
+
+                            </div>
+
+                        </div>

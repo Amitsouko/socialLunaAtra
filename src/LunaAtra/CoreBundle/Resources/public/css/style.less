@@ -5,9 +5,15 @@
 @blue : #599DD7;
 @darkBlue: #1b4259;
 
-@red : #BD391A;
+//True colors
+@darkGray: rgb(83,83,83);
+@gray : #BCBCBC;
+
+
+@red: #BD391A;
 
 @lightGray: rgb(229,229,229);
+
 .transition (@properties: all, @duration: 0.2s, @type: ease-out){
   -webkit-transition: @properties @duration @type;
   -moz-transition: @properties @duration @type;
@@ -32,6 +38,34 @@
         background: -ms-linear-gradient(top,  rgba(255,255,255,1) 0%,rgba(242,242,242,1) 100%); /* IE10+ */
         background: linear-gradient(to bottom,  rgba(255,255,255,1) 0%,rgba(242,242,242,1) 100%); /* W3C */
         filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#f2f2f2',GradientType=0 ); /* IE6-9 */
+}
+
+::-webkit-input-placeholder {
+   color: @lightGray;
+   font-style:italic;
+}
+
+:-moz-placeholder { 
+   color: @lightGray;
+   font-style:italic;  
+}
+
+::-moz-placeholder { 
+   color: @lightGray;
+   font-style:italic;  
+}
+
+:-ms-input-placeholder {  
+   color: @lightGray;
+   font-style:italic;  
+}
+
+.list-inline {
+    margin-left: 0px;
+}
+
+input, button, a {
+    outline: none !important;
 }
 
 .margin-bottom-20 {
@@ -96,7 +130,7 @@ a.no-style:active {
 }
 
 h1, h2, h3, h4 {
-    font-family: "PT Sans";
+    font-family: "PT Sans Caption";
     margin-bottom: 20px;
     em {
         font-size: 14px;
@@ -185,17 +219,18 @@ header.header-main {
         text-shadow:none !important;
     }
     input[type="search"] {
-        width: 400px;
+        width: 244px;
         border-bottom-left-radius: 2px;
         border-top-left-radius: 2px;
     }
     #search-submit, #_submit {
+        color: @lightGray;
         margin: 0px !important;
         margin-left: 5px;
         vertical-align: middle;
         height: 32px;
-        width: 45px;
-        background:@blue;
+        width: 32px;
+        background:white;
         border:none !important;
         box-shadow: none !important;
         text-shadow:none !important;
@@ -209,24 +244,27 @@ header.header-main {
     }
     .profile-area {
         margin-left: 0px !important;
+        padding: 0px !important;
     }
 }
 
-#trigger-main-menu-dropdown {
-    width: 18px;
+.to-upper {
+    position: relative;
+    top: -121px;
 }
 
-#logo-header {
-    background: url("../images/luna-atra-little.png");
-    background-size: cover;
-    width: 70px;
-    display: block;
-    height: 30px;
+#trigger-main-menu-dropdown {
+    width: 32px;
+    padding:16px 5px;
+    border-left: 1px solid @lightGray;
+    border-right: 1px solid @lightGray;
 }
 
 #main-top-bar {
     z-index: 10; 
-    color: white;
+    color: @darkGray;
+    background: white;
+    height: 50px;
     input[type="text"],
     input[type="email"],
     input[type="password"],
@@ -241,16 +279,17 @@ header.header-main {
     a:visited,
     a:hover,
     a:active {
-        color: white;
+        color: @gray;
     }
     button {
         width: 60px;
     }
-    > div {
-        margin:9px 20px;
+    .container  > div {
+        padding:10px 12px;
     }
     .profile-area {
         display: table;
+        position: relative;
         > div {
             display: table-cell;
             vertical-align: middle;
@@ -258,24 +297,42 @@ header.header-main {
             margin-left: 20px;
         }
         .span-username {
+            font-size: 14px;
             margin-right:10px;
             position: relative;
+            color: black;
             display: inline-block;
             vertical-align: middle;
         }
     }
     .glyphicon {
         font-size: 18px;
-        position: relative;
-        top: 2px;
-        .transition;
+        position: relative;        
         text-decoration: none !important;
-        &.open {
-            .transform(rotate(45deg));
-        }
-
+        top: 0px;
     }
+
+    .search-wrapper {
+        border-right: 1px solid @lightGray;
+    }
+    .logo-wrapper {
+        border-left: 1px solid @lightGray;
+        border-right: 1px solid @lightGray;
+    }
+
+    #logo-header {
+        background: url("../images/luna-atra-little-black.png");
+        background-size: cover;
+        width: 70px;
+        display: block;
+        height: 30px;
+    }
+
 }
+
+
+
+
 
 #main-footer {
     margin-top: 30px;
@@ -298,7 +355,7 @@ header.header-main {
     box-shadow: 1px 1px 4px gray;
     position: absolute;
     top: 60px;
-    right: 10px;
+    right: -2px;
     z-index:20;
     max-width: 300px;
     min-width: 100px;
@@ -568,30 +625,32 @@ header.header-main {
     background-size: cover;
     background-position: center;
     opacity: 0;
+
 }
 
 #cover-profile {
     position: relative;
-    height: 405px; 
+    height: 585px; 
     width: 100%;
-    background-color:rgb(27, 66, 89);;
+    background-color: black;
     background-size: cover;
     background-position: center;
     .cover-content {
-        padding-top: 50px;
+        padding-top: 86px;
         text-align: center;
         position: relative;
         #main-profile-image {
-            width: 185px;
-            height: 185px;
+            width: 165px;
+            height: 165px;
             border: white solid 5px;
             border-radius: 3px;
             box-shadow: 0px 2px 1px #dddddd;
             float: none;
             margin: auto;
             img {
-                width: 175px;
-                height: 175px;
+                width: 155px;
+                box-shadow: 1px 1px 2px whiteSmoke; 
+                height: 155px;
             }
         }
         .tram {
@@ -603,14 +662,13 @@ header.header-main {
             // border-radius: 4px;
         }
         .profile-name {
-            margin-top: 20px;
             text-transform: none;
             font-size: 2.7em;
             border-bottom: none;
             font-weight: bold;
             margin-bottom: 1px;
-            margin-top: 0px;
-            padding-bottom: 0px;
+            margin-top: 5px;
+            padding-bottom: 4px;
             em {
                 display: block;
                 margin-top: 5px;
@@ -618,11 +676,21 @@ header.header-main {
             }
             a:link, a:visited {
                 color: white;
+                text-transform: uppercase;
+                font-size: 36px;
             }
             em {
                 font-size: 0.4em;
                 font-style: normal;
             }
+        }
+        .main-announce {
+            font-size: 26px;
+            font-family: "Lora";
+            font-style: italic;
+            color: white;
+            border-bottom: none;
+            line-height: 32px;  
         }
     }
 }
@@ -769,11 +837,10 @@ input[type="submit"], button[type='submit'] {
 .sub-menu-profile {
     z-index:5;
     position: relative;
-    margin-top: -51px;
+
     margin-bottom: 20px;
     height: 51px;
-    border-top-right-radius: 3px;
-    border-top-left-radius: 3px;
+
     border-bottom: 1px rgb(202, 219, 235) solid;
     .mini-menu {
         z-index:15;

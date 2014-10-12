@@ -1,12 +1,14 @@
 <header id="main-top-bar" class="header-main">  
-<div class="pull-left">
-    <a href="{{ path("lunaatra_core_default_index") }}" id="logo-header"></a>
-</div>
-<div class="pull-left visible-md-block visible-sm-block  visible-lg-block">
-    <form>
-        <input  type="search" placeholder="Recherche" name="search" id="search"/><button type="submit" id="search-submit"><span class="glyphicon glyphicon-search"></span></button>
-    </form>
-</div>
+<div class="container">
+    <div class="pull-left logo-wrapper">
+        <a href="{{ path("lunaatra_core_default_index") }}" id="logo-header"></a>
+    </div>
+
+    <div class="pull-left visible-md-block visible-sm-block  visible-lg-block search-wrapper">
+        <form>
+            <input  type="search" placeholder="Recherche" name="search" id="search"/><button type="submit" id="search-submit"><span class="glyphicon glyphicon-search"></span></button>
+        </form>
+    </div>
     {% trans_default_domain 'FOSUserBundle' %}
 
     {% if is_granted("ROLE_USER") %}
@@ -24,7 +26,7 @@
             </a>
         </div>
         <div>
-            <a href="" id="trigger-main-menu-dropdown" class="glyphicon dropdown glyphicon-cog"></a>
+            <a href="" id="trigger-main-menu-dropdown" class="glyphicon glyphicon-chevron-down dropdown"></a>
             <ul id="main-menu-dropdown" class="list-unstyled dropdown-menu">
                 <li><a href="{{ path("fos_user_profile_show") }}"><span class="glyphicon glyphicon-user"></span>Mon profil</a></li>
                 <li><a href="{{ path("fos_user_profile_edit") }}"><span class="glyphicon glyphicon-pencil"></span>Éditer mes informations</a></li>
@@ -55,5 +57,5 @@
         <a href="{{ path("fos_user_security_login") }}">Login</a>
     </div>
     {% endif %}
-
+</div><!-- end container -->
 </header>

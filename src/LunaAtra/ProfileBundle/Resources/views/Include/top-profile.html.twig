@@ -1,5 +1,4 @@
-{% set currentPath = path(app.request.attributes.get('_route'),
-                           app.request.attributes.get('_route_params')) %}
+
 
 <div id="cover-profile">
 {% if user.cover %}
@@ -16,19 +15,22 @@
     </div>
     <div class="container">
         <div class="row">
-            <div class="tram col-md-6 col-md-offset-3 col-lg-4 col-lg-offset-4">
+            <div class="tram col-md-6 col-md-offset-3 col-lg-6 col-lg-offset-3">
                 <h1 class="profile-name ">
                     <a href="{{ path("user", {"username": user.username}) }}">{{ user.username }}</a>
-                        {% if app.user == user %} 
+                       {# {% if app.user == user %} 
                             <em><a href="{{ path("fos_user_profile_edit") }}">Éditer</a></em>
-                        {% endif%}
+                        {% endif%} 2} #}
                 </h1>
+                <h2 class="main-announce">
+                    “&thinsp;{{ user.announce }}&thinsp;”   
+                </h2>
             </div>
         </div>
     </div>
  </div>
 
-</div>
+</div>{#
 <div class="container">
     <div class="sub-menu-profile">
         <ul class="list-inline hidden-xs hidden-sm">
@@ -55,28 +57,9 @@
                     Blog
                 </a>
             </li>
-           {# <li>
-                <a {% if "d" == currentPath  %}class="selected" {% endif %} href="">
-                    Guildes
-                </a>
-            </li>
-            <li >
-                <a {% if "ZZ" == currentPath  %}class="selected" {% endif %}
-                    href="">
-                    Galeries
-                </a>
-            </li>
-            <li>
-                <a {% if "ZZ" == currentPath  %}class="selected" {% endif %}
-                    href="">
-                    Trophés
-                </a>
-            </li>#}
+        
         </ul>
 
-
-
-            {# responsive menu #}
             <span class="hidden-md hidden-lg pull-left responsive-selected-menu">{{ pagename }}</span>
             <a  class=" mini-menu pull-right hidden-md hidden-lg dropdown" href=""><span class="glyphicon glyphicon-align-justify"></span></a>
             <ul id="profile-menu-dropdown" class="list-unstyled dropdown-menu">
@@ -103,27 +86,11 @@
                     Blog
                 </a>
             </li>
-          {#  <li>
-                <a {% if "d" == currentPath  %}class="selected" {% endif %} href="">
-                    Guildes
-                </a>
-            </li>
-            <li >
-                <a {% if "ZZ" == currentPath  %}class="selected" {% endif %}
-                    href="">
-                    Galeries
-                </a>
-            </li>
-            <li>
-                <a {% if "ZZ" == currentPath  %}class="selected" {% endif %}
-                    href="">
-                    Trophés
-                </a>
-            </li>#}
+
         </ul>
             </ul>
 
     </div>
 
     <div class="clearfix"></div>
-</div>
+</div> #}

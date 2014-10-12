@@ -94,7 +94,7 @@ $(function(){
             console.log("end");
         },
         each: function() {
-            $(this).animate({opacity: "1"}, 1500);
+            $(this).animate({opacity: "0.5"}, 1500);
           // console.log($(this));
         },
         waitForAll: true
