@@ -2,12 +2,7 @@
 
 {% block content %}
 
-{% include "ProfileBundle:Include:top-profile.html.twig" %}
 
-<div class="container">
-
-
-    <div class="row">
     {% if user.characters|length > 0 %}
 
         {% for char in user.characters %}
@@ -63,8 +58,6 @@
             </a>
         </div>
         {% endif %}
-    </div>
-
-</div>
+ 
 
 {% endblock content %}

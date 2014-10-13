@@ -1,10 +1,3 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title></title>
-</head>
-<body>
-
 
 {% if activities is defined %}
 {% set date = "" %}
@@ -12,24 +5,20 @@
 {% for act in activities %}
 
     {% if act.date|date("d-m-Y") != date %}
-        {% if date != "" %}
-            </div>
-        {% endif %}
+
         
         {% set date = act.date|date("d-m-Y") %}
-        <h2><span>{{ act.date|date("F d, Y") }}</span></h2>
-        
-        <div class="white-box">
+        <h2>{{ act.date|date("F") }} <span>{{ act.date|date("d") }}</span></h2>
+
     {% endif %}
 
     <div class="single-activity">
-        <em>{{ act.date|date }}</em>
-        <span>{{ act.text|raw }}</span>
+        <span>{{ act.text|raw }} <em>{{ act.date|date("H:i") }}</em></span>
     </div>
 
 
 {% endfor %}
- </div>
+
 {% else %}
     
     {% if user == app.user %}
@@ -42,5 +31,4 @@
     <p>No activity yet bro !</p>
  </div>
 {% endif %}
-</body>
-</html>
+    

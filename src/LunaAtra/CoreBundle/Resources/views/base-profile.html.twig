@@ -1,4 +1,6 @@
 {% extends "CoreBundle::layout.html.twig" %}
+{% set currentPath = path(app.request.attributes.get('_route'),
+                           app.request.attributes.get('_route_params')) %}
 
 {% block bodyclass %}{% spaceless %}profile-container{% endspaceless %}{% endblock bodyclass %}
 
@@ -6,9 +8,43 @@
 {% render path("embbed-main") %}
 
     <div class="main-container">
-            {% block content %}
-            {% endblock content %}
+
+{% include "ProfileBundle:Include:header-profile.html.twig" %}
+{% include "ProfileBundle:Include:top-profile.html.twig" %}
+
+
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="white-box to-upper">
+                    <div class="row">
+                        {% include "ProfileBundle:Include:menu-profile.html.twig" %}
+
+
+
+
+
+                            {% block content %}
+                            {% endblock content %}
         
+
+
+
+
+
+
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
+
+
+
+
+</div>
 
 {% endblock main %}

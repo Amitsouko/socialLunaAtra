@@ -1,29 +1,10 @@
-{% set currentPath = path(app.request.attributes.get('_route'),
-                           app.request.attributes.get('_route_params')) %}
 {% extends "CoreBundle::base-profile.html.twig" %}
 
 {% block content %}
 
-{% include "ProfileBundle:Include:header-profile.html.twig" %}
-{% include "ProfileBundle:Include:top-profile.html.twig" %}
 
 
-
-
-<div class="container">
-    <div class="row">
-        <div class="col-md-12">
-            <div class="white-box to-upper no-padding">
-                    <div class="row">
-                        {% include "ProfileBundle:Include:menu-profile.html.twig" %}
-
-
-
-
-
-
-
-  <div class="col-md-4">
+  <div class="col-md-4 col-lg-3 col-lg-offset-1">
 
         {# user announce 
         {% if user.announce %}
@@ -34,7 +15,13 @@
             <span class="glyphicon glyphicon-pencil"></span> Éditer votre profil</a>.</p>
         {% endif %}#}
 
-
+        <div class="content-with-margin">
+            <h3><span>Informations</span></h3>
+            <strong>Last connnection</strong><br/>
+            <span>{{ user.lastLogin|date() }}</span><br/>
+             <strong>Actual Game</strong><br/>
+            <span>None</span><br/>         
+        </div>
 
 
         {# character list #}
@@ -62,10 +49,12 @@
 
         </div>{# end column #}
 
-        <div class="col-md-8">
+        <div class="col-md-8 col-lg-7">
             {# activity list#}
             {% if user.activities|length > 0  %}
+            <div class="activites-list content-with-margin">
                 {% render path("include-activities", {"id": user.id}) %}
+            </div>
             {% else %}
                 <div class="col-md-12 no-data-full-size">
                 <span class="glyphicon glyphicon-exclamation-sign"></span><br/>
@@ -98,30 +87,6 @@
 
 
 
-                        
-                    </div>
-            </div>
-        </div>
-    </div>
-</div>
 
 
-
-
-
-
-
-
-
-
-
-
-<div class="container container-upper">
-    <div class="row">
-
-
-      
-
-    </div>
-</div>
 {% endblock content %}

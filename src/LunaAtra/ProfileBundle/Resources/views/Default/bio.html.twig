@@ -2,9 +2,6 @@
 
 {% block content %}
 
-{% include "ProfileBundle:Include:top-profile.html.twig" %}
-<div class="container">
-    <div class="row">
         <div class=" col-md-12">
         {% if user.bio is not empty %}
         <article>
@@ -27,6 +24,5 @@
         
         {% endif %}
         </div>
-    </div>
-</div>
+
 {% endblock content %}
