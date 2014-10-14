@@ -5,9 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     <title>Luna Atra</title>
 
-   
+    {% if "localhost" not in app.request.getHost()  %}
+      {% stylesheets 
+          "http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic|PT+Sans:400,700,400italic,700italic|PT+Serif:400,700,400italic,700italic|PT+Sans+Caption:400,700|Lora:400,700,400italic,700italic"
+         filter='cssrewrite'
+        output="Resources/css/all.css"
+      %}
+        <link href="{{ asset_url }}" rel="stylesheet" media="screen" />
+      {% endstylesheets %}
+    {% endif %}
+
     {% stylesheets 
-      "http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic|PT+Sans:400,700,400italic,700italic|PT+Serif:400,700,400italic,700italic|PT+Sans+Caption:400,700"
+      
       'bundles/core/css/bootstrap.min.css'
       'bundles/core/css/bootstrap-theme.min.css'
       'bundles/core/css/lightbox.css'

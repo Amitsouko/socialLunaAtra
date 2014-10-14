@@ -91,7 +91,7 @@ $(function(){
 
     $('#image-cover-profile').waitForImages({
         finished: function() {
-            console.log("end");
+           $(this).animate({opacity: "0.5"}, 1500);
         },
         each: function() {
             $(this).animate({opacity: "0.5"}, 1500);

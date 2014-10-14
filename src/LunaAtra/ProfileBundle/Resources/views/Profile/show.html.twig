@@ -26,14 +26,14 @@
 
         {# character list #}
         {% if user.characters|length > 0 %}
-            <div class="">
-                <h3><span>Personnages</span></h3>
+            <div class="content-with-margin">
+                <h3><span>Personnages</span> <em>{{ user.characters|length }}</em></h3>
                 <ul class="list-unstyled character-list-mini">
                 {% for char in user.characters %}
-                    <li><a href="{{ path("single-character", {id: char.id}) }}"><img src="{{ char.WebPath|imagine_filter("mini_character_thumbnail") }}"> {{ char.name }}</a></li>
+                    <li><a href="{{ path("single-character", {id: char.id}) }}"><img src="{{ char.WebPath|imagine_filter("mini_character_thumbnail") }}" width="43" height="43"> {{ char.name }}</a></li>
                 {% endfor %}
                 {% if user == app.user %}
-                <li><a href="{{ path("add-character") }}"><span class="glyphicon glyphicon-plus"></span> Ajouter un personnage</a></li>
+                <li><a href="{{ path("add-character") }}"  class="discret gray-large-button"><span class="glyphicon glyphicon-plus"></span> Ajouter un personnage</a></li>
                 {% endif %}
                 </ul>
             </div>
@@ -42,7 +42,7 @@
             <div class="margin-bottom-20">
             <h3><span>Personnages</span></h3>
             <span>Vous n'avez pas encore créé de personnage.</span><br/>
-           <a href="{{ path("add-character") }}"><span class="glyphicon glyphicon-plus"></span> Créer mon premier personnage</a>
+           <a href="{{ path("add-character") }}" class="discret gray-large-button"><span class="glyphicon glyphicon-plus"></span> Créer mon premier personnage</a>
            </div>
         {% endif %}
   

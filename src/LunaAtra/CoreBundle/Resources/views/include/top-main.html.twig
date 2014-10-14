@@ -22,7 +22,7 @@
 
         <div>
             <a class="hidden-xs span-username" href="{{ path("fos_user_profile_show") }}"><span>{{ app.user.username }}</span></a>
-            <a href="{{ path("fos_user_profile_show") }}"><img src="{{ app.user.WebPath | imagine_filter("micro_profile_thumbnail") }}">
+            <a href="{{ path("fos_user_profile_show") }}"><img height="32" width="32" src="{{ app.user.WebPath | imagine_filter("micro_profile_thumbnail") }}">
             </a>
         </div>
         <div>
