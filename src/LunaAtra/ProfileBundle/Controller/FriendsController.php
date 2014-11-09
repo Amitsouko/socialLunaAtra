@@ -18,7 +18,7 @@ class FriendsController extends Controller
      * @Route("/add/{id}", name="ajax-friend-add")
      * @Template("ProfileBundle:Blog:show.html.twig")
      */
-    public function showEntryAction($id)
+    public function addFriendAction($id)
     {
         $em = $this->getDoctrine()->getManager();
         $user = $em->getRepository('ProfileBundle:User')->findOneById($id);
@@ -29,7 +29,6 @@ class FriendsController extends Controller
 
         if(count($friendLink) != null)
         {
-            $friendLink = $friendLink[0];
             //they are already friends or request sent
             switch($this->fnFriendStatus($friendLink, $connectedUser))
             {
@@ -59,6 +58,25 @@ class FriendsController extends Controller
         }
         return array();
 
+    }
+
+    /**
+     * @Route("/remove/{id}", name="ajax-friend-remove")
+     * @Template("ProfileBundle:Blog:show.html.twig")
+     */
+    public function deleteFriend($id)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $user = $em->getRepository('ProfileBundle:User')->findOneById($id);
+        $connectedUser = $this->get('security.context')->getToken()->getUser();
+        
+        // Verifications
+        $friendLink = $em->getRepository('ProfileBundle:Friends')->getFriendStatus($connectedUser,$user);
+        if($friendLink)
+        {
+            $em->remove($friendLink);
+            $em->flush();
+        }
     }
 
 

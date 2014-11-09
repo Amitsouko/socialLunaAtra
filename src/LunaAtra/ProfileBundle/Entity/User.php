@@ -43,13 +43,13 @@ class User extends BaseUser
 
 
     /**
-     * @ORM\OneToMany(targetEntity="LunaAtra\ProfileBundle\Entity\Friends", mappedBy="requester")
+     * @ORM\OneToMany(targetEntity="LunaAtra\ProfileBundle\Entity\Friends", mappedBy="requester",cascade={"remove"})
      * @var type
      */
     protected $friendAsk;
 
     /**
-     * @ORM\OneToMany(targetEntity="LunaAtra\ProfileBundle\Entity\Friends", mappedBy="requested")
+     * @ORM\OneToMany(targetEntity="LunaAtra\ProfileBundle\Entity\Friends", mappedBy="requested",cascade={"remove"})
      * @var type
      */
     protected $friendResponse;
@@ -62,7 +62,7 @@ class User extends BaseUser
     protected $posts;
 
     /**
-     * @ORM\OneToMany(targetEntity="LunaAtra\CoreBundle\Entity\Activity", mappedBy="seeder")
+     * @ORM\OneToMany(targetEntity="LunaAtra\CoreBundle\Entity\Activity", mappedBy="seeder",cascade={"remove"})
      * @ORM\OrderBy({"date" = "DESC"})
      * @var type
      */

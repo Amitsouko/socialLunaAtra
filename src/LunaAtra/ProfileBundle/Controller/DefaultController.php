@@ -22,6 +22,9 @@ class DefaultController extends Controller
         $em = $this->getDoctrine()->getManager();
         $connectedUser = $this->get('security.context')->getToken()->getUser();
         $user = $em->getRepository('ProfileBundle:User')->findOneByUsername($username);
+        $em->remove($user);
+        $em->flush();
+        exit();
         if(!is_object($user)){
             throw $this->createNotFoundException('The user does not exist !');
         }
