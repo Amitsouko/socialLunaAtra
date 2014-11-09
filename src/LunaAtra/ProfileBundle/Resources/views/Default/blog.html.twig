@@ -1,24 +1,25 @@
-{% extends "CoreBundle::base-profile.html.twig" %}
+{% extends "CoreBundle::base-blog.html.twig" %}
 
 {% block content %}
+<div class="container">
+<div class="row">
 
+
+
+<div class="col-md-9">
 {% if user == app.user %}
-    <div class="col-lg-10 col-lg-offset-1 col-md-12">
-        <div class="gray-border">
-            <a class="white-button" href="{{path("user-blog", {"username": user.username, "type":"published"})}}">Posts publiés ({{ postNumber.publicated }})</a>
-            <a class="white-button" href="{{path("user-blog", {"username": user.username, "type":"draft"})}}">Brouillons ({{ postNumber.draft }})</a>
+    <div class="gray-border">
+        <a class="white-button" href="{{path("user-blog", {"username": user.username, "type":"published"})}}">Posts publiés ({{ postNumber.publicated }})</a>
+        <a class="white-button" href="{{path("user-blog", {"username": user.username, "type":"draft"})}}">Brouillons ({{ postNumber.draft }})</a>
 
-            <a class="blue-button pull-right" href="{{ path("create-post") }}">Créer un post</a>
-            <a class="white-button pull-right" href="{{ path("admin-blog") }}">Administrer mon blog</a> 
-            <div class="clearfix"></div>
-        </div>
-</div>
+        <a class="blue-button pull-right" href="{{ path("create-post") }}">Créer un post</a>
+        <a class="white-button pull-right" href="{{ path("admin-blog") }}">Administrer mon blog</a> 
+        <div class="clearfix"></div>
+    </div>
 {% endif %}
 
 
-
 {% if posts|length > 0 %}
-<div class="col-lg-10 col-lg-offset-1 col-md-12">
 
 {% if app.user == posts[0].user and app.request.get('type') and app.request.get('type') == "draft" %}
 {% set showDraft  = true %}
@@ -70,13 +71,10 @@
         </article>
         </div>
 
-
-
         {% endif %}
 
 
     {% endfor %}
-</div>
 
 
 {% else %}
@@ -87,6 +85,24 @@
                     {{ user.username }} n'a pas encore de posts.
     </div>
 {% endif %}
+</div>
+
+<div class="col-md-3">
+    <div class="dark-box">
+    <img src="{{ user.WebPath|imagine_filter("profile_thumbnail") }}">
+        {{ user.username }}
+        <p>
+            {{user.announce}}
+        </p>
+        <ul classs="list-unstyled">
+            <li>Profil</li>
+            <li>Biographie</li>
+            <li>Personnages</li>
+        </ul>
+    </div>
+</div>
 
 
+</div>
+</div>
 {% endblock content %}

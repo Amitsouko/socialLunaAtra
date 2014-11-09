@@ -100,4 +100,13 @@ $(function(){
         waitForAll: true
     });
 
+    $(".text-user img").each(function(index,obj){
+        if($(obj).attr("style").indexOf("float: right") > -1)
+        {
+            $(obj).addClass("image-right");
+        }else if($(obj).attr("style").indexOf("float: left") > -1) {
+            $(obj).addClass("image-left");
+        }
+    });
+
 })

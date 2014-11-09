@@ -1,10 +1,10 @@
 {% extends "CoreBundle::base-profile.html.twig" %}
 
 {% block content %}
+{{ friendLink|friendButton(app.user) }}
 
 
-
-  <div class="col-md-4 col-lg-3 col-lg-offset-1">
+  <div class="col-md-4">
 
         {# user announce 
         {% if user.announce %}
@@ -15,18 +15,18 @@
             <span class="glyphicon glyphicon-pencil"></span> Éditer votre profil</a>.</p>
         {% endif %}#}
 
-        <div class="content-with-margin">
+        <div class="dark-box">
             <h3><span>Informations</span></h3>
             <strong>Last connnection</strong><br/>
             <span>{{ user.lastLogin|date() }}</span><br/>
              <strong>Actual Game</strong><br/>
             <span>None</span><br/>         
-        </div>
+
 
 
         {# character list #}
         {% if user.characters|length > 0 %}
-            <div class="content-with-margin">
+        
                 <h3><span>Personnages</span> <em>{{ user.characters|length }}</em></h3>
                 <ul class="list-unstyled character-list-mini">
                 {% for char in user.characters %}
@@ -36,16 +36,15 @@
                 <li><a href="{{ path("add-character") }}"  class="discret gray-large-button"><span class="glyphicon glyphicon-plus"></span> Ajouter un personnage</a></li>
                 {% endif %}
                 </ul>
-            </div>
+           
 
         {% elseif user == app.user %}
-            <div class="margin-bottom-20">
             <h3><span>Personnages</span></h3>
             <span>Vous n'avez pas encore créé de personnage.</span><br/>
            <a href="{{ path("add-character") }}" class="discret gray-large-button"><span class="glyphicon glyphicon-plus"></span> Créer mon premier personnage</a>
-           </div>
+
         {% endif %}
-  
+            </div>
 
         </div>{# end column #}
 

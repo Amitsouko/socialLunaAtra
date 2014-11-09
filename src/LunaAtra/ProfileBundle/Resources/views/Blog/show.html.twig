@@ -1,34 +1,40 @@
-{% extends "CoreBundle::base.html.twig" %}
+{% extends "CoreBundle::base-blog.html.twig" %}
 
 {% block content %}
 <div class="container">
-    <div class="col-md-12">
+    <div class="col-md-9">
     <article class="full-article text-user">
     
         <div class="white-box text-user">
-            <div class="row">
-                <div class="col-lg-10 col-lg-offset-1 col-md-12">
-                <header>
-                    <h1><span>{{ post.title}}</span>
-                    {% if post.game %}<em>{{ post.game.name }}</em>{% endif %}
-                    {% if post|isPrivate %} <em title="privé" class="color-gray glyphicon glyphicon-eye-close"></em>{% endif %}
-                    {% if post.user == app.user %}
-                        <span class="pull-right no-underline">
-                        <em><a class="no-underline glyphicon glyphicon-pencil" href="{{ path("edit-post", {id: post.id}) }}"></a></em> 
-                        <em><a class="no-underline glyphicon glyphicon-trash" href="{{ path("delete-post", {id: post.id}) }}"></a></em>
-                        </span>
-                        {% endif %}
-                    </h1> 
-                    <p>
-                    Publié le : <time pubdate="pubdate" datetime="{{ post.publishedDate|date }}">{{ post.publishedDate|date }}</time> {% if post.updateDate %} - last update : {{ post.updateDate|date }}{% endif %}
-                    </p>
-                </header>
-                {{ post.content|raw}}
-                </div>
-            </div>
+
+            <header>
+                <h1><span>{{ post.title}}</span>
+                {% if post.game %}<em>{{ post.game.name }}</em>{% endif %}
+                {% if post|isPrivate %} <em title="privé" class="color-gray glyphicon glyphicon-eye-close"></em>{% endif %}
+                {% if post.user == app.user %}
+                    <span class="pull-right no-underline">
+                    <em><a class="no-underline glyphicon glyphicon-pencil" href="{{ path("edit-post", {id: post.id}) }}"></a></em> 
+                    <em><a class="no-underline glyphicon glyphicon-trash" href="{{ path("delete-post", {id: post.id}) }}"></a></em>
+                    </span>
+                    {% endif %}
+                </h1> 
+                <p>
+                Publié le : <time pubdate="pubdate" datetime="{{ post.publishedDate|date }}">{{ post.publishedDate|date }}</time> {% if post.updateDate %} - last update : {{ post.updateDate|date }}{% endif %}
+                </p>
+            </header>
+            {{ post.content|raw}}
+
+        </div>
+    </article>
+    </div>
+
+    <div class="col-md-3">
+        <div class="dark-box">
+        <img src="{{ post.user.WebPath|imagine_filter("profile_thumbnail") }}">
+            {{ post.user.username }}
         </div>
     </div>
-    </article>
+
 </div>
 
 {% endblock content %}

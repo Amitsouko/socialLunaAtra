@@ -87,9 +87,10 @@ input, button, a {
 
 body{
 
-    background: #f5f5f5;
+    background: #E6E6E6;
     font-family: Lato;
     font-size: 16px;
+    color: rgb(85, 85, 85);
     line-height: 26px;
 }
 
@@ -153,7 +154,7 @@ h1, h2, h3, h4 {
         text-transform: none;
         font-style: normal;
         color: @gray;
-        float: right;
+        display: inline;
     }
 
 }
@@ -238,6 +239,7 @@ header.header-main {
         border: 0px;
         margin-bottom: 0px;
         padding: 5px;
+        background:white;
         color: gray;
         border:none !important;
         box-shadow: none !important;
@@ -249,7 +251,7 @@ header.header-main {
         border-top-left-radius: 2px;
     }
     #search-submit, #_submit {
-        color: @lightGray;
+        color: @gray;
         margin: 0px !important;
         margin-left: 5px;
         vertical-align: middle;
@@ -405,7 +407,7 @@ header.header-main {
                 color: gray;
                 display: block;
                 padding:10px 15px;
-                border-bottom: 1px whiteSmoke solid;
+                border-bottom: 1px white solid;
                 &:last-child {
                     border-bottom: none;
                 }
@@ -442,7 +444,7 @@ header.header-main {
         font-weight: bold;
         display: block;
         background: white;
-        border-bottom: 1px solid whiteSmoke;
+        border-bottom: 1px solid white;
         &:hover {
             background: @darkBlue;
             color: white;
@@ -544,7 +546,7 @@ header.header-main {
 
 .green-button {
     .button;
-    background: @green;
+    background: @green !important;
     // &:hover {
     //     background: @green-highlight;
     //     box-shadow: 0px 0px 5px @green-highlight;
@@ -582,6 +584,7 @@ header.header-main {
         padding: 10px;
         border-radius: 3px;
         border: none;
+        background:white;
         box-shadow: 0px 0px 2px rgba(0,0,0,0.2) inset;
         margin-top: 15px;
         &[type="submit"] { margin-top: 0px; min-width: 100px;}
@@ -668,7 +671,7 @@ header.header-main {
 
 #cover-profile {
     position: relative;
-    height: 665px; 
+    height: 605px; 
     width: 100%;
     background-color: black;
     background-size: cover;
@@ -687,7 +690,7 @@ header.header-main {
             margin: auto;
             img {
                 width: 155px;
-                box-shadow: 1px 1px 2px whiteSmoke; 
+                box-shadow: 1px 1px 2px white; 
                 height: 155px;
             }
         }
@@ -761,7 +764,7 @@ header.header-main {
 .white-box{
     background-color:white;
     border-radius: 3px;
-    // border:1px solid whiteSmoke;
+    // border:1px solid white;
     box-sizing:border-box;
     padding:15px;
     margin-bottom: 20px;
@@ -769,6 +772,16 @@ header.header-main {
     &.no-padding {
         padding: 0px;
     }
+}
+.dark-box {
+    background: #343434;
+    box-sizing:border-box;
+    padding:15px;
+    margin-bottom: 20px;
+    &.no-padding {
+        padding: 0px;
+    }
+    color: whiteSmoke;
 }
 
 .gray-border {
@@ -960,7 +973,11 @@ input[type="submit"], button[type='submit'] {
     }
     img {
         max-width: 100%;
+        margin: 15px;
         height: auto !important;
+        &.image-right {
+            margin-right: -90px;
+        }
     }
     h1,h2,h3,h4,h5 {
         border:none;
@@ -983,6 +1000,7 @@ input[type="submit"], button[type='submit'] {
         em {
             font-size: 30px;
             font-style: italic;
+            display: inline;
         }    
     }
     h3 {
@@ -1163,7 +1181,7 @@ input[type="submit"], button[type='submit'] {
         vertical-align: middle;
     }
     .draft {
-        background:whiteSmoke;
+        background:white;
     }
     .eighth {
         width: 12.5%;

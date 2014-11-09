@@ -22,9 +22,11 @@
                             <em><a href="{{ path("fos_user_profile_edit") }}">Éditer</a></em>
                         {% endif%} 2} #}
                 </h1>
+                {% if user.announce %}
                 <h2 class="main-announce">
                     “&thinsp;{{ user.announce }}&thinsp;”   
                 </h2>
+                {% endif %}
             </div>
         </div>
     </div>

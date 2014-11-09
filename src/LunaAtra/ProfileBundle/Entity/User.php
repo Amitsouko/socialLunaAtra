@@ -41,6 +41,19 @@ class User extends BaseUser
      */
     protected $characters;
 
+
+    /**
+     * @ORM\OneToMany(targetEntity="LunaAtra\ProfileBundle\Entity\Friends", mappedBy="requester")
+     * @var type
+     */
+    protected $friendAsk;
+
+    /**
+     * @ORM\OneToMany(targetEntity="LunaAtra\ProfileBundle\Entity\Friends", mappedBy="requested")
+     * @var type
+     */
+    protected $friendResponse;
+
     /**
      * @ORM\OneToMany(targetEntity="LunaAtra\ProfileBundle\Entity\Blog", mappedBy="user")
      * @ORM\OrderBy({"publishedDate" = "DESC"})
@@ -511,5 +524,71 @@ class User extends BaseUser
     public function getPosts()
     {
         return $this->posts;
+    }
+
+    /**
+     * Add friendAsk
+     *
+     * @param \LunaAtra\ProfileBundle\Entity\Friends $friendAsk
+     * @return User
+     */
+    public function addFriendAsk(\LunaAtra\ProfileBundle\Entity\Friends $friendAsk)
+    {
+        $this->friendAsk[] = $friendAsk;
+
+        return $this;
+    }
+
+    /**
+     * Remove friendAsk
+     *
+     * @param \LunaAtra\ProfileBundle\Entity\Friends $friendAsk
+     */
+    public function removeFriendAsk(\LunaAtra\ProfileBundle\Entity\Friends $friendAsk)
+    {
+        $this->friendAsk->removeElement($friendAsk);
+    }
+
+    /**
+     * Get friendAsk
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getFriendAsk()
+    {
+        return $this->friendAsk;
+    }
+
+    /**
+     * Add friendResponse
+     *
+     * @param \LunaAtra\ProfileBundle\Entity\Friends $friendResponse
+     * @return User
+     */
+    public function addFriendResponse(\LunaAtra\ProfileBundle\Entity\Friends $friendResponse)
+    {
+        $this->friendResponse[] = $friendResponse;
+
+        return $this;
+    }
+
+    /**
+     * Remove friendResponse
+     *
+     * @param \LunaAtra\ProfileBundle\Entity\Friends $friendResponse
+     */
+    public function removeFriendResponse(\LunaAtra\ProfileBundle\Entity\Friends $friendResponse)
+    {
+        $this->friendResponse->removeElement($friendResponse);
+    }
+
+    /**
+     * Get friendResponse
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getFriendResponse()
+    {
+        return $this->friendResponse;
     }
 }

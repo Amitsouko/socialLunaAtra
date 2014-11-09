@@ -13,7 +13,7 @@ use Doctrine\ORM\EntityRepository;
 class BlogRepository extends EntityRepository
 {
 
-   public function getPublicPosts($user)
+   public function getPublicPosts($user, $offset = 0, $numb = 10)
     {
         return $this->getEntityManager()
             ->createQuery('SELECT a FROM ProfileBundle:Blog a 
@@ -21,9 +21,26 @@ class BlogRepository extends EntityRepository
                             AND a.draft = :false
                             AND a.user = :user
                             ORDER BY a.publishedDate DESC')
+            ->setFirstResult($offset)
+            ->setMaxResults($numb)
             ->setParameters(array(
                 'private' => "%\_0\_%" ,
                 'false' => false   ,
+                'user' => $user 
+            ))
+            ->getResult();
+    }
+
+   public function getPaginationPage($user, $offset = 0, $numb = 10)
+    {
+        return $this->getEntityManager()
+            ->createQuery('SELECT a FROM ProfileBundle:Blog a 
+                            WHERE a.user = :user
+                            ORDER BY a.publishedDate DESC
+                            ')
+            ->setFirstResult($offset)
+            ->setMaxResults($numb)
+            ->setParameters(array(
                 'user' => $user 
             ))
             ->getResult();
@@ -49,7 +66,7 @@ class BlogRepository extends EntityRepository
 
 
 
-   public function getPostByPrivacy($array, $owner)
+   public function getPostByPrivacy($array, $owner, $offset = 0, $numb = 10)
     {
         $qb = $this->createQueryBuilder("a");
         $query = $qb
@@ -74,6 +91,8 @@ class BlogRepository extends EntityRepository
             $i++;
         }
         $query->andWhere($orModule);
+        $query->setFirstResult($offset)
+              ->setMaxResults($numb);
         $query->orderBy("a.publishedDate", "DESC");
 
         return $query->getQuery()->getResult();
