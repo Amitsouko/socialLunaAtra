@@ -44,21 +44,8 @@ class PrivacyManager extends ContainerAware
     */
     public function getPrivacyForm()
     {
-        $return = Array();
-        $return["name"] = "privacy";
-        $return["type"] = "choice";
-        $return["params"] = array(
-                "choices" => array(
-                        $this->assoc["public"]         => $this->assocTranslate["public"],
-                        //$this->assoc["my_communities"] => $this->translator->trans("choice.my_communities",array(), "choices"),
-                        //$this->assoc["friends"]        => $this->translator->trans("choice.friends",array(), "choices"),
-                        $this->assoc["only_me"]        => $this->assocTranslate["only_me"]
-                    ),
-                "required" => true,
-                "multiple" =>true,
-                "expanded" => true,
-                "data" => array($this->assoc["public"])
-            );
+        $return = $this->getForm();
+        $return["params"]["data"] = array($this->assoc["public"]);
         return $return;
     }
 
@@ -67,22 +54,10 @@ class PrivacyManager extends ContainerAware
     */
     public function getEditPrivacyForm()
     {
-        $return = Array();
-        $return["name"] = "privacy";
-        $return["type"] = "choice";
-        $return["params"] = array(
-                "choices" => array(
-                        $this->assoc["public"]         => $this->assocTranslate["public"],
-                        //$this->assoc["my_communities"] => $this->translator->trans("choice.my_communities",array(), "choices"),
-                        //$this->assoc["friends"]        => $this->translator->trans("choice.friends",array(), "choices"),
-                        $this->assoc["only_me"]        => $this->assocTranslate["only_me"]
-                    ),
-                "required" => true,
-                "multiple" =>true,
-                "expanded" => true
-            );
-        return $return;
+        return $this->getForm();
     }
+
+
     /**
      *   GET the privacy name
     */
@@ -118,11 +93,13 @@ class PrivacyManager extends ContainerAware
 
     public function isInCommunity(BaseUser $owner)
     {
+        //@TODO: add condition
         return true;
     }
 
     public function isInFriends(BaseUser $owner)
     {
+        //@TODO: add condition
         return true;
     }
 
@@ -139,6 +116,25 @@ class PrivacyManager extends ContainerAware
         //if public so, return true
         if(in_array($this->assoc["public"], $privacyConf)) return true;
 
+    }
+
+    private function getForm()
+    {
+        $return = Array();
+        $return["name"] = "privacy";
+        $return["type"] = "choice";
+        $return["params"] = array(
+                "choices" => array(
+                        $this->assoc["public"]         => $this->assocTranslate["public"],
+                        //$this->assoc["my_communities"] => $this->translator->trans("choice.my_communities",array(), "choices"),
+                        $this->assoc["friends"]        => $this->translator->trans("choice.friends",array(), "choices"),
+                        $this->assoc["only_me"]        => $this->assocTranslate["only_me"]
+                    ),
+                "required" => true,
+                "multiple" =>true,
+                "expanded" => true
+            );
+        return $return;
     }
 
 }
