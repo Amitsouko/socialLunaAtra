@@ -42,6 +42,11 @@ class Game
     protected $characters;
 
     /**
+     * @ORM\ManyToMany(targetEntity="LunaAtra\CoreBundle\Entity\Community", mappedBy="communities")
+     **/
+    private $communities;
+
+    /**
      * @ORM\OneToMany(targetEntity="LunaAtra\ProfileBundle\Entity\Blog", mappedBy="game")
      * @var type
      */
@@ -174,5 +179,71 @@ class Game
     public function getBlogs()
     {
         return $this->blogs;
+    }
+
+    /**
+     * Add communities
+     *
+     * @param \LunaAtra\CoreBundle\Entity\Community $communities
+     * @return Game
+     */
+    public function addCommunity(\LunaAtra\CoreBundle\Entity\Community $communities)
+    {
+        $this->communities[] = $communities;
+
+        return $this;
+    }
+
+    /**
+     * Remove communities
+     *
+     * @param \LunaAtra\CoreBundle\Entity\Community $communities
+     */
+    public function removeCommunity(\LunaAtra\CoreBundle\Entity\Community $communities)
+    {
+        $this->communities->removeElement($communities);
+    }
+
+    /**
+     * Get communities
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getCommunities()
+    {
+        return $this->communities;
+    }
+
+    /**
+     * Add askForCommunities
+     *
+     * @param \LunaAtra\CoreBundle\Entity\Community $askForCommunities
+     * @return Game
+     */
+    public function addAskForCommunity(\LunaAtra\CoreBundle\Entity\Community $askForCommunities)
+    {
+        $this->askForCommunities[] = $askForCommunities;
+
+        return $this;
+    }
+
+    /**
+     * Remove askForCommunities
+     *
+     * @param \LunaAtra\CoreBundle\Entity\Community $askForCommunities
+     */
+    public function removeAskForCommunity(\LunaAtra\CoreBundle\Entity\Community $askForCommunities)
+    {
+        $this->askForCommunities->removeElement($askForCommunities);
+    }
+
+    /**
+     * Get askForCommunities
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getAskForCommunities()
+    {
+        return $this->askForCommunities;
     }
 }

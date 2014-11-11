@@ -80,6 +80,12 @@ class User extends BaseUser
     private $notifications;
 
     /**
+     * @ORM\ManyToMany(targetEntity="LunaAtra\CoreBundle\Entity\CommunityRank", inversedBy="users")
+     * @ORM\JoinTable(name="users_to_community_rank")
+     **/
+    private $communityRanks;
+
+    /**
      * @Assert\File(maxSize="2000000", mimeTypes = {"image/jpeg", "image/png", "image/gif"}, mimeTypesMessage = "Please upload a valid image")
      */
     public $file;
@@ -95,6 +101,11 @@ class User extends BaseUser
      * @ORM\Column(name="lastImageUpdate", type="string", nullable=true)
      */
     private $lastImageUpdate;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="LunaAtra\CoreBundle\Entity\Community", mappedBy="askers")
+     **/
+    private $askForCommunities;
 
     /**
      * @ORM\PrePersist()
@@ -590,5 +601,38 @@ class User extends BaseUser
     public function getFriendResponse()
     {
         return $this->friendResponse;
+    }
+
+    /**
+     * Add communities
+     *
+     * @param \LunaAtra\CoreBundle\Entity\Community $communities
+     * @return User
+     */
+    public function addCommunity(\LunaAtra\CoreBundle\Entity\Community $communities)
+    {
+        $this->communities[] = $communities;
+
+        return $this;
+    }
+
+    /**
+     * Remove communities
+     *
+     * @param \LunaAtra\CoreBundle\Entity\Community $communities
+     */
+    public function removeCommunity(\LunaAtra\CoreBundle\Entity\Community $communities)
+    {
+        $this->communities->removeElement($communities);
+    }
+
+    /**
+     * Get communities
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getCommunities()
+    {
+        return $this->communities;
     }
 }
